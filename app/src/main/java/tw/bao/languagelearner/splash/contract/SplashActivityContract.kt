@@ -1,4 +1,4 @@
-package tw.bao.languagelearner.main.contract
+package tw.bao.languagelearner.splash.contract
 
 import tw.bao.languagelearner.base.BasePresenter
 import tw.bao.languagelearner.base.BaseView
@@ -6,12 +6,9 @@ import tw.bao.languagelearner.base.BaseView
 /**
  * Created by bao on 2017/10/25.
  */
-interface AnswerDialogContract {
+interface SplashActivityContract {
     interface View : BaseView<Presenter> {
 
-        fun showQuestionView()
-
-        fun hideQuestionView()
     }
 
     interface Presenter : BasePresenter

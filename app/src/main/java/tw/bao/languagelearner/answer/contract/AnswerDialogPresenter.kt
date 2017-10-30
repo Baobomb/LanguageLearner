@@ -1,4 +1,4 @@
-package tw.bao.languagelearner.main.contract
+package tw.bao.languagelearner.answer.contract
 
 /**
  * Created by bao on 2017/10/25.
