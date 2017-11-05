@@ -1,8 +1,8 @@
 package tw.bao.languagelearner.answer.activity
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import android.view.Window
 import tw.bao.languagelearner.R
@@ -12,7 +12,7 @@ import tw.bao.languagelearner.answer.contract.AnswerDialogPresenter
 /**
  * Created by bao on 2017/10/25.
  */
-class AnswerDialogActivity : AppCompatActivity(), AnswerDialogContract.View {
+class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     lateinit var mPresenter: AnswerDialogPresenter
 

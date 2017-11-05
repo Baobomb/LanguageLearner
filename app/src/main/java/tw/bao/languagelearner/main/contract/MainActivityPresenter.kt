@@ -20,10 +20,10 @@ class MainActivityPresenter(view: MainActivityContract.View) : MainActivityContr
     }
 
     override fun onResume() {
-        mMainActivityView.showQuestionView()
+
     }
 
     override fun onPause() {
-        mMainActivityView.hideQuestionView()
+
     }
 }
