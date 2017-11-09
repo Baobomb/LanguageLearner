@@ -11,5 +11,7 @@ interface SplashActivityContract {
 
     }
 
-    interface Presenter : BasePresenter
+    interface Presenter : BasePresenter{
+        fun initDB()
+    }
 }

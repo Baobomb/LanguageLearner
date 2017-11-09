@@ -1,7 +1,7 @@
 package tw.bao.languagelearner.utils.db
 
-import android.text.TextUtils
-import android.util.Log
+import tw.bao.languagelearner.model.WordData
+import tw.bao.languagelearner.model.WordDatas
 import java.util.*
 
 /**
@@ -10,42 +10,12 @@ import java.util.*
 object UtilsDB {
 
 
-    fun parseSQLCreateCommand(condition: String): String {
-        val commands = ArrayList<Any>()
-        val columns = condition.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-        for (column in columns) {
-            val commandArray = getSingleCommands(column)
-            val tableCommand = StringBuilder()
-            var columnName: String? = null
-            var columnType: String? = null
-            var columnPrimaryKey: String? = null
-            var columnNullable: String? = null
-            var columnDefault: String? = null
-            var columnAutoIncrement: String? = null
-            columnName = commandArray[0] + " "
-            columnType = parseColumnType(commandArray[1]) + " "
-            columnPrimaryKey = if (columnType.contains("INTEGER") && java.lang.Boolean.parseBoolean(commandArray[4])) "PRIMARY KEY " else ""
-            columnAutoIncrement = if (columnType.contains("INTEGER") && java.lang.Boolean.parseBoolean(commandArray[4])) "AUTOINCREMENT " else ""
-            columnDefault = if (!columnType.contains("INTEGER") && !TextUtils.isEmpty(commandArray[3])) "DEFAULT'" + commandArray[3] + "' " else ""
-            columnNullable = if (!columnType.contains("INTEGER") && TextUtils.isEmpty(columnDefault) && !java.lang.Boolean.parseBoolean(commandArray[2])) "NOT NULL " else ""
-            tableCommand.append(columnName)
-                    .append(columnType)
-                    .append(columnPrimaryKey)
-                    .append(columnAutoIncrement)
-                    .append(columnNullable)
-                    .append(columnDefault)
-            commands.add(tableCommand.toString())
-        }
-        val finalCommand = StringBuilder()
-        for (i in commands.indices) {
-            finalCommand.append(commands.get(i))
-            if (i < commands.size - 1) {
-                finalCommand.append(",")
-            }
-        }
-        Log.d("SQLCommand", finalCommand.toString())
-        return finalCommand.toString()
+    fun parseSQLCreateCommand(condition: String): WordDatas {
+        val wordDataArray = condition.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val wordDataList = wordDataArray
+                .map { getSingleCommands(it) }
+                .map { WordData(it[1], it[2], it[0]) }
+        return WordDatas("", wordDataList)
     }
 
     private fun getSingleCommands(command: String): List<String> {

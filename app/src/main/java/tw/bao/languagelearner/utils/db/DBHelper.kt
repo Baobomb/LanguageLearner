@@ -8,6 +8,7 @@ import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.model.WordDatas
 import java.util.*
 
+
 /**
  * Created by bao on 2017/11/8.
  */
@@ -141,5 +142,19 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
         }
 
         return if (results.size > 0) WordDatas(tableName, results) else null
+    }
+
+    fun getCount(tableName: String): Int {
+        var cnt = 0
+        try {
+            val countQuery = "SELECT  * FROM $tableName"
+            val db = this.readableDatabase
+            val cursor = db.rawQuery(countQuery, null)
+            cnt = cursor.count
+            cursor.close()
+        } catch (exception: Exception) {
+
+        }
+        return cnt
     }
 }
