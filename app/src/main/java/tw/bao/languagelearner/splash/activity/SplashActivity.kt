@@ -1,5 +1,6 @@
 package tw.bao.languagelearner.splash.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import tw.bao.languagelearner.R
@@ -18,7 +19,16 @@ class SplashActivity : AppCompatActivity(), SplashActivityContract.View {
         mPresenter.onCreate()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mPresenter.onStart()
+    }
+
     override fun initView() {
         setContentView(R.layout.activity_splash_layout)
+    }
+
+    override fun getContext(): Context {
+        return this
     }
 }

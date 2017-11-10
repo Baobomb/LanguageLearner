@@ -1,5 +1,6 @@
 package tw.bao.languagelearner.splash.contract
 
+import android.content.Context
 import tw.bao.languagelearner.base.BasePresenter
 import tw.bao.languagelearner.base.BaseView
 
@@ -8,10 +9,10 @@ import tw.bao.languagelearner.base.BaseView
  */
 interface SplashActivityContract {
     interface View : BaseView<Presenter> {
-
+        fun getContext(): Context
     }
 
-    interface Presenter : BasePresenter{
+    interface Presenter : BasePresenter {
         fun initDB()
     }
 }

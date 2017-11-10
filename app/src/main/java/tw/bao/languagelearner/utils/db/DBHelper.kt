@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.model.WordDatas
 import java.util.*
@@ -22,7 +23,7 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
     private val ID_SQL_COMMAND = "_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
     private val CHINESE_WORD_SQL_COMMAND = "chinese_word TEXT ,"
     private val ENG_WORD_SQL_COMMAND = "eng_word TEXT ,"
-    private val ROMAN_TEXT_SQL_COMMAND = "roman_text TEXT ,"
+    private val ROMAN_TEXT_SQL_COMMAND = "roman_text TEXT"
 
 
     override fun onCreate(db: SQLiteDatabase) {}
@@ -36,7 +37,7 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
         context.deleteDatabase(dbName)
     }
 
-    fun createTable(tableName: String, command: String): Boolean {
+    fun createTable(tableName: String): Boolean {
         var isSuccess = true
         try {
             val db = this.writableDatabase
@@ -85,7 +86,7 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
                     null,
                     values)
         } catch (e: Exception) {
-
+            Log.d(LOGTAG, e.toString())
         }
         return newRowId > -1
     }

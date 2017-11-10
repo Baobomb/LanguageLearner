@@ -5,9 +5,7 @@ package tw.bao.languagelearner.utils.db
  */
 object DBDefinetion {
 
-    //Asset path
-    val WEBAPP_URL_ASSET = "file:///android_asset/basic"
-
+    val ASSET_FILE_EXTESION = ".txt"
     //Table name
-    val WORD_TABLE_BASIC = "word_table_basic"
+    val WORD_TABLE_BASIC = "word_basic"
 }
