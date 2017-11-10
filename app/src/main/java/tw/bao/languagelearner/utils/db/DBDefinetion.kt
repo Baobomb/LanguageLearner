@@ -5,6 +5,7 @@ package tw.bao.languagelearner.utils.db
  */
 object DBDefinetion {
 
+    val WORDS_DB_NAME = "words"
     val ASSET_FILE_EXTESION = ".txt"
     //Table name
     val WORD_TABLE_BASIC = "word_basic"
