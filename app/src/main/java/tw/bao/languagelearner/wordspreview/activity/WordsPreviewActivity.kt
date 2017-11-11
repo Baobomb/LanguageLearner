@@ -41,7 +41,7 @@ class WordsPreviewActivity : AppCompatActivity(), WordsPreviewActivityContract.V
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_main_layout)
+        setContentView(R.layout.activity_words_preview_layout)
     }
 
     override fun getContext(): Context? = this
