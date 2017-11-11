@@ -15,23 +15,15 @@ import java.util.*
 object UtilsDB {
     fun parseWordDatas(type: String, condition: String): WordDatas {
         val wordDataArray = condition.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        val wordDataList = wordDataArray
+        val wordDataList: List<WordData> = wordDataArray
                 .map { getSingleCommands(it) }
                 .map { WordData(it[1], it[2], it[0]) }
-        return WordDatas(type, wordDataList)
+        return WordDatas(type, wordDataList.toMutableList())
     }
 
-    private fun getSingleCommands(command: String): List<String> {
+    private fun getSingleCommands(command: String): MutableList<String> {
         val commands = command.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         return Arrays.asList(*commands)
-    }
-
-    fun parseColumnType(command: String): String {
-        var lowerCaseType = command.toLowerCase()
-        lowerCaseType = lowerCaseType.replace("integer", "INTEGER")
-        lowerCaseType = lowerCaseType.replace("varchar", "VARCHAR")
-        lowerCaseType = lowerCaseType.replace("text", "TEXT")
-        return if (lowerCaseType.contains("INTEGER")) "INTEGER" else lowerCaseType
     }
 
     @Throws(IOException::class)

@@ -69,24 +69,22 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
         }
     }
 
-    fun insertData(tableName: String, wordData: WordData): Boolean {
-        val db = this.writableDatabase
-
-        // Create a new map of values, where column names are the keys
-        val values = ContentValues()
-        values.put(KEY_CHINESE_WORD, wordData.chineseWord)
-        values.put(KEY_ROMAN_TEXT, wordData.romanText)
-        values.put(KEY_ENG_WORD, wordData.engWord)
-        //        values.put(FeedContract.FeedEntry.COLUMN_NAME_TITLE, title);
+    fun insertData(tableName: String, wordData: WordData?): Boolean {
         var newRowId: Long = -1
-
-        try {
-            newRowId = db.insert(
-                    tableName,
-                    null,
-                    values)
-        } catch (e: Exception) {
-            Log.d(LOGTAG, e.toString())
+        wordData?.apply {
+            val db = this@DBHelper.writableDatabase
+            val values = ContentValues()
+            values.put(KEY_CHINESE_WORD, chineseWord)
+            values.put(KEY_ROMAN_TEXT, romanText)
+            values.put(KEY_ENG_WORD, engWord)
+            try {
+                newRowId = db.insert(
+                        tableName,
+                        null,
+                        values)
+            } catch (e: Exception) {
+                Log.d(LOGTAG, e.toString())
+            }
         }
         return newRowId > -1
     }
@@ -97,7 +95,7 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
         var isSuccess = true
         try {
             val db = this.getReadableDatabase()
-            val query = "SELECT $KEY_CHINESE_WORD , $KEY_ENG_WORD , $KEY_ROMAN_TEXT FROM $tableName WHERE ID= $rowId"
+            val query = "SELECT $KEY_CHINESE_WORD , $KEY_ENG_WORD , $KEY_ROMAN_TEXT FROM $tableName WHERE _id= $rowId"
             val cursor = db.rawQuery(query, null)
             if (null != cursor) {
                 if (cursor.moveToFirst()) {
@@ -142,7 +140,7 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
 
         }
 
-        return if (results.size > 0) WordDatas(tableName, results) else null
+        return if (results.size > 0) WordDatas(tableName, results.toMutableList()) else null
     }
 
     fun getCount(tableName: String): Int {

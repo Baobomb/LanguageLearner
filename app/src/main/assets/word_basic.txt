@@ -1,3 +1,7 @@
 Hello.你好.Nǐ hǎo,
 bye.再見.Zài jiàn,
-fuck.他媽的.Tā mā de
+fuck.他媽的.Tā mā de,
+mother.媽媽.Mā mā,
+father.爸爸.Bà ba,
+brother.哥哥.Gē gē,
+sister.姊姊.Jiě jie,

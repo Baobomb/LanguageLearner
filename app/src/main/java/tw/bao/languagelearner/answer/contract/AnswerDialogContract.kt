@@ -1,5 +1,6 @@
 package tw.bao.languagelearner.answer.contract
 
+import android.content.Context
 import tw.bao.languagelearner.base.BasePresenter
 import tw.bao.languagelearner.base.BaseView
 
@@ -12,6 +13,8 @@ interface AnswerDialogContract {
         fun showQuestionView()
 
         fun hideQuestionView()
+
+        fun getContext(): Context
     }
 
     interface Presenter : BasePresenter

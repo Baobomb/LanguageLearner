@@ -1,6 +1,7 @@
 package tw.bao.languagelearner.answer.activity
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.ViewGroup
@@ -46,14 +47,15 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.decorView.setBackgroundColor(Color.TRANSPARENT)
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        setContentView(R.layout.activity_answer_dialog_layout)
     }
 
     override fun showQuestionView() {
-
+        setContentView(R.layout.activity_answer_dialog_layout)
     }
 
     override fun hideQuestionView() {
 
     }
+
+    override fun getContext(): Context = this
 }

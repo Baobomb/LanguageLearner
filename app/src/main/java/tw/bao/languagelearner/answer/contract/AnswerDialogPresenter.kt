@@ -1,5 +1,14 @@
 package tw.bao.languagelearner.answer.contract
 
+import android.util.Log
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import tw.bao.languagelearner.model.WordData
+import tw.bao.languagelearner.model.WordDatas
+import tw.bao.languagelearner.utils.Utils
+import tw.bao.languagelearner.utils.db.DBDefinetion
+import tw.bao.languagelearner.utils.db.DBHelper
+
 /**
  * Created by bao on 2017/10/25.
  */
@@ -20,10 +29,33 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
     }
 
     override fun onResume() {
-        mAnswerDialogView.showQuestionView()
+        doAsync {
+            val wordDatas = prepareWords()
+            val couns = wordDatas?.words?.size
+            val type = wordDatas?.type
+            Log.d("TAG","123")
+            uiThread {
+                mAnswerDialogView.showQuestionView()
+            }
+        }
     }
 
     override fun onPause() {
         mAnswerDialogView.hideQuestionView()
+    }
+
+    private fun prepareWords(): WordDatas? {
+        val dbHelper = DBHelper(mAnswerDialogView.getContext(), DBDefinetion.WORDS_DB_NAME, 1)
+        val dbRows = dbHelper.getCount(DBDefinetion.WORD_TABLE_BASIC)
+        return if (dbRows >= 4) {
+            val positions = Utils.getRamdonInts(1, dbRows)
+            val words = ArrayList<WordData?>()
+            positions.mapTo(words) {
+                dbHelper.getData(DBDefinetion.WORD_TABLE_BASIC, it)
+            }
+            WordDatas(DBDefinetion.WORD_TABLE_BASIC, words.toMutableList())
+        } else {
+            null
+        }
     }
 }

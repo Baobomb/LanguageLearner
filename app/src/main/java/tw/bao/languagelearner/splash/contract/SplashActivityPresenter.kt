@@ -1,7 +1,9 @@
 package tw.bao.languagelearner.splash.contract
 
+import android.content.Intent
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import tw.bao.languagelearner.answer.activity.AnswerDialogActivity
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.db.DBDefinetion.ASSET_FILE_EXTESION
 import tw.bao.languagelearner.utils.db.DBDefinetion.WORDS_DB_NAME
@@ -40,6 +42,9 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
         doAsync {
             loadWordsIntoDB(WORD_TABLE_BASIC)
             uiThread {
+                mAnswerDialogView.getContext()?.apply {
+                    startActivity(Intent(this, AnswerDialogActivity::class.java))
+                }
             }
         }
     }
@@ -48,10 +53,22 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
         if (dbHelper == null) {
             dbHelper = DBHelper(mAnswerDialogView.getContext(), WORDS_DB_NAME, 1)
         }
-        val words: String = UtilsDB.readFromAssets(mAnswerDialogView.getContext(), tableName + ASSET_FILE_EXTESION)
-        val wordDatas: WordDatas = UtilsDB.parseWordDatas(WORD_TABLE_BASIC, words)
         dbHelper?.apply {
+            val dbRowCounts = getCount(tableName)
+            val words: String = UtilsDB.readFromAssets(mAnswerDialogView.getContext(), tableName + ASSET_FILE_EXTESION)
+            val wordDatas: WordDatas = UtilsDB.parseWordDatas(WORD_TABLE_BASIC, words)
+            var startPostiion = 0
+            if (dbRowCounts >= wordDatas.words.size) {
+                return
+            } else {
+                startPostiion = dbRowCounts - 1
+            }
             createTable(tableName)
+            if (startPostiion > 0) {
+                for (removePosition in 0..startPostiion) {
+                    wordDatas.words.removeAt(0)
+                }
+            }
             insertDatas(wordDatas)
         }
     }
