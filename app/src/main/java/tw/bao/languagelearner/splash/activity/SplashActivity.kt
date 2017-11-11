@@ -28,7 +28,5 @@ class SplashActivity : AppCompatActivity(), SplashActivityContract.View {
         setContentView(R.layout.activity_splash_layout)
     }
 
-    override fun getContext(): Context {
-        return this
-    }
+    override fun getContext(): Context? = this
 }

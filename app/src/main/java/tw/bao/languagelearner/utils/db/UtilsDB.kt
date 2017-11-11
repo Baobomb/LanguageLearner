@@ -27,16 +27,19 @@ object UtilsDB {
     }
 
     @Throws(IOException::class)
-    fun readFromAssets(context: Context, filename: String): String {
-        val reader = BufferedReader(InputStreamReader(context.getAssets().open(filename)))
-        // do reading, usually loop until end of file reading
+    fun readFromAssets(context: Context?, filename: String): String {
         val sb = StringBuilder()
-        var mLine = reader.readLine()
-        while (mLine != null) {
-            sb.append(mLine) // process line
-            mLine = reader.readLine()
+        context?.apply {
+            val reader = BufferedReader(InputStreamReader(context.getAssets().open(filename)))
+            // do reading, usually loop until end of file reading
+            var mLine = reader.readLine()
+            while (mLine != null) {
+                sb.append(mLine) // process line
+                mLine = reader.readLine()
+            }
+            reader.close()
+            return sb.toString()
         }
-        reader.close()
         return sb.toString()
     }
 }

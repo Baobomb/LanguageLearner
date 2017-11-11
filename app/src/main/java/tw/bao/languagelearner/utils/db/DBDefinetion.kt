@@ -9,4 +9,5 @@ object DBDefinetion {
     val ASSET_FILE_EXTESION = ".txt"
     //Table name
     val WORD_TABLE_BASIC = "word_basic"
+    val WORD_TABLE_BUSINESS = "word_business"
 }

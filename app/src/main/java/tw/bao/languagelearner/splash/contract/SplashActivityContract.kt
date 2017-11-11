@@ -9,7 +9,7 @@ import tw.bao.languagelearner.base.BaseView
  */
 interface SplashActivityContract {
     interface View : BaseView<Presenter> {
-        fun getContext(): Context
+        fun getContext(): Context?
     }
 
     interface Presenter : BasePresenter {

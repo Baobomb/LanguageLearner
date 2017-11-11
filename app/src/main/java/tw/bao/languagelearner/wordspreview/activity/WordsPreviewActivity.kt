@@ -4,19 +4,19 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import tw.bao.languagelearner.R
-import tw.bao.languagelearner.main.contract.MainActivityContract
-import tw.bao.languagelearner.main.contract.MainActivityPresenter
+import tw.bao.languagelearner.main.contract.WordsPreviewActivityContract
+import tw.bao.languagelearner.main.contract.WordsPreviewActivityPresenter
 
 /**
  * Created by bao on 2017/10/25.
  */
-class MainActivity : AppCompatActivity(), MainActivityContract.View {
+class WordsPreviewActivity : AppCompatActivity(), WordsPreviewActivityContract.View {
 
-    lateinit var mPresenter: MainActivityPresenter
+    lateinit var mPresenter: WordsPreviewActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = MainActivityPresenter(this)
+        mPresenter = WordsPreviewActivityPresenter(this)
         mPresenter.onCreate()
     }
 

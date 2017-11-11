@@ -3,11 +3,12 @@ package tw.bao.languagelearner.splash.contract
 import android.content.Intent
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import tw.bao.languagelearner.answer.activity.AnswerDialogActivity
+import tw.bao.languagelearner.main.activity.MainActivity
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.db.DBDefinetion.ASSET_FILE_EXTESION
 import tw.bao.languagelearner.utils.db.DBDefinetion.WORDS_DB_NAME
 import tw.bao.languagelearner.utils.db.DBDefinetion.WORD_TABLE_BASIC
+import tw.bao.languagelearner.utils.db.DBDefinetion.WORD_TABLE_BUSINESS
 import tw.bao.languagelearner.utils.db.DBHelper
 import tw.bao.languagelearner.utils.db.UtilsDB
 
@@ -41,9 +42,10 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
     override fun initDB() {
         doAsync {
             loadWordsIntoDB(WORD_TABLE_BASIC)
+            loadWordsIntoDB(WORD_TABLE_BUSINESS)
             uiThread {
                 mAnswerDialogView.getContext()?.apply {
-                    startActivity(Intent(this, AnswerDialogActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
             }
         }
@@ -51,12 +53,14 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
 
     private fun loadWordsIntoDB(tableName: String) {
         if (dbHelper == null) {
-            dbHelper = DBHelper(mAnswerDialogView.getContext(), WORDS_DB_NAME, 1)
+            mAnswerDialogView.getContext()?.apply {
+                dbHelper = DBHelper(this, WORDS_DB_NAME, 1)
+            }
         }
         dbHelper?.apply {
             val dbRowCounts = getCount(tableName)
             val words: String = UtilsDB.readFromAssets(mAnswerDialogView.getContext(), tableName + ASSET_FILE_EXTESION)
-            val wordDatas: WordDatas = UtilsDB.parseWordDatas(WORD_TABLE_BASIC, words)
+            val wordDatas: WordDatas = UtilsDB.parseWordDatas(tableName, words)
             var startPostiion = 0
             if (dbRowCounts >= wordDatas.words.size) {
                 return

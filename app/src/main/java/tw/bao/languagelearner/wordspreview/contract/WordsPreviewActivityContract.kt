@@ -7,7 +7,7 @@ import tw.bao.languagelearner.base.BaseView
 /**
  * Created by bao on 2017/10/25.
  */
-interface MainActivityContract {
+interface WordsPreviewActivityContract {
     interface View : BaseView<Presenter> {
         fun getContext(): Context?
     }

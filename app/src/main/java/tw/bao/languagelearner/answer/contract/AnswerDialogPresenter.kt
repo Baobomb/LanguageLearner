@@ -7,6 +7,7 @@ import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.Utils
 import tw.bao.languagelearner.utils.db.DBDefinetion
+import tw.bao.languagelearner.utils.db.DBDefinetion.WORD_TABLE_BUSINESS
 import tw.bao.languagelearner.utils.db.DBHelper
 
 /**
@@ -15,6 +16,7 @@ import tw.bao.languagelearner.utils.db.DBHelper
 class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContract.Presenter {
 
     var mAnswerDialogView: AnswerDialogContract.View = checkNotNull(view)
+    var mDbHelper: DBHelper? = null
 
     override fun onCreate() {
         mAnswerDialogView.initView()
@@ -30,10 +32,10 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
 
     override fun onResume() {
         doAsync {
-            val wordDatas = prepareWords()
-            val couns = wordDatas?.words?.size
+            val wordDatas = prepareWords(WORD_TABLE_BUSINESS)
+            val counts = wordDatas?.words?.size
             val type = wordDatas?.type
-            Log.d("TAG","123")
+            Log.d("TAG", "Type : $type Counts : $counts")
             uiThread {
                 mAnswerDialogView.showQuestionView()
             }
@@ -44,18 +46,25 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
         mAnswerDialogView.hideQuestionView()
     }
 
-    private fun prepareWords(): WordDatas? {
-        val dbHelper = DBHelper(mAnswerDialogView.getContext(), DBDefinetion.WORDS_DB_NAME, 1)
-        val dbRows = dbHelper.getCount(DBDefinetion.WORD_TABLE_BASIC)
-        return if (dbRows >= 4) {
-            val positions = Utils.getRamdonInts(1, dbRows)
-            val words = ArrayList<WordData?>()
-            positions.mapTo(words) {
-                dbHelper.getData(DBDefinetion.WORD_TABLE_BASIC, it)
+    private fun prepareWords(tableName: String): WordDatas? {
+        if (mDbHelper == null) {
+            mAnswerDialogView.apply {
+                mDbHelper = DBHelper(mAnswerDialogView.getContext(), DBDefinetion.WORDS_DB_NAME, 1)
             }
-            WordDatas(DBDefinetion.WORD_TABLE_BASIC, words.toMutableList())
-        } else {
-            null
         }
+        mDbHelper?.apply {
+            val dbRows = getCount(tableName)
+            return if (dbRows >= 4) {
+                val positions = Utils.getRamdonInts(1, dbRows)
+                val words = ArrayList<WordData?>()
+                positions.mapTo(words) {
+                    getData(tableName, it)
+                }
+                WordDatas(tableName, words.toMutableList())
+            } else {
+                null
+            }
+        }
+        return null
     }
 }

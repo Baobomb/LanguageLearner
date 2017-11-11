@@ -2,6 +2,7 @@ package tw.bao.languagelearner.utils.db
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -30,11 +31,6 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
-    }
-
-
-    fun DropDB(context: Context, dbName: String) {
-        context.deleteDatabase(dbName)
     }
 
     fun createTable(tableName: String): Boolean {
@@ -93,24 +89,26 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
     fun getData(tableName: String, rowId: Int): WordData? {
         val results = ArrayList<WordData>()
         var isSuccess = true
+        var cursor: Cursor? = null
         try {
             val db = this.getReadableDatabase()
             val query = "SELECT $KEY_CHINESE_WORD , $KEY_ENG_WORD , $KEY_ROMAN_TEXT FROM $tableName WHERE _id= $rowId"
-            val cursor = db.rawQuery(query, null)
-            if (null != cursor) {
-                if (cursor.moveToFirst()) {
+            cursor = db.rawQuery(query, null)
+            cursor?.apply {
+                if (moveToFirst()) {
                     do {
                         val dataValue = WordData("", "", "")
-                        dataValue.chineseWord = cursor.getString(cursor.getColumnIndex(KEY_CHINESE_WORD))
-                        dataValue.engWord = cursor.getString(cursor.getColumnIndex(KEY_ENG_WORD))
-                        dataValue.romanText = cursor.getString(cursor.getColumnIndex(KEY_ROMAN_TEXT))
+                        dataValue.chineseWord = getString(getColumnIndex(KEY_CHINESE_WORD))
+                        dataValue.engWord = getString(getColumnIndex(KEY_ENG_WORD))
+                        dataValue.romanText = getString(getColumnIndex(KEY_ROMAN_TEXT))
                         results.add(dataValue)
-                    } while (cursor.moveToNext())
+                    } while (moveToNext())
                 }
-                cursor.close()
             }
         } catch (e: Exception) {
             isSuccess = false
+        } finally {
+            cursor?.close()
         }
         return if (isSuccess && results.size > 0) results[0] else null
     }
@@ -119,25 +117,26 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
     fun getAll(tableName: String): WordDatas? {
         val results = ArrayList<WordData>()
         var datas: WordDatas? = null
+        var cursor: Cursor? = null
         try {
             val query = "SELECT * FROM " + tableName
             val db = this.readableDatabase
-            val cursor = db.rawQuery(query, null)
-            if (null != cursor) {
-                if (cursor.moveToFirst()) {
+            cursor = db.rawQuery(query, null)
+            cursor?.apply {
+                if (moveToFirst()) {
                     do {
                         val dataValue = WordData("", "", "")
-                        dataValue.chineseWord = cursor.getString(cursor.getColumnIndex(KEY_CHINESE_WORD))
-                        dataValue.engWord = cursor.getString(cursor.getColumnIndex(KEY_ENG_WORD))
-                        dataValue.romanText = cursor.getString(cursor.getColumnIndex(KEY_ROMAN_TEXT))
+                        dataValue.chineseWord = getString(getColumnIndex(KEY_CHINESE_WORD))
+                        dataValue.engWord = getString(getColumnIndex(KEY_ENG_WORD))
+                        dataValue.romanText = getString(getColumnIndex(KEY_ROMAN_TEXT))
                         results.add(dataValue)
-                    } while (cursor.moveToNext())
+                    } while (moveToNext())
                 }
-
-                cursor.close()
             }
         } catch (e: Exception) {
 
+        } finally {
+            cursor?.close()
         }
 
         return if (results.size > 0) WordDatas(tableName, results.toMutableList()) else null
@@ -145,14 +144,16 @@ class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteO
 
     fun getCount(tableName: String): Int {
         var cnt = 0
+        var cursor: Cursor? = null
         try {
             val countQuery = "SELECT  * FROM $tableName"
             val db = this.readableDatabase
-            val cursor = db.rawQuery(countQuery, null)
+            cursor = db.rawQuery(countQuery, null)
             cnt = cursor.count
-            cursor.close()
         } catch (exception: Exception) {
 
+        } finally {
+            cursor?.close()
         }
         return cnt
     }

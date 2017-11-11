@@ -26,4 +26,8 @@ class MainActivityPresenter(view: MainActivityContract.View) : MainActivityContr
     override fun onPause() {
 
     }
+
+    private fun prepareWordsTable() {
+
+    }
 }
