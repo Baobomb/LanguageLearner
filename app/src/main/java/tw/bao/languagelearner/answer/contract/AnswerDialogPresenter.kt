@@ -49,7 +49,7 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
     private fun prepareWords(tableName: String): WordDatas? {
         if (mDbHelper == null) {
             mAnswerDialogView.apply {
-                mDbHelper = DBHelper(mAnswerDialogView.getContext(), DBDefinetion.WORDS_DB_NAME, 1)
+                mDbHelper = DBHelper(mAnswerDialogView.getContext(), DBDefinetion.WORDS_DB_NAME)
             }
         }
         mDbHelper?.apply {

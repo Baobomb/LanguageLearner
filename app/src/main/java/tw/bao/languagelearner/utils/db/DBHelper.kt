@@ -14,7 +14,7 @@ import java.util.*
 /**
  * Created by bao on 2017/11/8.
  */
-class DBHelper(context: Context, dbName: String, databaseVersion: Int) : SQLiteOpenHelper(context, dbName, null, databaseVersion) {
+class DBHelper(context: Context, dbName: String, databaseVersion: Int = DBDefinetion.WORDS_DB_DEFAULT_VERSION) : SQLiteOpenHelper(context, dbName, null, databaseVersion) {
     val KEY_CHINESE_WORD = "chinese_word"
     val KEY_ENG_WORD = "eng_word"
     val KEY_ROMAN_TEXT = "roman_text"

@@ -43,7 +43,7 @@ class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : W
     private fun prepareWords(tableName: String): WordDatas? {
         if (mDBHelper == null) {
             mWordsPreviewActivityView.getContext()?.apply {
-                mDBHelper = DBHelper(this, DBDefinetion.WORDS_DB_NAME, 1)
+                mDBHelper = DBHelper(this, DBDefinetion.WORDS_DB_NAME)
             }
         }
         mDBHelper?.apply {

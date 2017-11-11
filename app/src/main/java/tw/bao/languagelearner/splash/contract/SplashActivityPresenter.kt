@@ -54,7 +54,7 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
     private fun loadWordsIntoDB(tableName: String) {
         if (dbHelper == null) {
             mAnswerDialogView.getContext()?.apply {
-                dbHelper = DBHelper(this, WORDS_DB_NAME, 1)
+                dbHelper = DBHelper(this, WORDS_DB_NAME)
             }
         }
         dbHelper?.apply {
