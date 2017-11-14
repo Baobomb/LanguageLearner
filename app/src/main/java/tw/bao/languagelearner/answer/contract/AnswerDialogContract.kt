@@ -14,6 +14,8 @@ interface AnswerDialogContract {
 
         fun hideQuestionView()
 
+        fun showAnswer(chooseView: android.view.View)
+
         fun getContext(): Context
     }
 

@@ -1,6 +1,7 @@
 package tw.bao.languagelearner.answer.contract
 
 import android.util.Log
+import android.view.View
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import tw.bao.languagelearner.model.WordData

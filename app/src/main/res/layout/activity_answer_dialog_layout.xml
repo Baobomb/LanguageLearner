@@ -37,6 +37,11 @@
                 android:id="@+id/mTvAnswerOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/answer_item_bg_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
                 android:text="AnswerOne"
                 android:textSize="18sp" />
 
@@ -44,6 +49,11 @@
                 android:id="@+id/mTvAnswerTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/answer_item_bg_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
                 android:text="AnswerTwo"
                 android:textSize="18sp" />
 
@@ -51,6 +61,11 @@
                 android:id="@+id/mTvAnswerThird"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/answer_item_bg_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
                 android:text="AnswerThird"
                 android:textSize="18sp" />
 
@@ -58,6 +73,11 @@
                 android:id="@+id/mTvAnswerFour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/answer_item_bg_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
                 android:text="AnswerFour"
                 android:textSize="18sp" />
         </LinearLayout>

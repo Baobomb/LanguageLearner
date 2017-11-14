@@ -3,6 +3,7 @@ package tw.bao.languagelearner.splash.contract
 import android.content.Intent
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import tw.bao.languagelearner.answer.activity.AnswerDialogActivity
 import tw.bao.languagelearner.main.activity.MainActivity
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.db.DBDefinetion.ASSET_FILE_EXTESION
@@ -45,7 +46,7 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
             loadWordsIntoDB(WORD_TABLE_BUSINESS)
             uiThread {
                 mAnswerDialogView.getContext()?.apply {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, AnswerDialogActivity::class.java))
                 }
             }
         }

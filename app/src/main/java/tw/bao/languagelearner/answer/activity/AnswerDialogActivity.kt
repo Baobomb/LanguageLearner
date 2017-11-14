@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import kotlinx.android.synthetic.main.activity_answer_dialog_layout.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.answer.contract.AnswerDialogContract
 import tw.bao.languagelearner.answer.contract.AnswerDialogPresenter
@@ -16,6 +18,11 @@ import tw.bao.languagelearner.answer.contract.AnswerDialogPresenter
 class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     lateinit var mPresenter: AnswerDialogPresenter
+    private var mAnswerView: View? = null
+
+    enum class ANSWER_TAG {
+        ANSWER, WRONG
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,11 +58,33 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     override fun showQuestionView() {
         setContentView(R.layout.activity_answer_dialog_layout)
+        mTvAnswerOne.setOnClickListener { showAnswer(chooseView = mTvAnswerOne) }
+        mTvAnswerTwo.setOnClickListener { showAnswer(chooseView = mTvAnswerTwo) }
+        mTvAnswerThird.setOnClickListener { showAnswer(chooseView = mTvAnswerThird) }
+        mTvAnswerFour.setOnClickListener { showAnswer(chooseView = mTvAnswerFour) }
+        mTvAnswerOne.tag = ANSWER_TAG.ANSWER
+        mTvAnswerTwo.tag = ANSWER_TAG.WRONG
+        mTvAnswerThird.tag = ANSWER_TAG.WRONG
+        mTvAnswerFour.tag = ANSWER_TAG.WRONG
+        mAnswerView = mTvAnswerOne
     }
 
     override fun hideQuestionView() {
 
     }
+
+    override fun showAnswer(chooseView: View) {
+        if (chooseView.tag == ANSWER_TAG.ANSWER) {
+            chooseView.isSelected = true
+            chooseView.isEnabled = true
+        } else {
+            chooseView.isSelected = true
+            chooseView.isEnabled = false
+            mAnswerView?.isSelected = true
+            mAnswerView?.isEnabled = true
+        }
+    }
+
 
     override fun getContext(): Context = this
 }
