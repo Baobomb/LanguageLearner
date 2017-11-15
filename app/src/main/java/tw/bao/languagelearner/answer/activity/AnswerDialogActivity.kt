@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_answer_dialog_layout.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.answer.contract.AnswerDialogContract
 import tw.bao.languagelearner.answer.contract.AnswerDialogPresenter
+import tw.bao.languagelearner.model.WordDatas
 
 /**
  * Created by bao on 2017/10/25.
@@ -56,21 +57,39 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
-    override fun showQuestionView() {
+    override fun showQuestionView(answerPosition: Int, wordDatas: WordDatas?) {
         setContentView(R.layout.activity_answer_dialog_layout)
-        mTvAnswerOne.setOnClickListener { showAnswer(chooseView = mTvAnswerOne) }
-        mTvAnswerTwo.setOnClickListener { showAnswer(chooseView = mTvAnswerTwo) }
-        mTvAnswerThird.setOnClickListener { showAnswer(chooseView = mTvAnswerThird) }
-        mTvAnswerFour.setOnClickListener { showAnswer(chooseView = mTvAnswerFour) }
-        mTvAnswerOne.tag = ANSWER_TAG.ANSWER
-        mTvAnswerTwo.tag = ANSWER_TAG.WRONG
-        mTvAnswerThird.tag = ANSWER_TAG.WRONG
-        mTvAnswerFour.tag = ANSWER_TAG.WRONG
-        mAnswerView = mTvAnswerOne
+        setQuestionItem(answerPosition, wordDatas)
+        setAnswerItem(answerPosition, wordDatas)
+    }
+
+    private fun setQuestionItem(answerPosition: Int, wordDatas: WordDatas?) {
+        wordDatas?.apply {
+            mTvQuestion.text = words[answerPosition - 1]?.engWord
+        }
+    }
+
+    private fun setAnswerItem(answerPosition: Int, wordDatas: WordDatas?) {
+        wordDatas?.apply {
+            mTvAnswerOne.setOnClickListener { showAnswer(chooseView = mTvAnswerOne) }
+            mTvAnswerTwo.setOnClickListener { showAnswer(chooseView = mTvAnswerTwo) }
+            mTvAnswerThird.setOnClickListener { showAnswer(chooseView = mTvAnswerThird) }
+            mTvAnswerFour.setOnClickListener { showAnswer(chooseView = mTvAnswerFour) }
+
+            mTvAnswerOne.tag = if (answerPosition == 1) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
+            mTvAnswerTwo.tag = if (answerPosition == 2) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
+            mTvAnswerThird.tag = if (answerPosition == 3) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
+            mTvAnswerFour.tag = if (answerPosition == 4) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
+
+            mTvAnswerOne.text = words[0]?.chineseWord
+            mTvAnswerTwo.text = words[1]?.chineseWord
+            mTvAnswerThird.text = words[2]?.chineseWord
+            mTvAnswerFour.text = words[3]?.chineseWord
+        }
     }
 
     override fun hideQuestionView() {
-
+        finish()
     }
 
     override fun showAnswer(chooseView: View) {

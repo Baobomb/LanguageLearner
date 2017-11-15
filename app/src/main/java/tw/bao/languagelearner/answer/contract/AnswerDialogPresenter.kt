@@ -1,7 +1,6 @@
 package tw.bao.languagelearner.answer.contract
 
 import android.util.Log
-import android.view.View
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import tw.bao.languagelearner.model.WordData
@@ -37,8 +36,9 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
             val counts = wordDatas?.words?.size
             val type = wordDatas?.type
             Log.d("TAG", "Type : $type Counts : $counts")
+            val answerPosition = Utils.getRamdonInts(1, 4)[0]
             uiThread {
-                mAnswerDialogView.showQuestionView()
+                mAnswerDialogView.showQuestionView(answerPosition = answerPosition, wordDatas = wordDatas)
             }
         }
     }

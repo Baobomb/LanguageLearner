@@ -3,6 +3,7 @@ package tw.bao.languagelearner.answer.contract
 import android.content.Context
 import tw.bao.languagelearner.base.BasePresenter
 import tw.bao.languagelearner.base.BaseView
+import tw.bao.languagelearner.model.WordDatas
 
 /**
  * Created by bao on 2017/10/25.
@@ -10,7 +11,7 @@ import tw.bao.languagelearner.base.BaseView
 interface AnswerDialogContract {
     interface View : BaseView<Presenter> {
 
-        fun showQuestionView()
+        fun showQuestionView(answerPosition: Int, wordDatas: WordDatas?)
 
         fun hideQuestionView()
 
