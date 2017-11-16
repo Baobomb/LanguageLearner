@@ -80,6 +80,12 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
             mTvAnswerTwo.tag = if (answerPosition == 2) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
             mTvAnswerThird.tag = if (answerPosition == 3) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
             mTvAnswerFour.tag = if (answerPosition == 4) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
+            when(answerPosition){
+                1 -> mAnswerView = mTvAnswerOne
+                2 -> mAnswerView = mTvAnswerTwo
+                3 -> mAnswerView = mTvAnswerThird
+                4 -> mAnswerView = mTvAnswerFour
+            }
 
             mTvAnswerOne.text = words[0]?.chineseWord
             mTvAnswerTwo.text = words[1]?.chineseWord
@@ -102,8 +108,11 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
             mAnswerView?.isSelected = true
             mAnswerView?.isEnabled = true
         }
+        mTvAnswerOne.isClickable = false
+        mTvAnswerTwo.isClickable = false
+        mTvAnswerThird.isClickable = false
+        mTvAnswerFour.isClickable = false
     }
-
 
     override fun getContext(): Context = this
 }
