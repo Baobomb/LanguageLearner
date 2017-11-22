@@ -11,6 +11,9 @@ import tw.bao.languagelearner.utils.db.DBHelper
  * Created by bao on 2017/10/25.
  */
 class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : WordsPreviewActivityContract.Presenter {
+    companion object {
+        val KEY_WORD_PREVIEW_TABLE_NAME = "KEY_WORD_PREVIEW_TABLE_NAME"
+    }
 
     var mWordsPreviewActivityView: WordsPreviewActivityContract.View = checkNotNull(view)
     var mDBHelper: DBHelper? = null
@@ -21,9 +24,13 @@ class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : W
 
     override fun onStart() {
         doAsync {
-            val wordDatas: WordDatas? = prepareWords(DBDefinetion.WORD_TABLE_BUSINESS)
-            Log.d("WordDatas", "WordDatas : " + wordDatas?.type)
+            var wordDatas: WordDatas? = null
+            mWordsPreviewActivityView.getIntent()?.getStringExtra(KEY_WORD_PREVIEW_TABLE_NAME)?.apply {
+                wordDatas = prepareWords(this@apply)
+            }
             uiThread {
+                //TODO : set ui
+                Log.d("WordDatas", "WordDatas : " + wordDatas?.type)
             }
         }
     }
