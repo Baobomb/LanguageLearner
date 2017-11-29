@@ -25,11 +25,12 @@ class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : W
     override fun onStart() {
         doAsync {
             var wordDatas: WordDatas? = null
-            mWordsPreviewActivityView.getIntent()?.getStringExtra(KEY_WORD_PREVIEW_TABLE_NAME)?.apply {
+            mWordsPreviewActivityView.getViewIntent()?.getStringExtra(KEY_WORD_PREVIEW_TABLE_NAME)?.apply {
                 wordDatas = prepareWords(this@apply)
             }
             uiThread {
                 //TODO : set ui
+                mWordsPreviewActivityView.setWordDatas(wordDatas)
                 Log.d("WordDatas", "WordDatas : " + wordDatas?.type)
             }
         }

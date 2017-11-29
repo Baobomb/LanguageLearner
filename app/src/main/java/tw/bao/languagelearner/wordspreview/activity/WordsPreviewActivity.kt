@@ -8,6 +8,7 @@ import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.contract.WordsPreviewActivityContract
 import tw.bao.languagelearner.main.contract.WordsPreviewActivityPresenter
 import tw.bao.languagelearner.model.WordDatas
+import tw.bao.languagelearner.wordspreview.adapter.WordDatasListAdapter
 
 /**
  * Created by bao on 2017/10/25.
@@ -15,6 +16,7 @@ import tw.bao.languagelearner.model.WordDatas
 class WordsPreviewActivity : AppCompatActivity(), WordsPreviewActivityContract.View {
 
     lateinit var mPresenter: WordsPreviewActivityPresenter
+    var mWordDatasAdapter: WordDatasListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +48,17 @@ class WordsPreviewActivity : AppCompatActivity(), WordsPreviewActivityContract.V
         setContentView(R.layout.activity_words_preview_layout)
     }
 
-    override fun setWordDatas(wordDatas: WordDatas) {
-
+    override fun setWordDatas(wordDatas: WordDatas?) {
+        if (mWordDatasAdapter == null) {
+            mWordDatasAdapter = WordDatasListAdapter(this)
+        }
+        mWordDatasAdapter?.mWordDatas = wordDatas
     }
 
     override fun getContext(): Context? = this
 
-    override fun getIntent(): Intent {
-        return super.getIntent()
+    override fun getViewIntent(): Intent {
+        return intent
     }
 
 }

@@ -12,8 +12,8 @@ import tw.bao.languagelearner.model.WordDatas
 interface WordsPreviewActivityContract {
     interface View : BaseView<Presenter> {
         fun getContext(): Context?
-        fun getIntent(): Intent?
-        fun setWordDatas(wordDatas: WordDatas)
+        fun getViewIntent(): Intent?
+        fun setWordDatas(wordDatas: WordDatas?)
     }
 
     interface Presenter : BasePresenter
