@@ -2,6 +2,7 @@ package tw.bao.languagelearner.answer.activity
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -95,7 +96,7 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
     }
 
     override fun hideQuestionView() {
-        finish()
+
     }
 
     override fun showAnswer(chooseView: View) {
@@ -115,4 +116,10 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
     }
 
     override fun getContext(): Context = this
+
+    override fun getViewIntent(): Intent? = intent
+
+    override fun stopSelf() {
+        finish()
+    }
 }

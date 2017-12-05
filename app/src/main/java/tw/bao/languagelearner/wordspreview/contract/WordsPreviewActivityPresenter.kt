@@ -6,6 +6,7 @@ import org.jetbrains.anko.uiThread
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.db.DBDefinetion
 import tw.bao.languagelearner.utils.db.DBHelper
+import java.util.concurrent.Future
 
 /**
  * Created by bao on 2017/10/25.
@@ -17,13 +18,14 @@ class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : W
 
     var mWordsPreviewActivityView: WordsPreviewActivityContract.View = checkNotNull(view)
     var mDBHelper: DBHelper? = null
+    var dbAsync: Future<Unit>? = null
 
     override fun onCreate() {
         mWordsPreviewActivityView.initView()
     }
 
     override fun onStart() {
-        doAsync {
+        dbAsync = doAsync {
             var wordDatas: WordDatas? = null
             mWordsPreviewActivityView.getViewIntent()?.getStringExtra(KEY_WORD_PREVIEW_TABLE_NAME)?.apply {
                 wordDatas = prepareWords(this@apply)
@@ -45,7 +47,7 @@ class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : W
     }
 
     override fun onPause() {
-
+        dbAsync?.cancel(true)
     }
 
     private fun prepareWords(tableName: String): WordDatas? {

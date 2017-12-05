@@ -7,13 +7,16 @@ import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.Utils
 import tw.bao.languagelearner.utils.db.DBDefinetion
-import tw.bao.languagelearner.utils.db.DBDefinetion.WORD_TABLE_BUSINESS
 import tw.bao.languagelearner.utils.db.DBHelper
 
 /**
  * Created by bao on 2017/10/25.
  */
 class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContract.Presenter {
+    companion object {
+        val KEY_ANSWER_TABLE_NAME = "KEY_ANSWER_TABLE_NAME"
+    }
+
 
     var mAnswerDialogView: AnswerDialogContract.View = checkNotNull(view)
     var mDbHelper: DBHelper? = null
@@ -31,15 +34,21 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
     }
 
     override fun onResume() {
-        doAsync {
-            val wordDatas = prepareWords(WORD_TABLE_BUSINESS)
-            val counts = wordDatas?.words?.size
-            val type = wordDatas?.type
-            Log.d("TAG", "Type : $type Counts : $counts")
-            val answerPosition = Utils.getRamdonInts(1, 4)[0]
-            uiThread {
-                mAnswerDialogView.showQuestionView(answerPosition = answerPosition, wordDatas = wordDatas)
+        val tableName = mAnswerDialogView.getViewIntent()?.getStringExtra(KEY_ANSWER_TABLE_NAME)
+        if (tableName != null) {
+            doAsync {
+                //TODO : Get Table name
+                val wordDatas = prepareWords(DBDefinetion.TableName.WORD_TABLE_BUSINESS)
+                val counts = wordDatas?.words?.size
+                val type = wordDatas?.type
+                Log.d("TAG", "Type : $type Counts : $counts")
+                val answerPosition = Utils.getRamdonInts(1, 4)[0]
+                uiThread {
+                    mAnswerDialogView.showQuestionView(answerPosition = answerPosition, wordDatas = wordDatas)
+                }
             }
+        } else {
+            mAnswerDialogView.stopSelf()
         }
     }
 
