@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/mMainAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:elevation="0dp">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/mMainToolbar"
+                style="@style/ToolBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_height"
+                android:background="@color/green"
+                android:fitsSystemWindows="true"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <include layout="@layout/content_main" />
+
+        <View
+            android:id="@+id/bottom_tab_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_above="@+id/mMainBottomTab"
+            android:background="@drawable/bottom_to_top_shadow"
+            android:visibility="gone" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/mMainBottomTab"
+            style="@style/CustomTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_tab_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/tab_bar_color"
+            android:visibility="visible"
+            app:tabTextColor="@color/tab_text_color" />
+
+    </RelativeLayout>
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fab"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|end"-->
+    <!--android:layout_margin="@dimen/fab_margin"-->
+    <!--android:src="@drawable/ic_dialer_dialpad"-->
+    <!--app:backgroundTint="#00c300"-->
+    <!--app:fabSize="normal"/>-->
+
+</android.support.design.widget.CoordinatorLayout>

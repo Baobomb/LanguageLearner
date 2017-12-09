@@ -10,4 +10,7 @@
     <color name="green">#00C300</color>
     <color name="red">#EE5555</color>
     <color name="yellow">#EEEE55</color>
+    <color name="image_mask">#ffcfcfcf</color>
+    <color name="tab_bar_color">#f6f6f9</color>
+    <color name="tab_text_color">#3f263147</color>
 </resources>
