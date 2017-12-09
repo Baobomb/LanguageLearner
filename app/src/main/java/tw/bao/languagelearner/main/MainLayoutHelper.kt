@@ -3,6 +3,7 @@ package tw.bao.languagelearner.main
 import android.content.Context
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -25,13 +26,16 @@ class MainLayoutHelper {
         private val sPageConfigs: ArrayList<PageConfig?> by lazy { arrayListOf(getPageConfig(PageEnum.MAIN), getPageConfig(PageEnum.WORD_PREVIEW), getPageConfig(PageEnum.SETTING)) }
 
         fun initTabIcons(context: Context, tabLayout: TabLayout) {
+            Log.d("TABINIT", "config size : " + sPageConfigs.size)
             for (config in sPageConfigs) {
+                Log.d("TABINIT", "Add Tab")
                 config?.apply {
                     val customView = inflateCustomTab(context, mTabUnselectedIconResId, mTitleStrId)
                     val newTab = tabLayout.newTab().setCustomView(customView)
                     val view = customView.parent as View
                     view.tag = mPageEnum
                     tabLayout.addTab(newTab)
+                    Log.d("TABINIT", "Add Tab")
                 }
             }
         }
@@ -46,7 +50,7 @@ class MainLayoutHelper {
         }
 
         private fun getPageConfig(page: PageEnum): PageConfig? {
-            when (page) {
+            return when (page) {
                 PageEnum.MAIN -> PageConfig(
                         PageEnum.MAIN,
                         MainFragment::class.java,
@@ -69,16 +73,20 @@ class MainLayoutHelper {
                         R.string.app_name
                 )
             }
-            return null
         }
 
-        public fun getPageFragment(page: PageEnum): Fragment? {
-            when (page) {
+        fun getPageFragment(page: PageEnum): Fragment? {
+            return when (page) {
                 PageEnum.MAIN -> MainFragment.sInstance
                 PageEnum.WORD_PREVIEW -> WordPreviewFragment.sInstance
                 PageEnum.SETTING -> SettingFragment.sInstance
             }
-            return null
+        }
+
+
+        fun getPageIndex(pageEnum: Enum<*>): Int {
+            return (0 until sPageConfigs.size).firstOrNull { sPageConfigs[it]?.mPageEnum == pageEnum }
+                    ?: 0
         }
     }
 }
