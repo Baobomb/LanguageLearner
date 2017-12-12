@@ -25,17 +25,17 @@ class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : W
     }
 
     override fun onStart() {
-        dbAsync = doAsync {
-            var wordDatas: WordDatas? = null
-            mWordsPreviewActivityView.getViewIntent()?.getStringExtra(KEY_WORD_PREVIEW_TABLE_NAME)?.apply {
-                wordDatas = prepareWords(this@apply)
-            }
-            uiThread {
-                //TODO : set ui
-                mWordsPreviewActivityView.setWordDatas(wordDatas)
-                Log.d("WordDatas", "WordDatas : " + wordDatas?.type)
-            }
-        }
+//        dbAsync = doAsync {
+//            var wordDatas: WordDatas? = null
+//            mWordsPreviewActivityView.getViewIntent()?.getStringExtra(KEY_WORD_PREVIEW_TABLE_NAME)?.apply {
+//                wordDatas = prepareWords(this@apply)
+//            }
+//            uiThread {
+//                //TODO : set ui
+//                mWordsPreviewActivityView.setWordDatas(wordDatas)
+//                Log.d("WordDatas", "WordDatas : " + wordDatas?.type)
+//            }
+//        }
     }
 
     override fun onStop() {

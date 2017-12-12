@@ -1,6 +1,5 @@
 package tw.bao.languagelearner.main.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
@@ -10,12 +9,11 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.MainLayoutHelper
-import tw.bao.languagelearner.main.contract.MainActivityContract
 
 /**
  * Created by bao on 2017/10/25.
  */
-class MainActivity : AppCompatActivity(), MainActivityContract.View {
+class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
         initView()
     }
 
-    override fun initView() {
+    fun initView() {
         setContentView(R.layout.activity_main_layout)
         mMainToolbar.title = ""
         setSupportActionBar(mMainToolbar)
@@ -41,9 +39,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
         setBottomTabListener()
         selectPage(MainLayoutHelper.getPageIndex(MainLayoutHelper.Companion.PageEnum.MAIN), MainLayoutHelper.Companion.PageEnum.MAIN)
     }
-
-    override fun getContext(): Context? = this
-
+    
     private val mTabOnClickListener = View.OnClickListener { view ->
         val selectedPage = view.tag as MainLayoutHelper.Companion.PageEnum
         selectPage(MainLayoutHelper.getPageIndex(selectedPage), selectedPage)
