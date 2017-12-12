@@ -11,7 +11,7 @@ import android.widget.TextView
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.fragment.MainFragment
 import tw.bao.languagelearner.main.fragment.SettingFragment
-import tw.bao.languagelearner.main.fragment.WordPreviewFragment
+import tw.bao.languagelearner.wordspreview.fragment.WordPreviewFragment
 
 /**
  * Created by bao on 2017/12/9.

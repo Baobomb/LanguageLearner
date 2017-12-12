@@ -1,9 +1,11 @@
-package tw.bao.languagelearner.main.activity
+package tw.bao.languagelearner.wordspreview.fragment
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.contract.WordsPreviewActivityContract
 import tw.bao.languagelearner.main.contract.WordsPreviewActivityPresenter
@@ -11,16 +13,30 @@ import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.wordspreview.adapter.WordDatasListAdapter
 
 /**
- * Created by bao on 2017/10/25.
+ * Created by bao on 2017/12/9.
  */
-class WordsPreviewActivity : AppCompatActivity(), WordsPreviewActivityContract.View {
+class WordPreviewFragment : Fragment, WordsPreviewActivityContract.View {
+    constructor()
 
-    lateinit var mPresenter: WordsPreviewActivityPresenter
+    var mPresenter: WordsPreviewActivityPresenter = WordsPreviewActivityPresenter(this)
     var mWordDatasAdapter: WordDatasListAdapter? = null
+
+    companion object {
+        public val sInstance: WordPreviewFragment by lazy { WordPreviewFragment() }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        Log.d("FragmentVisible", "WordPreviewFragment visible")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater?.inflate(R.layout.fragment_words_preview_layout, container, false)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = WordsPreviewActivityPresenter(this)
         mPresenter.onCreate()
     }
 
@@ -44,21 +60,17 @@ class WordsPreviewActivity : AppCompatActivity(), WordsPreviewActivityContract.V
         mPresenter.onStop()
     }
 
+
     override fun initView() {
-        setContentView(R.layout.activity_words_preview_layout)
+
     }
 
     override fun setWordDatas(wordDatas: WordDatas?) {
         if (mWordDatasAdapter == null) {
-            mWordDatasAdapter = WordDatasListAdapter(this)
+            context?.apply {
+                mWordDatasAdapter = WordDatasListAdapter(this)
+            }
         }
         mWordDatasAdapter?.mWordDatas = wordDatas
     }
-
-    override fun getContext(): Context? = this
-
-    override fun getViewIntent(): Intent {
-        return intent
-    }
-
 }
