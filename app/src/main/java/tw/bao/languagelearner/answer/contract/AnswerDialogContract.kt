@@ -25,5 +25,7 @@ interface AnswerDialogContract {
         fun stopSelf()
     }
 
-    interface Presenter : BasePresenter
+    interface Presenter : BasePresenter{
+        fun updateUserInfo(isScored: Boolean)
+    }
 }

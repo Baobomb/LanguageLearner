@@ -1,4 +1,4 @@
-package tw.bao.languagelearner.main.fragment
+package tw.bao.languagelearner.info.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -8,25 +8,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import tw.bao.languagelearner.R
-import tw.bao.languagelearner.main.contract.MainActivityContract
-import tw.bao.languagelearner.main.contract.MainActivityPresenter
+import tw.bao.languagelearner.info.contract.InfoContract
+import tw.bao.languagelearner.info.contract.InfoPresenter
 
 /**
  * Created by bao on 2017/12/9.
  */
 
-class MainFragment : Fragment, MainActivityContract.View {
+class InfoFragment : Fragment, InfoContract.View {
     constructor()
 
-    var mPresenter: MainActivityPresenter = MainActivityPresenter(this)
+    var mPresenter: InfoPresenter = InfoPresenter(this)
 
     companion object {
-        public val sInstance: MainFragment by lazy { MainFragment() }
+        public val sInstance: InfoFragment by lazy { InfoFragment() }
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        Log.d("FragmentVisible", "MainFragment visible")
+        Log.d("FragmentVisible", "InfoFragment visible")
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

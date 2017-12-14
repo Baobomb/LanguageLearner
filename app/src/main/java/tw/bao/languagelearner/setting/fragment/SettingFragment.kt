@@ -1,4 +1,4 @@
-package tw.bao.languagelearner.main.fragment
+package tw.bao.languagelearner.setting.fragment
 
 import android.content.Context
 import android.os.Bundle

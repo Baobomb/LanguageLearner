@@ -81,7 +81,7 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
             mTvAnswerTwo.tag = if (answerPosition == 2) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
             mTvAnswerThird.tag = if (answerPosition == 3) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
             mTvAnswerFour.tag = if (answerPosition == 4) ANSWER_TAG.ANSWER else ANSWER_TAG.WRONG
-            when(answerPosition){
+            when (answerPosition) {
                 1 -> mAnswerView = mTvAnswerOne
                 2 -> mAnswerView = mTvAnswerTwo
                 3 -> mAnswerView = mTvAnswerThird
@@ -103,11 +103,13 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
         if (chooseView.tag == ANSWER_TAG.ANSWER) {
             chooseView.isSelected = true
             chooseView.isEnabled = true
+            mPresenter.updateUserInfo(true)
         } else {
             chooseView.isSelected = true
             chooseView.isEnabled = false
             mAnswerView?.isSelected = true
             mAnswerView?.isEnabled = true
+            mPresenter.updateUserInfo(false)
         }
         mTvAnswerOne.isClickable = false
         mTvAnswerTwo.isClickable = false

@@ -11,30 +11,20 @@ import java.util.concurrent.Future
 /**
  * Created by bao on 2017/10/25.
  */
-class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : WordsPreviewActivityContract.Presenter {
+class WordsPreviewPresenter(view: WordsPreviewContract.View) : WordsPreviewContract.Presenter {
     companion object {
         val KEY_WORD_PREVIEW_TABLE_NAME = "KEY_WORD_PREVIEW_TABLE_NAME"
     }
 
-    var mWordsPreviewActivityView: WordsPreviewActivityContract.View = checkNotNull(view)
+    var mWordsPreviewView: WordsPreviewContract.View = checkNotNull(view)
     var mDBHelper: DBHelper? = null
     var dbAsync: Future<Unit>? = null
 
     override fun onCreate() {
-        mWordsPreviewActivityView.initView()
+        mWordsPreviewView.initView()
     }
 
     override fun onStart() {
-//        dbAsync = doAsync {
-//            var wordDatas: WordDatas? = null
-//            mWordsPreviewActivityView.getViewIntent()?.getStringExtra(KEY_WORD_PREVIEW_TABLE_NAME)?.apply {
-//                wordDatas = prepareWords(this@apply)
-//            }
-//            uiThread {
-//                //TODO : set ui
-//                mWordsPreviewActivityView.setWordDatas(wordDatas)
-//                Log.d("WordDatas", "WordDatas : " + wordDatas?.type)
-//            }
 //        }
     }
 
@@ -50,9 +40,21 @@ class WordsPreviewActivityPresenter(view: WordsPreviewActivityContract.View) : W
         dbAsync?.cancel(true)
     }
 
+    public fun selectWords(tableName: String) {
+        dbAsync = doAsync {
+            val wordDatas = prepareWords(tableName)
+            uiThread {
+                //TODO : set ui
+                mWordsPreviewView.setWordDatas(wordDatas)
+                Log.d("WordDatas", "WordDatas : " + wordDatas?.type)
+            }
+        }
+    }
+
+
     private fun prepareWords(tableName: String): WordDatas? {
         if (mDBHelper == null) {
-            mWordsPreviewActivityView.getContext()?.apply {
+            mWordsPreviewView.getContext()?.apply {
                 mDBHelper = DBHelper(this, DBDefinetion.WORDS_DB_NAME)
             }
         }

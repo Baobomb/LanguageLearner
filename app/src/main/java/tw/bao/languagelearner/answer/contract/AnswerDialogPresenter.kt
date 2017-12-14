@@ -3,6 +3,7 @@ package tw.bao.languagelearner.answer.contract
 import android.util.Log
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import tw.bao.languagelearner.info.utils.UtilsInfo
 import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.Utils
@@ -54,6 +55,12 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
 
     override fun onPause() {
         mAnswerDialogView.hideQuestionView()
+    }
+
+    override fun updateUserInfo(isScored: Boolean) {
+        if (isScored) {
+            UtilsInfo.upUserScore()
+        }
     }
 
     private fun prepareWords(tableName: String): WordDatas? {

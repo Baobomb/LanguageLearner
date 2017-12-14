@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">LanguageLearner</string>
 
+
     <string name="info_tab_name">Info</string>
     <string name="word_preview_tab_name">Words</string>
     <string name="setting_tab_name">Settings</string>

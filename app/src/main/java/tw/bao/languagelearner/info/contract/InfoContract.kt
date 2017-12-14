@@ -1,18 +1,15 @@
-package tw.bao.languagelearner.main.contract
+package tw.bao.languagelearner.info.contract
 
 import android.content.Context
-import android.content.Intent
 import tw.bao.languagelearner.base.BasePresenter
 import tw.bao.languagelearner.base.BaseView
-import tw.bao.languagelearner.model.WordDatas
 
 /**
  * Created by bao on 2017/10/25.
  */
-interface WordsPreviewActivityContract {
+interface InfoContract {
     interface View : BaseView<Presenter> {
-        fun getContext(): Context?
-        fun setWordDatas(wordDatas: WordDatas?)
+        fun getViewContext(): Context?
     }
 
     interface Presenter : BasePresenter

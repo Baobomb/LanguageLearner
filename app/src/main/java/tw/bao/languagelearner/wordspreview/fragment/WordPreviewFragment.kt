@@ -7,18 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import tw.bao.languagelearner.R
-import tw.bao.languagelearner.main.contract.WordsPreviewActivityContract
-import tw.bao.languagelearner.main.contract.WordsPreviewActivityPresenter
+import tw.bao.languagelearner.main.contract.WordsPreviewContract
+import tw.bao.languagelearner.main.contract.WordsPreviewPresenter
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.wordspreview.adapter.WordDatasListAdapter
 
 /**
  * Created by bao on 2017/12/9.
  */
-class WordPreviewFragment : Fragment, WordsPreviewActivityContract.View {
+class WordPreviewFragment : Fragment, WordsPreviewContract.View {
     constructor()
 
-    var mPresenter: WordsPreviewActivityPresenter = WordsPreviewActivityPresenter(this)
+    var mPresenter: WordsPreviewPresenter = WordsPreviewPresenter(this)
     var mWordDatasAdapter: WordDatasListAdapter? = null
 
     companion object {
