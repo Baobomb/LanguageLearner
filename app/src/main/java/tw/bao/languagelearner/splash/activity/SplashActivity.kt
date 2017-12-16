@@ -24,6 +24,11 @@ class SplashActivity : AppCompatActivity(), SplashActivityContract.View {
         mPresenter.onStart()
     }
 
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
+
     override fun initView() {
         setContentView(R.layout.activity_splash_layout)
     }

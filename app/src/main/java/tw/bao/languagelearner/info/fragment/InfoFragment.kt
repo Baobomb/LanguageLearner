@@ -18,7 +18,7 @@ import tw.bao.languagelearner.info.contract.InfoPresenter
 class InfoFragment : Fragment, InfoContract.View {
     constructor()
 
-    var mPresenter: InfoPresenter = InfoPresenter(this)
+    private var mPresenter: InfoPresenter = InfoPresenter(this)
 
     companion object {
         public val sInstance: InfoFragment by lazy { InfoFragment() }
