@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_info_layout.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.info.contract.InfoContract
 import tw.bao.languagelearner.info.contract.InfoPresenter
+import tw.bao.languagelearner.info.utils.UtilsInfo
 
 /**
  * Created by bao on 2017/12/9.
@@ -29,13 +31,19 @@ class InfoFragment : Fragment, InfoContract.View {
         Log.d("FragmentVisible", "InfoFragment visible")
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_main_layout, container, false)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter.onCreate()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mPresenter.onCreateView()
+        return inflater?.inflate(R.layout.fragment_info_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        mPresenter.onViewCreated()
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
@@ -59,7 +67,7 @@ class InfoFragment : Fragment, InfoContract.View {
     }
 
     override fun initView() {
-
+        mCircleInfoView.mUserExpPercent = UtilsInfo.getUserCurrentScore()
     }
 
     override fun getViewContext(): Context? = context

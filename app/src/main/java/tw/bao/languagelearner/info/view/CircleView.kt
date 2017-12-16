@@ -26,7 +26,7 @@ class CircleView : View {
     private var mCenterX = 0
     private var mCenterY = 0
     private var mCircleBounds: RectF? = null
-    public var mUserExpPercent: Float = 50f
+    public var mUserExpPercent: Int = 50
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, R.attr.circleViewStyle)

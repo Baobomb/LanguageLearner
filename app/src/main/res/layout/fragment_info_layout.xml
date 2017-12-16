@@ -6,7 +6,7 @@
     android:background="@android:color/transparent">
 
     <tw.bao.languagelearner.info.view.CircleView
-        android:id="@+id/circle_scan_view"
+        android:id="@+id/mCircleInfoView"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_centerInParent="true"

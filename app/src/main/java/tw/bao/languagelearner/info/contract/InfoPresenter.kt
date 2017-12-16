@@ -8,6 +8,12 @@ class InfoPresenter(view: InfoContract.View) : InfoContract.Presenter {
     var mInfoView: InfoContract.View = checkNotNull(view)
 
     override fun onCreate() {
+    }
+
+    fun onCreateView() {
+    }
+
+    fun onViewCreated() {
         mInfoView.initView()
     }
 
