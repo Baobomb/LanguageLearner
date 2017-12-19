@@ -7,20 +7,87 @@
 
     <tw.bao.languagelearner.info.view.CircleView
         android:id="@+id/mCircleInfoView"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
         app:background_stroke_color="@color/gray"
         app:foreground_stroke_color="@color/yellow"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:stroke_width="4dp" />
+
+    <TextView
+        android:id="@+id/mTvLevel"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="1"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mCircleInfoView"
+        app:layout_constraintEnd_toEndOf="@+id/mCircleInfoView"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="@+id/mCircleInfoView"
+        app:layout_constraintTop_toTopOf="@+id/mCircleInfoView"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <TextView
+        android:id="@+id/mTvLevelTitle"
+        android:layout_width="260dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="LEVEL"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/mCircleInfoView"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="@+id/mCircleInfoView"
+        app:layout_constraintTop_toBottomOf="@+id/mTvLevel" />
+
+    <TextView
+        android:id="@+id/mTvWordsPreview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mCircleInfoView" />
+
+    <TextView
+        android:id="@+id/mTvUnLockWords"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mTvWordsPreview" />
+
+    <TextView
+        android:id="@+id/mTvAnswerCorrectRate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mTvUnLockWords" />
 
 
 </android.support.constraint.ConstraintLayout>
