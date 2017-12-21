@@ -18,18 +18,16 @@ class InfoPresenter(view: InfoContract.View) : InfoContract.Presenter {
     }
 
     override fun onStart() {
-        mInfoView.startWordsPreviewAnim()
     }
 
     override fun onStop() {
-
     }
 
     override fun onResume() {
-
+        mInfoView.startWordsPreviewAnim()
     }
 
     override fun onPause() {
-
+        mInfoView.stopWordsPreviewAnim()
     }
 }

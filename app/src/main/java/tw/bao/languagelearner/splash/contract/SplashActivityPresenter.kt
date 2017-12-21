@@ -9,7 +9,7 @@ import tw.bao.languagelearner.utils.db.DBDefinetion
 import tw.bao.languagelearner.utils.db.DBDefinetion.ASSET_FILE_EXTESION
 import tw.bao.languagelearner.utils.db.DBDefinetion.WORDS_DB_NAME
 import tw.bao.languagelearner.utils.db.DBHelper
-import tw.bao.languagelearner.utils.db.UtilsDB
+import tw.bao.languagelearner.utils.db.UtilsDBCommand
 
 /**
  * Created by bao on 2017/10/25.
@@ -58,8 +58,8 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
         }
         dbHelper?.apply {
             val dbRowCounts = getCount(tableName)
-            val words: String = UtilsDB.readFromAssets(mAnswerDialogView.getContext(), tableName + ASSET_FILE_EXTESION)
-            val wordDatas: WordDatas = UtilsDB.parseWordDatas(tableName, words)
+            val words: String = UtilsDBCommand.readFromAssets(mAnswerDialogView.getContext(), tableName + ASSET_FILE_EXTESION)
+            val wordDatas: WordDatas = UtilsDBCommand.parseWordDatas(tableName, words)
             var startPostiion = 0
             if (dbRowCounts >= wordDatas.words.size) {
                 return

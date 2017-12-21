@@ -10,6 +10,7 @@ import tw.bao.languagelearner.base.BaseView
 interface InfoContract {
     interface View : BaseView<Presenter> {
         fun startWordsPreviewAnim()
+        fun stopWordsPreviewAnim()
         fun getViewContext(): Context?
     }
 
