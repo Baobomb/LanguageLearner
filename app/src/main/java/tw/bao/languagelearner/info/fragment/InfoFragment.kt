@@ -68,6 +68,12 @@ class InfoFragment : Fragment, InfoContract.View {
 
     override fun initView() {
         mCircleInfoView.mUserExpPercent = UtilsInfo.getUserCurrentScore()
+        mTvAnswerCorrectRate.text = "${UtilsInfo.getUserAnswerCorrectRate()}%"
+        mTvAnswerTotalNums.text = UtilsInfo.getUserAnswerTotalNums().toString()
+        mTvAnswerCorrectNums.text = UtilsInfo.getUserAnswerCorrectNums().toString()
+    }
+
+    override fun startWordsPreviewAnim() {
     }
 
     override fun getViewContext(): Context? = context

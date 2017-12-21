@@ -14,6 +14,8 @@ object Prefs {
 
     // 0 ~ 700
     public val KEY_SCORE = "user_score"
+    public val KEY_TOTAL_ANSWER_NUMS = "user_total_answer_nums"
+    public val KEY_ANSWER_CORRECT_NUMS = "user_answer_correct_nums"
 
     public fun putInt(key: String, value: Int) {
         if (sPref == null) {
