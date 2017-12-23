@@ -26,6 +26,7 @@ class WordDatasListAdapter(context: Context) : RecyclerView.Adapter<WordDatasLis
         mWordDatas?.words?.takeIf { it[position] != null }?.apply {
             holder?.itemView?.mTvWordEng?.text = this[position]?.engWord
             holder?.itemView?.mTvWordChinese?.text = this[position]?.chineseWord
+            holder?.itemView?.mTvWordRoman?.text = this[position]?.romanText
         }
     }
 

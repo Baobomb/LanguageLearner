@@ -26,7 +26,7 @@ class CircleView : View {
     private var mCenterX = 0
     private var mCenterY = 0
     private var mCircleBounds: RectF? = null
-    public var mUserExpPercent: Int = 50
+    public var mCircleOuterStrokePercent: Int = 50
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, R.attr.circleViewStyle)
@@ -87,7 +87,7 @@ class CircleView : View {
             canvas?.drawArc(mCircleBounds, 0f, 360f, false, this)
         }
         mForegroundStrokePaint?.apply {
-            val sweepAngle = 360f * (mUserExpPercent * 0.01f)
+            val sweepAngle = 360f * (mCircleOuterStrokePercent * 0.01f)
             Log.d(LOG_TAG, "Sweep angle : " + sweepAngle)
             canvas?.drawArc(mCircleBounds, 90f, sweepAngle, false, this)
         }

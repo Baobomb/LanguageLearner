@@ -74,7 +74,7 @@ class InfoFragment : Fragment, InfoContract.View {
     }
 
     override fun initView() {
-        mCircleInfoView.mUserExpPercent = UtilsInfo.getUserCurrentScore()
+        mCircleLevelExp.mCircleOuterStrokePercent = UtilsInfo.getUserCurrentScore()
         mTvAnswerCorrectRate.text = "${UtilsInfo.getUserAnswerCorrectRate()}%"
         mTvAnswerTotalNums.text = UtilsInfo.getUserAnswerTotalNums().toString()
         mTvAnswerCorrectNums.text = UtilsInfo.getUserAnswerCorrectNums().toString()
@@ -86,7 +86,7 @@ class InfoFragment : Fragment, InfoContract.View {
     var animator: ValueAnimator = ValueAnimator.ofFloat(0f, 3f).apply {
         addUpdateListener {
             val animatedValue = animatedValue as Int
-            mTvWordsPreview.alpha = when {
+            mClWordsPreview.alpha = when {
                 animatedValue > 20f -> 30f - animatedValue
                 animatedValue > 10f -> 1f
                 else -> 10f - animatedValue
@@ -95,7 +95,9 @@ class InfoFragment : Fragment, InfoContract.View {
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?) {
                 nextWords?.apply {
-                    mTvWordsPreview.text = chineseWord
+                    mTvChineseWordsPreview.text = chineseWord
+                    mTvEngWordsPreview.text = engWord
+                    mTvRomanWordsPreview.text = romanText
                 }
             }
 
@@ -127,7 +129,9 @@ class InfoFragment : Fragment, InfoContract.View {
             return
         }
         currentWords?.apply {
-            mTvWordsPreview.text = chineseWord
+            mTvChineseWordsPreview.text = chineseWord
+            mTvEngWordsPreview.text = engWord
+            mTvRomanWordsPreview.text = romanText
         }
         animator.start()
     }
