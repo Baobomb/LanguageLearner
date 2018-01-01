@@ -2,10 +2,12 @@ package tw.bao.languagelearner.wordspreview.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_words_preview_layout.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.contract.WordsPreviewContract
 import tw.bao.languagelearner.main.contract.WordsPreviewPresenter
@@ -31,7 +33,13 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mPresenter.onCreateView()
         return inflater?.inflate(R.layout.fragment_words_preview_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        mPresenter.onViewCreated()
+        super.onViewCreated(view, savedInstanceState)
     }
 
 
@@ -62,7 +70,8 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
 
 
     override fun initView() {
-
+        mRvWordsList.layoutManager = LinearLayoutManager(context)
+        mRvWordsList.adapter = mWordDatasAdapter
     }
 
     override fun setWordDatas(wordDatas: WordDatas?) {

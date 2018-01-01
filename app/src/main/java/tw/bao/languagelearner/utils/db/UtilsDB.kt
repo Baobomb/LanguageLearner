@@ -22,7 +22,7 @@ object UtilsDB {
 
     fun getWordDatas(context: Context, tableName: String): WordDatas? {
         val dbHelper = DBHelper(context, DBDefinetion.WORDS_DB_NAME)
-        dbHelper?.apply {
+        dbHelper.apply {
             val dbRows = getCount(tableName)
             return if (dbRows >= 4) {
                 val positions = Utils.getRamdonInts(1, dbRows)

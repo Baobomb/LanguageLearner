@@ -85,7 +85,7 @@ class InfoFragment : Fragment, InfoContract.View {
     var mIsAnimNeedContinue = false
     var animator: ValueAnimator = ValueAnimator.ofFloat(0f, 3f).apply {
         addUpdateListener {
-            val animatedValue = animatedValue as Int
+            val animatedValue = animatedValue as Float
             mClWordsPreview.alpha = when {
                 animatedValue > 20f -> 30f - animatedValue
                 animatedValue > 10f -> 1f

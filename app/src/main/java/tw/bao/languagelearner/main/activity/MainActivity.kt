@@ -21,6 +21,14 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
+    override fun onBackPressed() {
+        if (mMainDrawerLayout.isDrawerOpen(mNav_view)) {
+            mMainDrawerLayout.closeDrawers()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     fun initView() {
         setContentView(R.layout.activity_main_layout)
         mMainToolbar.title = ""
@@ -39,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         setBottomTabListener()
         selectPage(MainLayoutHelper.getPageIndex(MainLayoutHelper.Companion.PageEnum.MAIN), MainLayoutHelper.Companion.PageEnum.MAIN)
     }
-    
+
     private val mTabOnClickListener = View.OnClickListener { view ->
         val selectedPage = view.tag as MainLayoutHelper.Companion.PageEnum
         selectPage(MainLayoutHelper.getPageIndex(selectedPage), selectedPage)

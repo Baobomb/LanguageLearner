@@ -21,6 +21,12 @@ class WordsPreviewPresenter(view: WordsPreviewContract.View) : WordsPreviewContr
     var dbAsync: Future<Unit>? = null
 
     override fun onCreate() {
+    }
+
+    fun onCreateView() {
+    }
+
+    fun onViewCreated() {
         mWordsPreviewView.initView()
     }
 
