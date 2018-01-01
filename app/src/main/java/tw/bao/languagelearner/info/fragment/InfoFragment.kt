@@ -87,9 +87,9 @@ class InfoFragment : Fragment, InfoContract.View {
         addUpdateListener {
             val animatedValue = animatedValue as Float
             mClWordsPreview.alpha = when {
-                animatedValue > 20f -> 30f - animatedValue
-                animatedValue > 10f -> 1f
-                else -> 10f - animatedValue
+                animatedValue > 2f -> 3f - animatedValue
+                animatedValue > 1f -> 1f
+                else -> 1f - animatedValue
             }
         }
         addListener(object : AnimatorListenerAdapter() {

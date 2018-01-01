@@ -18,7 +18,12 @@ object UtilsInfo {
 
     public fun getUserAnswerTotalNums(): Int = Prefs.getInt(Prefs.KEY_TOTAL_ANSWER_NUMS, 0)
 
-    public fun getUserAnswerCorrectRate(): Float = getUserAnswerCorrectNums().toFloat() / getUserAnswerTotalNums().toFloat()
+    public fun getUserAnswerCorrectRate(): Float {
+        if (getUserAnswerTotalNums() == 0) {
+            return 0f
+        }
+        return getUserAnswerCorrectNums().toFloat() / getUserAnswerTotalNums().toFloat()
+    }
 
     public fun upUserScore() {
         var currentTotalScore = getUserTotalAnswerScore()
