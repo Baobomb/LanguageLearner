@@ -89,7 +89,7 @@ class InfoFragment : Fragment, InfoContract.View {
             mClWordsPreview.alpha = when {
                 animatedValue > 2f -> 3f - animatedValue
                 animatedValue > 1f -> 1f
-                else -> 1f - animatedValue
+                else -> animatedValue
             }
         }
         addListener(object : AnimatorListenerAdapter() {
@@ -105,7 +105,7 @@ class InfoFragment : Fragment, InfoContract.View {
                 prepareWords()
             }
         })
-        duration = 10000
+        duration = 5000
     }
 
     override fun startWordsPreviewAnim() {
