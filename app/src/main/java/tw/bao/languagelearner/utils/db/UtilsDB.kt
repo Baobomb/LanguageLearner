@@ -10,9 +10,9 @@ import tw.bao.languagelearner.utils.Utils
  */
 object UtilsDB {
     fun getRandomWords(context: Context): WordData? {
-        val randomWordDatasPosition = Utils.getRamdonInts(0, 7)
+        val randomWordDatasPosition = Utils.getRamdonInts(0, DBDefinetion.TABLE_LIST.size - 1)
         //TODO random table
-        val wordDatas = getWordDatas(context, DBDefinetion.TableName.WORD_TABLE_BUSINESS)
+        val wordDatas = getWordDatas(context, DBDefinetion.TABLE_LIST[randomWordDatasPosition[0]])
         wordDatas?.words?.apply {
             val randomWordsPosition: Int = Utils.getRamdonInts(0, size)[0]
             return wordDatas.words[randomWordsPosition]

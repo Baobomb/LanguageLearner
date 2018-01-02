@@ -40,8 +40,9 @@ class SplashActivityPresenter(view: SplashActivityContract.View) : SplashActivit
 
     override fun initDB() {
         doAsync {
-            loadWordsIntoDB(DBDefinetion.TableName.WORD_TABLE_BASIC)
-            loadWordsIntoDB(DBDefinetion.TableName.WORD_TABLE_BUSINESS)
+            DBDefinetion.TABLE_LIST.forEach {
+                loadWordsIntoDB(it)
+            }
             uiThread {
                 mAnswerDialogView.getContext()?.apply {
                     startActivity(Intent(this, MainActivity::class.java))

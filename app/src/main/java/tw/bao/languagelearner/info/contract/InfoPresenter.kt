@@ -7,6 +7,10 @@ class InfoPresenter(view: InfoContract.View) : InfoContract.Presenter {
 
     var mInfoView: InfoContract.View = checkNotNull(view)
 
+    fun setUserVisibleHint(isVisible: Boolean) {
+
+    }
+
     override fun onCreate() {
     }
 

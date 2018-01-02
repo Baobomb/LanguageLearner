@@ -20,7 +20,7 @@ object DBDefinetion {
         val WORD_TABLE_DIRTY = "word_dirty"
     }
 
-    val TABLE_LIST = arrayOf(TableName.WORD_TABLE_BASIC
+    public val TABLE_LIST = arrayOf(TableName.WORD_TABLE_BASIC
             , TableName.WORD_TABLE_LIFE
             , TableName.WORD_TABLE_BUSINESS
             , TableName.WORD_TABLE_SCHOOL

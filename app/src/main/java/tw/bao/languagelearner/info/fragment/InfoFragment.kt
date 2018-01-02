@@ -35,6 +35,7 @@ class InfoFragment : Fragment, InfoContract.View {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
+        mPresenter.setUserVisibleHint(isVisibleToUser)
         Log.d("FragmentVisible", "InfoFragment visible")
     }
 
@@ -78,6 +79,7 @@ class InfoFragment : Fragment, InfoContract.View {
         mTvAnswerCorrectRate.text = "${UtilsInfo.getUserAnswerCorrectRate()}%"
         mTvAnswerTotalNums.text = UtilsInfo.getUserAnswerTotalNums().toString()
         mTvAnswerCorrectNums.text = UtilsInfo.getUserAnswerCorrectNums().toString()
+        mTvLevel.text = (UtilsInfo.getUserLevel() + 1).toString()
     }
 
     var currentWords: WordData? = null
