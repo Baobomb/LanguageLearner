@@ -1,1 +1,5 @@
 school.學校.Hsui hsiao,
+father.爸爸.Bà ba,
+brother.哥哥.Gē gē,
+sister.姊姊.Jiě jie,
+Good morning.早安.Zǎo ān,

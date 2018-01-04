@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -15,6 +16,9 @@ import tw.bao.languagelearner.main.MainLayoutHelper
  */
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        val LOG_TAG = MainActivity::class.java.simpleName
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,10 +75,15 @@ class MainActivity : AppCompatActivity() {
 
 
     var currentPage = MainLayoutHelper.Companion.PageEnum.MAIN
-    var currentPageIndex = 0
+    var currentPageIndex = -1
     var lastPageIndex = -1
 
     private fun selectPage(index: Int, pageEnum: MainLayoutHelper.Companion.PageEnum) {
+        Log.d(LOG_TAG, "selectPage > index : $index page ${pageEnum.name}")
+        if (currentPageIndex == index) {
+            Log.d(LOG_TAG, "currentPageIndex == index do not need transition")
+            return
+        }
         lastPageIndex = currentPageIndex
 
         //Assign new
@@ -87,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         var selectedFragment = getFragmentByIndex(index)
         if (selectedFragment != null) {
+            Log.d(LOG_TAG, "selectPage > selectedFragment !=null : $selectedFragment")
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val list = supportFragmentManager.fragments
             for (fragment in list) {
@@ -101,6 +111,7 @@ class MainActivity : AppCompatActivity() {
 
         selectedFragment = MainLayoutHelper.getPageFragment(pageEnum)
         selectedFragment?.apply {
+            Log.d(LOG_TAG, "selectPage > selectedFragment == null : $selectedFragment")
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val list = supportFragmentManager.fragments
             for (fragment in list) {

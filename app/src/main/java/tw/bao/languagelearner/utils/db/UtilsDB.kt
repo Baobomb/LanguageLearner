@@ -1,6 +1,7 @@
 package tw.bao.languagelearner.utils.db
 
 import android.content.Context
+import android.util.Log
 import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.Utils
@@ -9,14 +10,20 @@ import tw.bao.languagelearner.utils.Utils
  * Created by bao on 2017/12/21.
  */
 object UtilsDB {
+    private val LOG_TAG = UtilsDB::class.java.simpleName
     fun getRandomWords(context: Context): WordData? {
+        Log.d(LOG_TAG, "getRandomWords")
         val randomWordDatasPosition = Utils.getRamdonInts(0, DBDefinetion.TABLE_LIST.size - 1)
+        Log.d(LOG_TAG, "getRandomWords randomWordDatasPosition : ${randomWordDatasPosition[0]}")
         //TODO random table
         val wordDatas = getWordDatas(context, DBDefinetion.TABLE_LIST[randomWordDatasPosition[0]])
         wordDatas?.words?.apply {
-            val randomWordsPosition: Int = Utils.getRamdonInts(0, size)[0]
+            Log.d(LOG_TAG, "getRandomWords wordDatas : $wordDatas")
+            val randomWordsPosition: Int = Utils.getRamdonInts(0, size - 1)[0]
+            Log.d(LOG_TAG, "getRandomWords randomWordsPosition : $randomWordsPosition")
             return wordDatas.words[randomWordsPosition]
         }
+        Log.d(LOG_TAG, "getRandomWords wordDatas : null")
         return null
     }
 

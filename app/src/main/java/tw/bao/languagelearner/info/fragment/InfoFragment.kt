@@ -24,19 +24,19 @@ import tw.bao.languagelearner.utils.db.UtilsDB
  * Created by bao on 2017/12/9.
  */
 
-class InfoFragment : Fragment, InfoContract.View {
-    constructor()
+class InfoFragment : Fragment(), InfoContract.View {
 
     private var mPresenter: InfoPresenter = InfoPresenter(this)
 
     companion object {
+        private val LOG_TAG = InfoFragment::class.java.simpleName
         public val sInstance: InfoFragment by lazy { InfoFragment() }
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         mPresenter.setUserVisibleHint(isVisibleToUser)
-        Log.d("FragmentVisible", "InfoFragment visible")
+        Log.d(LOG_TAG, "InfoFragment visible")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +82,6 @@ class InfoFragment : Fragment, InfoContract.View {
         mTvLevel.text = (UtilsInfo.getUserLevel() + 1).toString()
     }
 
-    var currentWords: WordData? = null
     var nextWords: WordData? = null
     var mIsAnimNeedContinue = false
     var animator: ValueAnimator = ValueAnimator.ofFloat(0f, 3f).apply {
@@ -111,37 +110,35 @@ class InfoFragment : Fragment, InfoContract.View {
     }
 
     override fun startWordsPreviewAnim() {
+        Log.d(LOG_TAG, "startWordsPreviewAnim")
         mIsAnimNeedContinue = true
         animWords()
     }
 
     override fun stopWordsPreviewAnim() {
+        Log.d(LOG_TAG, "stopWordsPreviewAnim")
         mIsAnimNeedContinue = false
-        currentWords = null
         nextWords = null
         animator.cancel()
     }
 
     private fun animWords() {
         if (!mIsAnimNeedContinue) {
+            Log.d(LOG_TAG, "start anim words fail currentWords : mIsAnimNeedContinue false")
             return
         }
-        if (currentWords == null || nextWords == null) {
+        if (nextWords == null) {
+            Log.d(LOG_TAG, "start anim words fail nextWords : $nextWords")
             prepareWords()
             return
-        }
-        currentWords?.apply {
-            mTvChineseWordsPreview.text = chineseWord
-            mTvEngWordsPreview.text = engWord
-            mTvRomanWordsPreview.text = romanText
         }
         animator.start()
     }
 
     private fun prepareWords() {
         doAsync {
-            currentWords = UtilsDB.getRandomWords(context)
             nextWords = UtilsDB.getRandomWords(context)
+            Log.d(LOG_TAG, "prepareWords nextWords : $nextWords")
             uiThread { animWords() }
         }
     }

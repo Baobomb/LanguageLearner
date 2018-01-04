@@ -27,12 +27,13 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
     var mWordDatasAdapter: WordDatasListAdapter? = null
 
     companion object {
+        private val LOG_TAG = WordPreviewFragment::class.java.simpleName
         public val sInstance: WordPreviewFragment by lazy { WordPreviewFragment() }
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        Log.d("FragmentVisible", "WordPreviewFragment visible")
+        Log.d(LOG_TAG, "WordPreviewFragment visible")
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -73,8 +74,8 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
 
 
     override fun initView() {
+        Log.d(LOG_TAG, "initView")
         mRvWordsList.layoutManager = LinearLayoutManager(context)
-        mRvWordsList.adapter = mWordDatasAdapter
         mTlWordsTables?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
@@ -102,6 +103,9 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
             context?.apply {
                 mWordDatasAdapter = WordDatasListAdapter(this)
             }
+        }
+        if (mRvWordsList.adapter == null) {
+            mRvWordsList.adapter = mWordDatasAdapter
         }
         mWordDatasAdapter?.mWordDatas = wordDatas
     }
