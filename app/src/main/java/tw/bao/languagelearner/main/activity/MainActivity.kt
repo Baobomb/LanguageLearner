@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import tw.bao.languagelearner.R
@@ -123,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             //Simulate the selected fragment is visible now
             userVisibleHint = true
         }
-
+        setTabImage(pageEnum)
     }
 
 
@@ -139,4 +141,24 @@ class MainActivity : AppCompatActivity() {
         return takeIf { lastPageIndex >= 0 }?.getFragmentByIndex(lastPageIndex)
     }
 
+
+    private fun setTabImage(pageEnum: MainLayoutHelper.Companion.PageEnum) {
+        val count = mMainBottomTab.tabCount
+        var customView: View?
+        for (i in 0 until count) {
+            customView = mMainBottomTab.getTabAt(i)!!.customView
+            customView?.apply {
+                val tabIcon = findViewById<View>(R.id.iv_tab_icon) as ImageView
+                val tabText = findViewById<View>(R.id.tv_tab_text) as TextView
+                val index = MainLayoutHelper.getPageIndex(pageEnum)
+                if (i == index) {
+                    tabIcon.setImageResource(MainLayoutHelper.sPageConfigs[i]!!.mTabSelectedIconResId)
+                    tabText.setTextColor(resources.getColor(R.color.tab_selected_text_color))
+                } else {
+                    tabIcon.setImageResource(MainLayoutHelper.sPageConfigs[i]!!.mTabUnselectedIconResId)
+                    tabText.setTextColor(getResources().getColor(R.color.tab_text_color))
+                }
+            }
+        }
+    }
 }

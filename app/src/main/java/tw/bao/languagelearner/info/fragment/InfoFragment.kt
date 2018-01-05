@@ -76,6 +76,7 @@ class InfoFragment : Fragment(), InfoContract.View {
 
     override fun initView() {
         mCircleLevelExp.mCircleOuterStrokePercent = UtilsInfo.getUserCurrentScore()
+        mCircleAnswerCorrectRate.mCircleOuterStrokePercent = UtilsInfo.getUserAnswerCorrectRate().toInt()
         mTvAnswerCorrectRate.text = "${UtilsInfo.getUserAnswerCorrectRate()}%"
         mTvAnswerTotalNums.text = UtilsInfo.getUserAnswerTotalNums().toString()
         mTvAnswerCorrectNums.text = UtilsInfo.getUserAnswerCorrectNums().toString()

@@ -14,4 +14,5 @@
     <color name="tab_bar_color">#f6f6f9</color>
     <color name="tab_text_color">#3f263147</color>
     <color name="tab_ripple_color">#8A8F9B</color>
+    <color name="tab_selected_text_color">#263147</color>
 </resources>

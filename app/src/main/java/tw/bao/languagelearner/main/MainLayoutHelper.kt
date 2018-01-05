@@ -23,7 +23,7 @@ class MainLayoutHelper {
             MAIN, WORD_PREVIEW, SETTING
         }
 
-        private val sPageConfigs: ArrayList<PageConfig?> by lazy { arrayListOf(getPageConfig(PageEnum.MAIN), getPageConfig(PageEnum.WORD_PREVIEW), getPageConfig(PageEnum.SETTING)) }
+        public val sPageConfigs: ArrayList<PageConfig?> by lazy { arrayListOf(getPageConfig(PageEnum.MAIN), getPageConfig(PageEnum.WORD_PREVIEW), getPageConfig(PageEnum.SETTING)) }
 
         fun initTabIcons(context: Context, tabLayout: TabLayout) {
             Log.d("TABINIT", "config size : " + sPageConfigs.size)
@@ -40,6 +40,7 @@ class MainLayoutHelper {
             }
         }
 
+
         private fun inflateCustomTab(context: Context, iconResId: Int, titleResId: Int): View {
             val view = LayoutInflater.from(context).inflate(R.layout.bottom_custom_tab, null)
             val tabImage: ImageView = view.findViewById(R.id.iv_tab_icon)
@@ -54,8 +55,8 @@ class MainLayoutHelper {
                 PageEnum.MAIN -> PageConfig(
                         PageEnum.MAIN,
                         InfoFragment::class.java,
-                        R.mipmap.ic_launcher,
-                        R.mipmap.ic_launcher,
+                        R.drawable.ic_info_outline_selected,
+                        R.drawable.ic_info_outline_unselected,
                         R.string.info_tab_name
                 )
                 PageEnum.WORD_PREVIEW -> PageConfig(
