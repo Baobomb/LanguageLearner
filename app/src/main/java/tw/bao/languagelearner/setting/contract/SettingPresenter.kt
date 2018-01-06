@@ -5,10 +5,17 @@ package tw.bao.languagelearner.main.contract
  */
 class SettingPresenter(view: SettingContract.View) : SettingContract.Presenter {
 
-    var mMainActivityView: SettingContract.View = checkNotNull(view)
+    var mSettingView: SettingContract.View = checkNotNull(view)
 
     override fun onCreate() {
-        mMainActivityView.initView()
+
+    }
+
+    fun onCreateView() {
+    }
+
+    fun onViewCreated() {
+        mSettingView.initView()
     }
 
     override fun onStart() {

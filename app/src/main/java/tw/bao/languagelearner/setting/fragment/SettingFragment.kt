@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_setting_layout.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.contract.SettingContract
 import tw.bao.languagelearner.main.contract.SettingPresenter
+import tw.bao.languagelearner.utils.Prefs
 
 /**
  * Created by bao on 2017/12/9.
@@ -29,7 +31,13 @@ class SettingFragment : Fragment, SettingContract.View {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mPresenter.onCreateView()
         return inflater?.inflate(R.layout.fragment_setting_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        mPresenter.onViewCreated()
+        super.onViewCreated(view, savedInstanceState)
     }
 
 
@@ -59,7 +67,12 @@ class SettingFragment : Fragment, SettingContract.View {
     }
 
     override fun initView() {
-
+        mCtvAnswerDialog.setOnClickListener {
+            mCtvAnswerDialog.apply {
+                isChecked = !isChecked
+                Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, isChecked)
+            }
+        }
     }
 
     override fun getContext(): Context {

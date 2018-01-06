@@ -62,15 +62,15 @@ class MainLayoutHelper {
                 PageEnum.WORD_PREVIEW -> PageConfig(
                         PageEnum.WORD_PREVIEW,
                         WordPreviewFragment::class.java,
-                        R.mipmap.ic_launcher,
-                        R.mipmap.ic_launcher,
+                        R.drawable.ic_translate_selected,
+                        R.drawable.ic_translate_unselected,
                         R.string.word_preview_tab_name
                 )
                 PageEnum.SETTING -> PageConfig(
                         PageEnum.SETTING,
                         SettingFragment::class.java,
-                        R.mipmap.ic_launcher,
-                        R.mipmap.ic_launcher,
+                        R.drawable.ic_settings_selected,
+                        R.drawable.ic_settings_unselected,
                         R.string.setting_tab_name
                 )
             }

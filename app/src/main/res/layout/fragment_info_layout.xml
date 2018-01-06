@@ -68,17 +68,41 @@
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
 
-        <View
-            android:id="@+id/mVDivider"
+        <RelativeLayout
+            android:id="@+id/mRlDivider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/gray"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mClWordsPreview" />
+            app:layout_constraintTop_toBottomOf="@+id/mClWordsPreview">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_toLeftOf="@+id/mTvTitle"
+                android:background="@color/gray" />
+
+            <TextView
+                android:id="@+id/mTvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="學習資訊" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/mTvTitle"
+                android:background="@color/gray" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/mLlLevel"
@@ -86,12 +110,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mVDivider">
+            app:layout_constraintTop_toBottomOf="@+id/mRlDivider">
 
 
             <android.support.constraint.ConstraintLayout
@@ -151,19 +175,21 @@
                     android:id="@+id/mTvLevel"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginEnd="24dp"
                     android:layout_marginStart="24dp"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="等級 1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mTvLevelTitle"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginEnd="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="15dp"
                     android:gravity="center"
-                    android:text="Level"
+                    android:text="解鎖字彙等級"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -243,19 +269,21 @@
                     android:id="@+id/mTvAnswerCorrectNums"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginEnd="24dp"
                     android:layout_marginStart="24dp"
                     android:gravity="center"
-                    android:text="10"
+                    android:text="共答對 10題"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mTvAnswerTotalNums"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginEnd="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="15dp"
                     android:gravity="center"
-                    android:text="20"
+                    android:text="共作答 20題"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

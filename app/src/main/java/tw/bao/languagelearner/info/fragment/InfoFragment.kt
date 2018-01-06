@@ -76,11 +76,12 @@ class InfoFragment : Fragment(), InfoContract.View {
 
     override fun initView() {
         mCircleLevelExp.mCircleOuterStrokePercent = UtilsInfo.getUserCurrentScore()
+        mTvExp.text = UtilsInfo.getUserCurrentScore().toString()
         mCircleAnswerCorrectRate.mCircleOuterStrokePercent = UtilsInfo.getUserAnswerCorrectRate().toInt()
         mTvAnswerCorrectRate.text = "${UtilsInfo.getUserAnswerCorrectRate()}%"
-        mTvAnswerTotalNums.text = UtilsInfo.getUserAnswerTotalNums().toString()
-        mTvAnswerCorrectNums.text = UtilsInfo.getUserAnswerCorrectNums().toString()
-        mTvLevel.text = (UtilsInfo.getUserLevel() + 1).toString()
+        mTvAnswerTotalNums.text = "共作答 : ${UtilsInfo.getUserAnswerTotalNums()}題"
+        mTvAnswerCorrectNums.text = "共答對 : ${UtilsInfo.getUserAnswerCorrectNums()}題"
+        mTvLevel.text = "等級 : ${(UtilsInfo.getUserLevel() + 1)}"
     }
 
     var nextWords: WordData? = null

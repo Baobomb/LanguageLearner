@@ -16,6 +16,7 @@ object Prefs {
     public val KEY_SCORE = "user_score"
     public val KEY_TOTAL_ANSWER_NUMS = "user_total_answer_nums"
     public val KEY_ANSWER_CORRECT_NUMS = "user_answer_correct_nums"
+    public val KEY_IS_ANSWER_DIALOG_OPEN = "is_answer_dialog_open"
 
     public fun putInt(key: String, value: Int) {
         if (sPref == null) {
@@ -32,6 +33,26 @@ object Prefs {
         }
         sPref?.apply {
             return getInt(key, defValue)
+        }
+        return defValue
+    }
+
+
+    public fun putBoolean(key: String, value: Boolean) {
+        if (sPref == null) {
+            sPref = MyApplication.getGlobalContext()?.getSharedPreferences(INDEX_PREF, Context.MODE_PRIVATE)
+        }
+        sPref?.apply {
+            edit().putBoolean(key, value).apply()
+        }
+    }
+
+    public fun getBoolean(key: String, defValue: Boolean): Boolean {
+        if (sPref == null) {
+            sPref = MyApplication.getGlobalContext()?.getSharedPreferences(INDEX_PREF, Context.MODE_PRIVATE)
+        }
+        sPref?.apply {
+            return Prefs.getBoolean(key, defValue)
         }
         return defValue
     }

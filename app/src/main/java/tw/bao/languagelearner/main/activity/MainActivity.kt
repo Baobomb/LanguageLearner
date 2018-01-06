@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initView() {
         setContentView(R.layout.activity_main_layout)
-        mMainToolbar.title = ""
+        mMainToolbar.title = "LearnChinese"
         setSupportActionBar(mMainToolbar)
 
         val toggle = ActionBarDrawerToggle(
@@ -108,6 +108,7 @@ class MainActivity : AppCompatActivity() {
                     .attach(selectedFragment)
                     .commit()
             selectedFragment.userVisibleHint = true
+            setTabImage(pageEnum)
             return
         }
 
@@ -124,8 +125,8 @@ class MainActivity : AppCompatActivity() {
                     .commit()
             //Simulate the selected fragment is visible now
             userVisibleHint = true
+            setTabImage(pageEnum)
         }
-        setTabImage(pageEnum)
     }
 
 
