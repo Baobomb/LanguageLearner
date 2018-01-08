@@ -1,10 +1,13 @@
 package tw.bao.languagelearner.main.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -27,28 +30,42 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
-    override fun onBackPressed() {
-        if (mMainDrawerLayout.isDrawerOpen(mNav_view)) {
-            mMainDrawerLayout.closeDrawers()
-        } else {
-            super.onBackPressed()
-        }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.activity_main_toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val itemId = item?.itemId
+        if (itemId == android.R.id.home || itemId == R.id.menu_about) run {
+            Log.d(LOG_TAG,"Menu about click")
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+//    override fun onBackPressed() {
+//        if (mMainDrawerLayout.isDrawerOpen(mNav_view)) {
+//            mMainDrawerLayout.closeDrawers()
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 
     fun initView() {
         setContentView(R.layout.activity_main_layout)
         mMainToolbar.title = "LearnChinese"
         setSupportActionBar(mMainToolbar)
 
-        val toggle = ActionBarDrawerToggle(
-                this,
-                mMainDrawerLayout,
-                mMainToolbar,
-                0,
-                0
-        )
-        mMainDrawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+//        val toggle = ActionBarDrawerToggle(
+//                this,
+//                mMainDrawerLayout,
+//                mMainToolbar,
+//                0,
+//                0
+//        )
+//        mMainDrawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
         MainLayoutHelper.initTabIcons(this, mMainBottomTab)
         setBottomTabListener()
         selectPage(MainLayoutHelper.getPageIndex(MainLayoutHelper.Companion.PageEnum.MAIN), MainLayoutHelper.Companion.PageEnum.MAIN)

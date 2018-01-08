@@ -84,7 +84,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_toLeftOf="@+id/mTvTitle"
-                android:background="@color/gray" />
+                android:background="@android:color/black" />
 
             <TextView
                 android:id="@+id/mTvTitle"
@@ -92,7 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="學習資訊" />
+                android:text="學習資訊"
+                android:textColor="@android:color/black" />
 
             <View
                 android:layout_width="match_parent"
@@ -101,7 +102,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_toRightOf="@+id/mTvTitle"
-                android:background="@color/gray" />
+                android:background="@android:color/black" />
         </RelativeLayout>
 
         <LinearLayout
