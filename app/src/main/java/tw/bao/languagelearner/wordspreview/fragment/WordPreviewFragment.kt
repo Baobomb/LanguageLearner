@@ -93,7 +93,7 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
         })
         val userLevel = UtilsInfo.getUserLevel()
         for (tablePos in 0..userLevel) {
-            mTlWordsTables.addTab(mTlWordsTables.newTab().setText(DBDefinetion.TABLE_LIST[tablePos]))
+            mTlWordsTables.addTab(mTlWordsTables.newTab().setText("Level " + (tablePos + 1)))
         }
         mPresenter.selectWords(DBDefinetion.TABLE_LIST[0])
     }

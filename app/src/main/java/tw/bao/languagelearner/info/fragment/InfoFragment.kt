@@ -89,11 +89,13 @@ class InfoFragment : Fragment(), InfoContract.View {
     var animator: ValueAnimator = ValueAnimator.ofFloat(0f, 3f).apply {
         addUpdateListener {
             val animatedValue = animatedValue as Float
-            mClWordsPreview.alpha = when {
+            val alphaValue = when {
                 animatedValue > 2f -> 3f - animatedValue
                 animatedValue > 1f -> 1f
                 else -> animatedValue
             }
+            mLlEngWordsPreview.alpha = alphaValue
+            mLlChineseWordsPreview.alpha = alphaValue
         }
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?) {

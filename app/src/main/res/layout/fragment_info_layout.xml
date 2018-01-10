@@ -3,18 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:background="#2a303e">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/mClInfoMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@android:color/transparent">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/mClWordsPreview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/info_card_bg"
             app:layout_constraintHeight_percent="0.3">
 
             <LinearLayout
@@ -38,6 +41,18 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+
+            <View
+                android:id="@+id/vDivider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="6.5dp"
+                android:layout_marginTop="6.5dp"
+                android:background="#e5e6e9"
+                app:layout_constraintBottom_toBottomOf="@+id/mClWordsPreview"
+                app:layout_constraintStart_toEndOf="@+id/mLlEngWordsPreview"
+                app:layout_constraintTop_toTopOf="@+id/mClWordsPreview" />
+
             <LinearLayout
                 android:id="@+id/mLlChineseWordsPreview"
                 android:layout_width="0dp"
@@ -45,7 +60,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="@+id/mClWordsPreview"
-                app:layout_constraintStart_toEndOf="@+id/mLlEngWordsPreview"
+                app:layout_constraintStart_toEndOf="@+id/vDivider"
                 app:layout_constraintTop_toTopOf="@+id/mClWordsPreview"
                 app:layout_constraintWidth_percent="0.5">
 
@@ -72,6 +87,7 @@
             android:id="@+id/mRlDivider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +100,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_toLeftOf="@+id/mTvTitle"
-                android:background="@android:color/black" />
+                android:background="@android:color/white" />
 
             <TextView
                 android:id="@+id/mTvTitle"
@@ -93,7 +109,7 @@
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:text="學習資訊"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/green" />
 
             <View
                 android:layout_width="match_parent"
@@ -102,17 +118,19 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_toRightOf="@+id/mTvTitle"
-                android:background="@android:color/black" />
+                android:background="@android:color/white" />
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/mLlLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/info_card_bg"
             android:orientation="horizontal"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -164,13 +182,21 @@
 
             </android.support.constraint.ConstraintLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="6.5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="6.5dp"
+                android:background="#e5e6e9" />
+
             <LinearLayout
                 android:id="@+id/mLlLevelContent"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
 
                 <TextView
                     android:id="@+id/mTvLevel"
@@ -201,11 +227,13 @@
             android:id="@+id/mLlAnswerCorrectRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
+            android:background="@drawable/info_card_bg"
             android:orientation="horizontal"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -257,6 +285,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/mTvAnswerCorrectRate" />
 
             </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="6.5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="6.5dp"
+                android:background="#e5e6e9" />
 
             <LinearLayout
                 android:id="@+id/mLlAnswerCorrectRateContent"
