@@ -25,6 +25,13 @@
                 android:fitsSystemWindows="true"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+            <View
+                android:id="@+id/toolbar_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@drawable/top_to_bottom_shadow"
+                android:visibility="visible" />
+
         </android.support.design.widget.AppBarLayout>
 
         <include
@@ -33,10 +40,10 @@
         <View
             android:id="@+id/bottom_tab_shadow"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="1.5dp"
             android:layout_above="@+id/mMainBottomTab"
             android:background="@drawable/bottom_to_top_shadow"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/mMainBottomTab"
