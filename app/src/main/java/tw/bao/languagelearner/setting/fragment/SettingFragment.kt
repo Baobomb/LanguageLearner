@@ -1,6 +1,7 @@
 package tw.bao.languagelearner.setting.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -71,9 +72,69 @@ class SettingFragment : Fragment, SettingContract.View {
             mCtvAnswerDialog.apply {
                 isChecked = !isChecked
                 Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, isChecked)
+                initSettingView(isChecked)
+                initRestrictTimes(isChecked, false)
             }
         }
+        mCtvAnswerShowAfterUnLock.setOnClickListener {
+            mCtvAnswerShowAfterUnLock.apply {
+                isChecked = !isChecked
+                Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_SHOW_AFTER_UNLOCK, isChecked)
+            }
+        }
+        mCtvAnswerShowAfterCall.setOnClickListener {
+            mCtvAnswerShowAfterCall.apply {
+                isChecked = !isChecked
+                Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_SHOW_AFTER_CALL, isChecked)
+            }
+        }
+        mCtvAnswerRestrictShowTimes.setOnClickListener {
+            mCtvAnswerRestrictShowTimes.apply {
+                isChecked = !isChecked
+                Prefs.putBoolean(Prefs.KEY_IS_RESTRICT_ANSWER_DIALOG_SHOW_TIMES, isChecked)
+                initRestrictTimes(true, isChecked)
+            }
+        }
+        val isAnswerOpen = Prefs.getBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, false)
+        val isRestrictAnswerDialogShowTimes = Prefs.getBoolean(Prefs.KEY_IS_RESTRICT_ANSWER_DIALOG_SHOW_TIMES, false)
+        mCtvAnswerDialog.isChecked = Prefs.getBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, false)
+        mCtvAnswerShowAfterCall.isChecked = Prefs.getBoolean(Prefs.KEY_IS_ANSWER_DIALOG_SHOW_AFTER_CALL, false)
+        mCtvAnswerShowAfterUnLock.isChecked = Prefs.getBoolean(Prefs.KEY_IS_ANSWER_DIALOG_SHOW_AFTER_UNLOCK, false)
+        mCtvAnswerRestrictShowTimes.isChecked = Prefs.getBoolean(Prefs.KEY_IS_RESTRICT_ANSWER_DIALOG_SHOW_TIMES, false)
+        initSettingView(isAnswerOpen)
+        initRestrictTimes(isAnswerOpen, isRestrictAnswerDialogShowTimes)
     }
+
+    private fun initSettingView(isChecked: Boolean) {
+        if (!isChecked) {
+            mCtvAnswerRestrictShowTimes.setTextColor(Color.GRAY)
+            mCtvAnswerShowAfterCall.setTextColor(Color.GRAY)
+            mCtvAnswerShowAfterUnLock.setTextColor(Color.GRAY)
+
+            mCtvAnswerRestrictShowTimes.isEnabled = false
+            mCtvAnswerShowAfterCall.isEnabled = false
+            mCtvAnswerShowAfterUnLock.isEnabled = false
+        } else {
+            mCtvAnswerRestrictShowTimes.setTextColor(Color.BLACK)
+            mCtvAnswerShowAfterCall.setTextColor(Color.BLACK)
+            mCtvAnswerShowAfterUnLock.setTextColor(Color.BLACK)
+
+            mCtvAnswerRestrictShowTimes.isEnabled = true
+            mCtvAnswerShowAfterCall.isEnabled = true
+            mCtvAnswerShowAfterUnLock.isEnabled = true
+        }
+    }
+
+    private fun initRestrictTimes(isAnswerDialogOpen: Boolean, isRestrictShowTimes: Boolean) {
+        if (!isAnswerDialogOpen || !isRestrictShowTimes) {
+            mEtAnswerRestrictShowTimes.setTextColor(Color.GRAY)
+            mEtAnswerRestrictShowTimes.isEnabled = false
+        } else {
+            mEtAnswerRestrictShowTimes.setTextColor(Color.BLACK)
+            mEtAnswerRestrictShowTimes.isEnabled = true
+        }
+    }
+
 
     override fun getContext(): Context {
         return super.getContext()

@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2a303e">
 
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_margin="10dp"
-        android:background="@drawable/info_card_bg">
+        android:background="@drawable/info_card_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/mTvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Setting"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <CheckedTextView
             android:id="@+id/mCtvAnswerDialog"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="78dp"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:checked="true"
             android:gravity="center"
             android:text="ANSWER_DIALOG"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <View
-            android:id="@+id/mVAnswerDialogDivider"
+            android:id="@+id/mVDivider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginEnd="10dp"
@@ -37,5 +48,128 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mCtvAnswerDialog" />
-    </android.support.constraint.ConstraintLayout>
-</android.support.constraint.ConstraintLayout>
+
+        <CheckedTextView
+            android:id="@+id/mCtvAnswerShowAfterCall"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:gravity="center"
+            android:text="ANSWER_DIALOG Show after call"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mVDivider1" />
+
+        <View
+            android:id="@+id/mVDivider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mCtvAnswerShowAfterCall" />
+
+        <CheckedTextView
+            android:id="@+id/mCtvAnswerShowAfterUnLock"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="true"
+            android:gravity="center"
+            android:text="ANSWER_DIALOG Show after unlock"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mVDivider2" />
+
+        <View
+            android:id="@+id/mVDivider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mCtvAnswerShowAfterUnLock" />
+
+        <CheckedTextView
+            android:id="@+id/mCtvAnswerRestrictShowTimes"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:gravity="center"
+            android:text="ANSWER_DIALOG restrict show times"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mVDivider3" />
+
+        <View
+            android:id="@+id/mVDivider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mCtvAnswerRestrictShowTimes" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/mEtAnswerRestrictShowTimes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@null"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:checked="false"
+                android:gravity="center_vertical|right"
+                android:text="3"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                app:layout_constraintEnd_toStartOf="@id/mTvRestrictTimes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mVDivider4" />
+
+            <TextView
+                android:id="@+id/mTvRestrictTimes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="times"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mVDivider4" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/mVDivider5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mEtAnswerRestrictShowTimes" />
+    </LinearLayout>
+</RelativeLayout>

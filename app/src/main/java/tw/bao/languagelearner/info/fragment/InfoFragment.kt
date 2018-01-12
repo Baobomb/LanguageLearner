@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_info_layout.*
+import kotlinx.android.synthetic.main.fragment_setting_layout.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import tw.bao.languagelearner.R

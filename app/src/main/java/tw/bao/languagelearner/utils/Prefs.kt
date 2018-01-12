@@ -2,6 +2,7 @@ package tw.bao.languagelearner.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import tw.bao.languagelearner.MyApplication
 
 /**
@@ -17,6 +18,10 @@ object Prefs {
     public val KEY_TOTAL_ANSWER_NUMS = "user_total_answer_nums"
     public val KEY_ANSWER_CORRECT_NUMS = "user_answer_correct_nums"
     public val KEY_IS_ANSWER_DIALOG_OPEN = "is_answer_dialog_open"
+    public val KEY_IS_ANSWER_DIALOG_SHOW_AFTER_CALL = "is_answer_dialog_show_after_call"
+    public val KEY_IS_ANSWER_DIALOG_SHOW_AFTER_UNLOCK = "is_answer_dialog_show_after_unlock"
+    public val KEY_IS_RESTRICT_ANSWER_DIALOG_SHOW_TIMES = "is_restrict_answer_dialog_show_times"
+    public val KEY_RESTRICT_ANSWER_DIALOG_SHOW_TIMES = "restrict_answer_dialog_show_times"
 
     public fun putInt(key: String, value: Int) {
         if (sPref == null) {
@@ -52,7 +57,7 @@ object Prefs {
             sPref = MyApplication.getGlobalContext()?.getSharedPreferences(INDEX_PREF, Context.MODE_PRIVATE)
         }
         sPref?.apply {
-            return Prefs.getBoolean(key, defValue)
+            return getBoolean(key, defValue)
         }
         return defValue
     }
