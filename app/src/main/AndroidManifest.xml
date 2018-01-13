@@ -28,6 +28,32 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AnswerDialog" />
+
+        <service
+            android:name=".MainService"
+            android:enabled="true"
+            android:label="CallService" />
+
+        <receiver android:name=".answer.receiver.CallStatusReceiver">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.PHONE_STATE_EXT" />
+            </intent-filter>
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.PHONE_STATE_2" />
+            </intent-filter>
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.PHONE_STATE2" />
+            </intent-filter>
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.DUAL_PHONE_STATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
