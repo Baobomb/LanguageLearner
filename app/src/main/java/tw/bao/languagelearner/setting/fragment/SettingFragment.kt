@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_setting_layout.*
+import tw.bao.languagelearner.MainService
+import tw.bao.languagelearner.MyApplication
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.contract.SettingContract
 import tw.bao.languagelearner.main.contract.SettingPresenter
@@ -72,6 +74,7 @@ class SettingFragment : Fragment, SettingContract.View {
             mCtvAnswerDialog.apply {
                 isChecked = !isChecked
                 Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, isChecked)
+                MainService.changeServiceState(MyApplication.getGlobalContext(), isChecked)
                 initSettingView(isChecked)
                 initRestrictTimes(isChecked, false)
             }
