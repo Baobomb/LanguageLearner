@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
+import tw.bao.languagelearner.answer.receiver.CallStatusReceiver
 import tw.bao.languagelearner.answer.receiver.ScreenStatusReceiver
 import tw.bao.languagelearner.utils.NotifyID
 import tw.bao.languagelearner.utils.Prefs
@@ -46,10 +47,13 @@ class MainService : Service() {
     override fun onCreate() {
         super.onCreate()
         ScreenStatusReceiver.registerReceiverIfNeed()
+        CallStatusReceiver.registerReceiverIfNeed()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        ScreenStatusReceiver.unregisterReceiver()
+        CallStatusReceiver.unregisterReceiver()
     }
 
     inner class MainServiceBinder : Binder() {

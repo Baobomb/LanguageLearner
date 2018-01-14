@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.util.Log
 import tw.bao.languagelearner.MyApplication
 
 /**
@@ -11,6 +12,7 @@ import tw.bao.languagelearner.MyApplication
  */
 class ScreenStatusReceiver : BroadcastReceiver() {
     companion object {
+        private val LOG_TAG = ScreenStatusReceiver::class.java.simpleName
         private var sReceiver: ScreenStatusReceiver? = null
         @Synchronized
         public fun registerReceiverIfNeed() {
@@ -25,9 +27,35 @@ class ScreenStatusReceiver : BroadcastReceiver() {
                 MyApplication.getGlobalContext()?.registerReceiver(sReceiver, filter)
             }
         }
+
+        @Synchronized
+        fun unregisterReceiver() {
+            if (sReceiver != null) {
+                MyApplication.getGlobalContext()?.unregisterReceiver(sReceiver)
+                sReceiver = null
+            }
+        }
     }
 
-    override fun onReceive(p0: Context?, p1: Intent?) {
-
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (intent == null) {
+            return
+        }
+        val action = intent.action
+        /*+ ", isCharging:" + mIsCharging*/
+        when (action) {
+            Intent.ACTION_SCREEN_OFF -> {
+                Log.d(LOG_TAG, "screen off")
+            }
+            Intent.ACTION_SCREEN_ON -> {
+                Log.d(LOG_TAG, "screen on")
+            }
+            Intent.ACTION_USER_UNLOCKED -> {
+                Log.d(LOG_TAG, "screen unlocked")
+            }
+            Intent.ACTION_USER_PRESENT -> {
+                Log.d(LOG_TAG, "user present")
+            }
+        }
     }
 }

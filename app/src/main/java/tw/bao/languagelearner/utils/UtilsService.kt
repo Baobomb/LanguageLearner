@@ -16,7 +16,7 @@ object UtilsService {
 
 
     private fun isServiceMatchCriteria(criteria: Int, vararg serviceClasses: Class<*>): Boolean {
-        if (null == serviceClasses || serviceClasses.size == 0) {
+        if (null == serviceClasses || serviceClasses.isEmpty()) {
             return false
         }
         MyApplication.getGlobalContext() ?: return false

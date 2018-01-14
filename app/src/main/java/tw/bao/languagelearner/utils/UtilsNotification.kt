@@ -19,7 +19,7 @@ object UtilsNotification {
     fun getBasicBuilder(context: Context?): NotificationCompat.Builder {
         val b = NotificationCompat.Builder(context)
         b.color = NOTIFICATION_BG_COLOR
-        b.setSmallIcon(R.drawable.ic_sync_black_24dp)
+        b.setSmallIcon(context!!.applicationInfo.icon)
         b.setAutoCancel(true)
 
 

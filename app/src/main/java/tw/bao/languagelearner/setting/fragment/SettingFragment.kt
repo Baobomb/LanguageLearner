@@ -14,6 +14,7 @@ import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.contract.SettingContract
 import tw.bao.languagelearner.main.contract.SettingPresenter
 import tw.bao.languagelearner.utils.Prefs
+import tw.bao.languagelearner.utils.UtilsPermission
 
 /**
  * Created by bao on 2017/12/9.
@@ -43,7 +44,6 @@ class SettingFragment : Fragment, SettingContract.View {
         super.onViewCreated(view, savedInstanceState)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter.onCreate()
@@ -69,16 +69,34 @@ class SettingFragment : Fragment, SettingContract.View {
         mPresenter.onStop()
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == UtilsPermission.REQUEST_PERMISSION_CODE) {
+            if (UtilsPermission.hasRequiredPermissions()) {
+                mCtvAnswerDialog.isChecked = true
+                Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, true)
+                MainService.changeServiceState(MyApplication.getGlobalContext(), true)
+                initSettingView(true)
+                initRestrictTimes(true, false)
+            }
+        }
+    }
+
     override fun initView() {
         mCtvAnswerDialog.setOnClickListener {
             mCtvAnswerDialog.apply {
-                isChecked = !isChecked
-                Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, isChecked)
-                MainService.changeServiceState(MyApplication.getGlobalContext(), isChecked)
-                initSettingView(isChecked)
-                initRestrictTimes(isChecked, false)
+                if (!isChecked && !UtilsPermission.hasRequiredPermissions()) {
+                    requestPermissions(UtilsPermission.REQUIRED_PERMISSIONS, UtilsPermission.REQUEST_PERMISSION_CODE)
+                } else {
+                    isChecked = !isChecked
+                    Prefs.putBoolean(Prefs.KEY_IS_ANSWER_DIALOG_OPEN, isChecked)
+                    MainService.changeServiceState(MyApplication.getGlobalContext(), isChecked)
+                    initSettingView(isChecked)
+                    initRestrictTimes(isChecked, false)
+                }
+
             }
         }
+
         mCtvAnswerShowAfterUnLock.setOnClickListener {
             mCtvAnswerShowAfterUnLock.apply {
                 isChecked = !isChecked
