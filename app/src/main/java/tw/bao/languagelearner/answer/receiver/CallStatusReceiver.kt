@@ -7,6 +7,8 @@ import android.content.IntentFilter
 import android.telephony.TelephonyManager
 import android.util.Log
 import tw.bao.languagelearner.MyApplication
+import tw.bao.languagelearner.answer.activity.AnswerDialogActivity
+import tw.bao.languagelearner.utils.Utils
 
 /**
  * Created by bao on 2018/1/13.
@@ -50,6 +52,9 @@ class CallStatusReceiver : BroadcastReceiver() {
         } else if (intent.getStringExtra(TelephonyManager.EXTRA_STATE) == TelephonyManager.EXTRA_STATE_IDLE) {
             Log.d(LOG_TAG, "idle")
             //TODO : show data
+            if (Utils.showShowAnswerDialog()) {
+                context?.startActivity(AnswerDialogActivity.getAnswerDialogActivityIntent(context))
+            }
         }
 
     }

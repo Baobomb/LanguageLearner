@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
 import tw.bao.languagelearner.MyApplication
+import tw.bao.languagelearner.answer.activity.AnswerDialogActivity
+import tw.bao.languagelearner.utils.Utils
 
 /**
  * Created by bao on 2018/1/13.
@@ -49,12 +51,17 @@ class ScreenStatusReceiver : BroadcastReceiver() {
             }
             Intent.ACTION_SCREEN_ON -> {
                 Log.d(LOG_TAG, "screen on")
+                //TODO : show data
             }
             Intent.ACTION_USER_UNLOCKED -> {
                 Log.d(LOG_TAG, "screen unlocked")
             }
             Intent.ACTION_USER_PRESENT -> {
                 Log.d(LOG_TAG, "user present")
+                if (Utils.showShowAnswerDialog()) {
+                    Log.d(LOG_TAG, "show answer dialog")
+                    context?.startActivity(AnswerDialogActivity.getAnswerDialogActivityIntent(context))
+                }
             }
         }
     }

@@ -2,7 +2,6 @@ package tw.bao.languagelearner.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import tw.bao.languagelearner.MyApplication
 
 /**
@@ -22,6 +21,28 @@ object Prefs {
     public val KEY_IS_ANSWER_DIALOG_SHOW_AFTER_UNLOCK = "is_answer_dialog_show_after_unlock"
     public val KEY_IS_RESTRICT_ANSWER_DIALOG_SHOW_TIMES = "is_restrict_answer_dialog_show_times"
     public val KEY_RESTRICT_ANSWER_DIALOG_SHOW_TIMES = "restrict_answer_dialog_show_times"
+
+    public val KEY_ANSWER_DIALOG_OPEN_TIMES_IN_12_HOURS = "answer_dialog_open_times_in_12_hours"
+    public val KEY_LAST_ANSWER_DIALOG_OPEN_TIME = "last_answer_dialog_open_time"
+
+    public fun putLong(key: String, value: Long) {
+        if (sPref == null) {
+            sPref = MyApplication.getGlobalContext()?.getSharedPreferences(INDEX_PREF, Context.MODE_PRIVATE)
+        }
+        sPref?.apply {
+            edit().putLong(key, value).apply()
+        }
+    }
+
+    public fun getLong(key: String, defValue: Long): Long {
+        if (sPref == null) {
+            sPref = MyApplication.getGlobalContext()?.getSharedPreferences(INDEX_PREF, Context.MODE_PRIVATE)
+        }
+        sPref?.apply {
+            return getLong(key, defValue)
+        }
+        return defValue
+    }
 
     public fun putInt(key: String, value: Int) {
         if (sPref == null) {

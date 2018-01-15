@@ -13,6 +13,8 @@ import tw.bao.languagelearner.R
 import tw.bao.languagelearner.answer.contract.AnswerDialogContract
 import tw.bao.languagelearner.answer.contract.AnswerDialogPresenter
 import tw.bao.languagelearner.model.WordDatas
+import tw.bao.languagelearner.utils.Utils
+import tw.bao.languagelearner.utils.db.DBDefinetion
 
 /**
  * Created by bao on 2017/10/25.
@@ -21,6 +23,20 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     lateinit var mPresenter: AnswerDialogPresenter
     private var mAnswerView: View? = null
+
+    companion object {
+
+        fun getAnswerDialogActivityIntent(context: Context): Intent {
+            val ii = Intent()
+            ii.setClass(context, AnswerDialogActivity::class.java)
+            ii.putExtra(AnswerDialogPresenter.KEY_ANSWER_TABLE_NAME, DBDefinetion.TABLE_LIST[Utils.getRamdonInts(0, DBDefinetion.TABLE_LIST.size)[0]])
+            ii.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION or
+                    Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+            return ii
+        }
+
+    }
 
     enum class ANSWER_TAG {
         ANSWER, WRONG
