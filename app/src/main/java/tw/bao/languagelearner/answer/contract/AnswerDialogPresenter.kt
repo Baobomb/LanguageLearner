@@ -39,11 +39,11 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
         if (tableName != null) {
             doAsync {
                 //TODO : Get Table name
-                val wordDatas = prepareWords(DBDefinetion.TableName.WORD_TABLE_BUSINESS)
+                val wordDatas = prepareWords(tableName)
                 val counts = wordDatas?.words?.size
                 val type = wordDatas?.type
                 Log.d("TAG", "Type : $type Counts : $counts")
-                val answerPosition = Utils.getRamdonInts(1, 4)[0]
+                val answerPosition = Utils.getRandomFourInts(1, 4)[0]
                 uiThread {
                     mAnswerDialogView.showQuestionView(answerPosition = answerPosition, wordDatas = wordDatas)
                 }
@@ -72,7 +72,7 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
         mDbHelper?.apply {
             val dbRows = getCount(tableName)
             return if (dbRows >= 4) {
-                val positions = Utils.getRamdonInts(1, dbRows)
+                val positions = Utils.getRandomFourInts(1, dbRows)
                 val words = ArrayList<WordData?>()
                 positions.mapTo(words) {
                     getData(tableName, it)

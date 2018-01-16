@@ -19,6 +19,21 @@
         android:id="@+id/mRvWordsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/mIvStartTest"
         android:layout_below="@+id/mTlWordsTables" />
+
+    <Button
+        android:id="@+id/mIvStartTest"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/start_test_button_bg"
+        android:gravity="center"
+        android:text="Start Test"
+        android:textSize="20sp" />
 
 </RelativeLayout>

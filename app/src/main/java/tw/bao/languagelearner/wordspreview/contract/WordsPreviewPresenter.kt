@@ -19,6 +19,7 @@ class WordsPreviewPresenter(view: WordsPreviewContract.View) : WordsPreviewContr
     var mWordsPreviewView: WordsPreviewContract.View = checkNotNull(view)
     var mDBHelper: DBHelper? = null
     var dbAsync: Future<Unit>? = null
+    public var mSelectedWords: String? = null
 
     override fun onCreate() {
     }
@@ -47,6 +48,7 @@ class WordsPreviewPresenter(view: WordsPreviewContract.View) : WordsPreviewContr
     }
 
     public fun selectWords(tableName: String) {
+        mSelectedWords = tableName
         dbAsync = doAsync {
             val wordDatas = prepareWords(tableName)
             uiThread {

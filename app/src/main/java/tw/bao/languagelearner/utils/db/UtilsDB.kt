@@ -13,13 +13,13 @@ object UtilsDB {
     private val LOG_TAG = UtilsDB::class.java.simpleName
     fun getRandomWords(context: Context): WordData? {
         Log.d(LOG_TAG, "getRandomWords")
-        val randomWordDatasPosition = Utils.getRamdonInts(0, DBDefinetion.TABLE_LIST.size - 1)
+        val randomWordDatasPosition = Utils.getRandomFourInts(0, DBDefinetion.TABLE_LIST.size - 1)
         Log.d(LOG_TAG, "getRandomWords randomWordDatasPosition : ${randomWordDatasPosition[0]}")
         //TODO random table
         val wordDatas = getWordDatas(context, DBDefinetion.TABLE_LIST[randomWordDatasPosition[0]])
         wordDatas?.words?.apply {
             Log.d(LOG_TAG, "getRandomWords wordDatas : $wordDatas")
-            val randomWordsPosition: Int = Utils.getRamdonInts(0, size - 1)[0]
+            val randomWordsPosition: Int = Utils.getRandomFourInts(0, size - 1)[0]
             Log.d(LOG_TAG, "getRandomWords randomWordsPosition : $randomWordsPosition")
             return wordDatas.words[randomWordsPosition]
         }
@@ -32,7 +32,7 @@ object UtilsDB {
         dbHelper.apply {
             val dbRows = getCount(tableName)
             return if (dbRows >= 4) {
-                val positions = Utils.getRamdonInts(1, dbRows)
+                val positions = Utils.getRandomFourInts(1, dbRows)
                 val words = ArrayList<WordData?>()
                 positions.mapTo(words) {
                     getData(tableName, it)

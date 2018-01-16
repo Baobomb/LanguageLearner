@@ -32,6 +32,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AnswerDialog" />
 
+        <activity
+            android:name=".wordstest.activity.WordTestActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".MainService"
             android:enabled="true"

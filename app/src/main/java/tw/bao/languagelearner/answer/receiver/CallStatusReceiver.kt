@@ -56,6 +56,5 @@ class CallStatusReceiver : BroadcastReceiver() {
                 context?.startActivity(AnswerDialogActivity.getAnswerDialogActivityIntent(context))
             }
         }
-
     }
 }

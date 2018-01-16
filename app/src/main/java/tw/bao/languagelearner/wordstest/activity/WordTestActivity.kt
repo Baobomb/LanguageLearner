@@ -1,35 +1,37 @@
-package tw.bao.languagelearner.answer.activity
+package tw.bao.languagelearner.wordstest.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import kotlinx.android.synthetic.main.activity_answer_dialog_layout.*
+import kotlinx.android.synthetic.main.activity_word_test_layout.*
 import tw.bao.languagelearner.R
-import tw.bao.languagelearner.answer.contract.AnswerDialogContract
 import tw.bao.languagelearner.answer.contract.AnswerDialogPresenter
 import tw.bao.languagelearner.model.WordDatas
-import tw.bao.languagelearner.utils.Utils
-import tw.bao.languagelearner.utils.db.DBDefinetion
+import tw.bao.languagelearner.wordstest.contract.WordTestContract
+import tw.bao.languagelearner.wordstest.contract.WordTestPresenter
 
 /**
  * Created by bao on 2017/10/25.
  */
-class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
+class WordTestActivity : Activity(), WordTestContract.View {
 
-    lateinit var mPresenter: AnswerDialogPresenter
+    lateinit var mPresenter: WordTestPresenter
     private var mAnswerView: View? = null
+    private var isStart = false
 
     companion object {
 
-        fun getAnswerDialogActivityIntent(context: Context): Intent {
+        fun getWordTestActivityIntent(context: Context, tableName: String): Intent {
             val ii = Intent()
-            ii.setClass(context, AnswerDialogActivity::class.java)
-            ii.putExtra(AnswerDialogPresenter.KEY_ANSWER_TABLE_NAME, DBDefinetion.TABLE_LIST[Utils.getRandomFourInts(0, DBDefinetion.TABLE_LIST.size)[0]])
+            ii.setClass(context, WordTestActivity::class.java)
+            ii.putExtra(AnswerDialogPresenter.KEY_ANSWER_TABLE_NAME, tableName)
             ii.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_NO_ANIMATION or
                     Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
@@ -44,7 +46,7 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = AnswerDialogPresenter(this)
+        mPresenter = WordTestPresenter(this)
         mPresenter.onCreate()
     }
 
@@ -70,14 +72,41 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     override fun initView() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.decorView.setBackgroundColor(Color.TRANSPARENT)
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        setContentView(R.layout.activity_word_test_layout)
     }
 
-    override fun showQuestionView(answerPosition: Int, wordDatas: WordDatas?) {
-        setContentView(R.layout.activity_answer_dialog_layout)
-        setQuestionItem(answerPosition, wordDatas)
-        setAnswerItem(answerPosition, wordDatas)
+    override fun showNextQuestionView(answerPosition: Int, wordDatas: WordDatas?) {
+        if (isStart) {
+            fadeAnimationOuestionView(1f, 0f, object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    setQuestionItem(answerPosition, wordDatas)
+                    setAnswerItem(answerPosition, wordDatas)
+                    fadeAnimationOuestionView(0f, 1f, null)
+                }
+            })
+        } else {
+            fadeAnimationOuestionView(0f, 1f, object : AnimatorListenerAdapter() {
+                override fun onAnimationStart(animation: Animator?) {
+                    setQuestionItem(answerPosition, wordDatas)
+                    setAnswerItem(answerPosition, wordDatas)
+                }
+            })
+            isStart = true
+        }
+    }
+
+    private fun fadeAnimationOuestionView(alphaFrom: Float, alphaTo: Float, animatorListenerAdapter: AnimatorListenerAdapter?) {
+        val valueAnimator = ValueAnimator.ofFloat(alphaFrom, alphaTo)
+        valueAnimator.addUpdateListener {
+            val animatedValue: Float = it.animatedValue as Float
+            mRlAnswerDialog.alpha = animatedValue
+        }
+        animatorListenerAdapter?.apply {
+            valueAnimator.addListener(this)
+        }
+        valueAnimator.duration = 1200
+        valueAnimator.start()
     }
 
     private fun setQuestionItem(answerPosition: Int, wordDatas: WordDatas?) {
@@ -108,11 +137,15 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
             mTvAnswerTwo.text = words[1]?.chineseWord
             mTvAnswerThird.text = words[2]?.chineseWord
             mTvAnswerFour.text = words[3]?.chineseWord
+            mTvAnswerOne.isSelected = false
+            mTvAnswerOne.isEnabled = true
+            mTvAnswerTwo.isSelected = false
+            mTvAnswerTwo.isEnabled = true
+            mTvAnswerThird.isSelected = false
+            mTvAnswerThird.isEnabled = true
+            mTvAnswerFour.isSelected = false
+            mTvAnswerFour.isEnabled = true
         }
-    }
-
-    override fun hideQuestionView() {
-
     }
 
     override fun showAnswer(chooseView: View) {

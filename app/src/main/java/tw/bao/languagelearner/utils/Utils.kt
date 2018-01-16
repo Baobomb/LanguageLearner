@@ -9,11 +9,19 @@ import kotlin.collections.ArrayList
  */
 object Utils {
 
-    fun getRamdonInts(from: Int, to: Int): Array<Int> {
+    fun getRandomFourInts(from: Int, to: Int): Array<Int> {
         ArrayList<Int>().let {
             it += from..to
             Collections.shuffle(it)
             return arrayOf(it[0], it[1], it[2], it[3])
+        }
+    }
+
+    fun getRandomInts(from: Int, to: Int): ArrayList<Int> {
+        ArrayList<Int>().let {
+            it += from..to
+            Collections.shuffle(it)
+            return it
         }
     }
 

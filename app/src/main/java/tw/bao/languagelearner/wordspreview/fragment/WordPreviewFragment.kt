@@ -16,6 +16,7 @@ import tw.bao.languagelearner.main.contract.WordsPreviewPresenter
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.db.DBDefinetion
 import tw.bao.languagelearner.wordspreview.adapter.WordDatasListAdapter
+import tw.bao.languagelearner.wordstest.activity.WordTestActivity
 
 /**
  * Created by bao on 2017/12/9.
@@ -96,6 +97,9 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
             mTlWordsTables.addTab(mTlWordsTables.newTab().setText("Level " + (tablePos + 1)))
         }
         mPresenter.selectWords(DBDefinetion.TABLE_LIST[0])
+        mIvStartTest.setOnClickListener {
+            startActivity(WordTestActivity.getWordTestActivityIntent(context!!, mPresenter.mSelectedWords!!))
+        }
     }
 
     override fun setWordDatas(wordDatas: WordDatas?) {
