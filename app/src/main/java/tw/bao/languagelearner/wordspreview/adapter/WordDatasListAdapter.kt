@@ -16,6 +16,10 @@ class WordDatasListAdapter(context: Context) : RecyclerView.Adapter<WordDatasLis
 
     var mContext: Context? = context
     var mWordDatas: WordDatas? = null
+        set(wordDatas) {
+            field = wordDatas
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WordDatasListItemViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.view_item_word_datas_list, parent, false)

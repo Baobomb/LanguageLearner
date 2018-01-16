@@ -79,13 +79,13 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
         mRvWordsList.layoutManager = LinearLayoutManager(context)
         mTlWordsTables?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
+                tab?.apply {
+                    mPresenter.selectWords(tag.toString())
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                tab?.apply {
-                    mPresenter.selectWords(text.toString())
-                }
+
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -94,7 +94,11 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
         })
         val userLevel = UtilsInfo.getUserLevel()
         for (tablePos in 0..userLevel) {
-            mTlWordsTables.addTab(mTlWordsTables.newTab().setText("Level " + (tablePos + 1)))
+            val tab = mTlWordsTables.newTab()
+            tab.text = "Level " + (tablePos + 1)
+            val tag = DBDefinetion.TABLE_LIST[tablePos]
+            tab.tag = tag
+            mTlWordsTables.addTab(tab)
         }
         mPresenter.selectWords(DBDefinetion.TABLE_LIST[0])
         mIvStartTest.setOnClickListener {
@@ -112,5 +116,6 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
             mRvWordsList.adapter = mWordDatasAdapter
         }
         mWordDatasAdapter?.mWordDatas = wordDatas
+        mWordDatasAdapter?.notifyDataSetChanged()
     }
 }
