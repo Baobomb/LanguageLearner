@@ -75,7 +75,7 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
     }
 
     private fun tryToShowNextQuestion() {
-        if (mWordDatas == null || mWordDatas?.words == null || mNowAnswerStartPosition >= mWordDatas!!.words.size-4) {
+        if (mWordDatas == null || mWordDatas?.words == null || mNowAnswerStartPosition >= mWordDatas!!.words.size) {
             mView.stopSelf()
             return
         }
