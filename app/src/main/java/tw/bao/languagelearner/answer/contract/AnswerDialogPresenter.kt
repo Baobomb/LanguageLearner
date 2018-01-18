@@ -27,11 +27,10 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
     }
 
     override fun onStart() {
-
     }
 
     override fun onStop() {
-
+        mAnswerDialogView.stopSelf()
     }
 
     override fun onResume() {
@@ -43,6 +42,7 @@ class AnswerDialogPresenter(view: AnswerDialogContract.View) : AnswerDialogContr
                 val counts = wordDatas?.words?.size
                 val type = wordDatas?.type
                 Log.d("TAG", "Type : $type Counts : $counts")
+                Log.d("TAG", "words size : " + wordDatas?.words?.size)
                 val answerPosition = Utils.getRandomFourInts(1, 4)[0]
                 uiThread {
                     mAnswerDialogView.showQuestionView(answerPosition = answerPosition, wordDatas = wordDatas)

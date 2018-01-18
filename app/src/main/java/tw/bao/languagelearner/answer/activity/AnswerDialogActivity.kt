@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -25,17 +26,15 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
     private var mAnswerView: View? = null
 
     companion object {
-
         fun getAnswerDialogActivityIntent(context: Context): Intent {
             val ii = Intent()
             ii.setClass(context, AnswerDialogActivity::class.java)
-            ii.putExtra(AnswerDialogPresenter.KEY_ANSWER_TABLE_NAME, DBDefinetion.TABLE_LIST[Utils.getRandomFourInts(0, DBDefinetion.TABLE_LIST.size)[0]])
+            ii.putExtra(AnswerDialogPresenter.KEY_ANSWER_TABLE_NAME, DBDefinetion.TABLE_LIST[Utils.getRandomFourInts(0, DBDefinetion.TABLE_LIST.size - 1)[0]])
             ii.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_NO_ANIMATION or
                     Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             return ii
         }
-
     }
 
     enum class ANSWER_TAG {
@@ -82,11 +81,13 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     private fun setQuestionItem(answerPosition: Int, wordDatas: WordDatas?) {
         wordDatas?.apply {
+            Log.d("TAG", "setQuestionItem : " + words[answerPosition - 1]?.engWord)
             mTvQuestion.text = words[answerPosition - 1]?.engWord
         }
     }
 
     private fun setAnswerItem(answerPosition: Int, wordDatas: WordDatas?) {
+        Log.d("TAG", "setAnswerItem")
         wordDatas?.apply {
             mTvAnswerOne.setOnClickListener { showAnswer(chooseView = mTvAnswerOne) }
             mTvAnswerTwo.setOnClickListener { showAnswer(chooseView = mTvAnswerTwo) }

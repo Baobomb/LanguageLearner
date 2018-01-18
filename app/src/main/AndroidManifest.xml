@@ -28,7 +28,7 @@
         <activity
             android:name=".answer.activity.AnswerDialogActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AnswerDialog" />
 

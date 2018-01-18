@@ -48,6 +48,7 @@ class ScreenStatusReceiver : BroadcastReceiver() {
         when (action) {
             Intent.ACTION_SCREEN_OFF -> {
                 Log.d(LOG_TAG, "screen off")
+
             }
             Intent.ACTION_SCREEN_ON -> {
                 Log.d(LOG_TAG, "screen on")
