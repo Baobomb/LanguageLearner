@@ -14,14 +14,16 @@ import tw.bao.languagelearner.info.utils.UtilsInfo
 import tw.bao.languagelearner.main.contract.WordsPreviewContract
 import tw.bao.languagelearner.main.contract.WordsPreviewPresenter
 import tw.bao.languagelearner.model.WordDatas
+import tw.bao.languagelearner.utils.UtilsTTS
 import tw.bao.languagelearner.utils.db.DBDefinetion
 import tw.bao.languagelearner.wordspreview.adapter.WordDatasListAdapter
 import tw.bao.languagelearner.wordstest.activity.WordTestActivity
+import java.util.*
 
 /**
  * Created by bao on 2017/12/9.
  */
-class WordPreviewFragment : Fragment, WordsPreviewContract.View {
+class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewContract.OnItemClickListener {
     constructor()
 
     var mPresenter: WordsPreviewPresenter = WordsPreviewPresenter(this)
@@ -110,6 +112,7 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
         if (mWordDatasAdapter == null) {
             context?.apply {
                 mWordDatasAdapter = WordDatasListAdapter(this)
+                mWordDatasAdapter?.onItemClickListener = this@WordPreviewFragment
             }
         }
         if (mRvWordsList.adapter == null) {
@@ -117,5 +120,13 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View {
         }
         mWordDatasAdapter?.mWordDatas = wordDatas
         mWordDatasAdapter?.notifyDataSetChanged()
+    }
+
+    override fun onChineseWordClick(chineseWords: String) {
+        UtilsTTS.speech(chineseWords, Locale.CHINESE)
+    }
+
+    override fun onEngWordClick(engWords: String) {
+        UtilsTTS.speech(engWords, Locale.ENGLISH)
     }
 }
