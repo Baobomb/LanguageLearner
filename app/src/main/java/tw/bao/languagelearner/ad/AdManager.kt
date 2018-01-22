@@ -1,10 +1,14 @@
 package tw.bao.languagelearner.ad
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.formats.*
 import tw.bao.languagelearner.R
 
@@ -16,63 +20,73 @@ object AdManager {
         fun onAdLoaded(ad: NativeAd)
     }
 
-    public fun loadAd(context: Context) {
+    public fun loadAd(context: Context, adLoadedListener: AdLoadedListener) {
         val adLoader = AdLoader.Builder(context, "ca-app-pub-3940256099942544/2247696110")
                 .forAppInstallAd { ad: NativeAppInstallAd ->
                     // Show the app install ad.
+                    adLoadedListener.onAdLoaded(ad)
                 }
                 .forContentAd { ad: NativeContentAd ->
                     // Show the content ad.
+                    adLoadedListener.onAdLoaded(ad)
                 }
                 .withAdListener(object : AdListener() {
                     override fun onAdFailedToLoad(errorCode: Int) {
-                        // Handle the failure by logging, altering the UI, and so on.
+                        Log.d("AdManager", "Error : " + errorCode)
                     }
                 })
                 .withNativeAdOptions(NativeAdOptions.Builder()
-                        // Methods in the NativeAdOptions.Builder class can be
-                        // used here to specify individual options settings.
                         .build())
                 .build()
+        val adRequest = AdRequest.Builder().build()
+        adLoader.loadAd(adRequest)
     }
 
-    private fun renderAd(nativeAd: NativeAppInstallAd, parent: ViewGroup) {
+    public fun renderAd(nativeAd: NativeAppInstallAd, parent: ViewGroup) {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
-        val adView = inflater.inflate(R.layout.admob_install_ad_layout, parent) as NativeAppInstallAdView
+        val adView = inflater.inflate(R.layout.inapp_sticky_ad_admob_install_ad_layout, null) as NativeAppInstallAdView
+        val adImageView = adView.findViewById<ImageView>(R.id.mIvAd)
+        val adTitle = adView.findViewById<TextView>(R.id.mTvAdTitle)
+        val adContent = adView.findViewById<TextView>(R.id.mTvAdContent)
+        val adCta = adView.findViewById<TextView>(R.id.mTvAdCta)
 
-        // Locate the view that will hold the headline, set its text, and use the
-        // NativeAppInstallAdView's headlineView property to register it.
-//        val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
-//        headlineView.text = nativeAd.headline
-//        adView.headlineView = headlineView
+        adTitle.text = nativeAd.headline
+        adContent.text = nativeAd.body
+        nativeAd.images[0]?.apply {
+            adImageView.setImageDrawable(this.drawable)
+        }
+        adCta.text = nativeAd.callToAction
 
-
-        // Call the NativeAppInstallAdView's setNativeAd method to register the
-        // NativeAdObject.
+        adView.headlineView = adTitle
+        adView.bodyView = adContent
+        adView.imageView = adImageView
+        adView.callToActionView = adCta
         adView.setNativeAd(nativeAd)
-
-        // Place the AdView into the parent.
         parent.addView(adView)
     }
 
-    private fun renderAd(nativeAd: NativeContentAd, parent: ViewGroup) {
+    public fun renderAd(nativeAd: NativeContentAd, parent: ViewGroup) {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
-        val adView = inflater.inflate(R.layout.admob_content_ad_layout, parent) as NativeContentAdView
+        val adView = inflater.inflate(R.layout.inapp_sticky_ad_admob_content_ad_layout, null) as NativeContentAdView
+        val adImageView = adView.findViewById<ImageView>(R.id.mIvAd)
+        val adTitle = adView.findViewById<TextView>(R.id.mTvAdTitle)
+        val adContent = adView.findViewById<TextView>(R.id.mTvAdContent)
+        val adCta = adView.findViewById<TextView>(R.id.mTvAdCta)
 
-        // Locate the view that will hold the headline, set its text, and use the
-        // NativeAppInstallAdView's headlineView property to register it.
-//        val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
-//        headlineView.text = nativeAd.headline
-//        adView.headlineView = headlineView
+        adTitle.text = nativeAd.headline
+        adContent.text = nativeAd.body
+        nativeAd.images[0]?.apply {
+            adImageView.setImageDrawable(this.drawable)
+        }
+        adCta.text = nativeAd.callToAction
 
-
-        // Call the NativeAppInstallAdView's setNativeAd method to register the
-        // NativeAdObject.
+        adView.headlineView = adTitle
+        adView.bodyView = adContent
+        adView.imageView = adImageView
+        adView.callToActionView = adCta
         adView.setNativeAd(nativeAd)
-
-        // Place the AdView into the parent.
         parent.addView(adView)
     }
 }

@@ -3,4 +3,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/inapp_sticky_ad_content_field" />
 </com.google.android.gms.ads.formats.NativeContentAdView>
