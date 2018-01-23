@@ -9,13 +9,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.google.android.gms.ads.formats.NativeAd
-import com.google.android.gms.ads.formats.NativeAppInstallAd
-import com.google.android.gms.ads.formats.NativeContentAd
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import tw.bao.languagelearner.R
-import tw.bao.languagelearner.ad.AdManager
 import tw.bao.languagelearner.main.MainLayoutHelper
 
 /**
@@ -34,15 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        AdManager.loadAd(this, object : AdManager.AdLoadedListener {
-            override fun onAdLoaded(ad: NativeAd) {
-                if (ad is NativeContentAd) {
-                    AdManager.renderAd((ad as NativeContentAd), mRlAdContainer)
-                } else {
-                    AdManager.renderAd((ad as NativeAppInstallAd), mRlAdContainer)
-                }
-            }
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

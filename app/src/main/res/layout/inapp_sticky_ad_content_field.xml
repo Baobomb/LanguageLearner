@@ -8,23 +8,25 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp" />
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 
     <TextView
         android:id="@+id/mTvAdTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/mVEmpty"
-        android:layout_toLeftOf="@+id/mTvCta"
-        android:layout_toRightOf="@+id/mIvAd" />
+        android:layout_toLeftOf="@+id/mTvAdCta"
+        android:layout_toRightOf="@+id/mIvAd"
+        android:ellipsize="end"
+        android:maxLines="1" />
 
     <View
         android:id="@+id/mVEmpty"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/mTvCta"
+        android:layout_toLeftOf="@+id/mTvAdCta"
         android:layout_toRightOf="@+id/mIvAd" />
 
     <TextView
@@ -32,8 +34,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mVEmpty"
-        android:layout_toLeftOf="@+id/mTvCta"
-        android:layout_toRightOf="@+id/mIvAd" />
+        android:layout_toLeftOf="@+id/mTvAdCta"
+        android:layout_toRightOf="@+id/mIvAd"
+        android:ellipsize="end"
+        android:maxLines="1" />
 
     <TextView
         android:id="@+id/mTvAdCta"
@@ -43,6 +47,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@drawable/ad_cta_bg"
+        android:gravity="center"
         android:maxWidth="100dp"
         android:minWidth="70dp" />
 </RelativeLayout>

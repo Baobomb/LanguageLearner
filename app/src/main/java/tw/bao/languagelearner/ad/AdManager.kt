@@ -16,6 +16,7 @@ import tw.bao.languagelearner.R
  * Created by bao on 2018/1/22.
  */
 object AdManager {
+
     interface AdLoadedListener {
         fun onAdLoaded(ad: NativeAd)
     }

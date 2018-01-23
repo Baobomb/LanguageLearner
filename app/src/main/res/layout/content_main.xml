@@ -17,16 +17,10 @@
     <!--android:background="@color/main_indicator_bg"-->
     <!--android:elevation="8dp" />-->
 
-    <RelativeLayout
-        android:id="@+id/mRlAdContainer"
-        android:layout_width="match_parent"
-        android:layout_height="76dp" />
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/mRlAdContainer">
+        android:layout_height="match_parent">
 
     </FrameLayout>
 
