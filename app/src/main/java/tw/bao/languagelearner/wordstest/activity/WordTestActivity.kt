@@ -78,15 +78,15 @@ class WordTestActivity : Activity(), WordTestContract.View {
 
     override fun showNextQuestionView(answerPosition: Int, wordDatas: WordDatas?) {
         if (isStart) {
-            fadeAnimationOuestionView(1f, 0f, object : AnimatorListenerAdapter() {
+            fadeAnimationOuestionView(mRlAnswerDialog, 1f, 0f, object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
                     setQuestionItem(answerPosition, wordDatas)
                     setAnswerItem(answerPosition, wordDatas)
-                    fadeAnimationOuestionView(0f, 1f, null)
+                    fadeAnimationOuestionView(mRlAnswerDialog, 0f, 1f, null)
                 }
             })
         } else {
-            fadeAnimationOuestionView(0f, 1f, object : AnimatorListenerAdapter() {
+            fadeAnimationOuestionView(mRlAnswerDialog, 0f, 1f, object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: Animator?) {
                     setQuestionItem(answerPosition, wordDatas)
                     setAnswerItem(answerPosition, wordDatas)
@@ -96,11 +96,11 @@ class WordTestActivity : Activity(), WordTestContract.View {
         }
     }
 
-    private fun fadeAnimationOuestionView(alphaFrom: Float, alphaTo: Float, animatorListenerAdapter: AnimatorListenerAdapter?) {
+    private fun fadeAnimationOuestionView(view: ViewGroup, alphaFrom: Float, alphaTo: Float, animatorListenerAdapter: AnimatorListenerAdapter?) {
         val valueAnimator = ValueAnimator.ofFloat(alphaFrom, alphaTo)
         valueAnimator.addUpdateListener {
             val animatedValue: Float = it.animatedValue as Float
-            mRlAnswerDialog.alpha = animatedValue
+            view.alpha = animatedValue
         }
         animatorListenerAdapter?.apply {
             valueAnimator.addListener(this)
@@ -164,6 +164,29 @@ class WordTestActivity : Activity(), WordTestContract.View {
         mTvAnswerTwo.isClickable = false
         mTvAnswerThird.isClickable = false
         mTvAnswerFour.isClickable = false
+    }
+
+    override fun showSummary() {
+        fadeAnimationOuestionView(mRlAnswerDialog, 1f, 0f, object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                mRlAnswerDialog.visibility = View.GONE
+                fadeAnimationOuestionView(mRlSummaryDialog, 0f, 1f, object : AnimatorListenerAdapter() {
+                    override fun onAnimationStart(animation: Animator?) {
+                        mRlSummaryDialog.visibility = View.VISIBLE
+                        mTvSummary.text = mPresenter.getAnswerSummary()
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        mClTestRoot.setOnClickListener {
+                            stopSelf()
+                        }
+                        mRlSummaryDialog.setOnClickListener {
+                            stopSelf()
+                        }
+                    }
+                })
+            }
+        })
     }
 
     override fun getContext(): Context = this

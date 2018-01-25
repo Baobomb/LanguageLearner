@@ -43,7 +43,10 @@ object AdManager {
         adLoader.loadAd(adRequest)
     }
 
-    public fun renderAd(nativeAd: NativeAppInstallAd, parent: ViewGroup) {
+    public fun renderAd(nativeAd: NativeAppInstallAd, parent: ViewGroup?) {
+        if (parent == null) {
+            return
+        }
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
         val adView = inflater.inflate(R.layout.inapp_sticky_ad_admob_install_ad_layout, null) as NativeAppInstallAdView
@@ -67,7 +70,10 @@ object AdManager {
         parent.addView(adView)
     }
 
-    public fun renderAd(nativeAd: NativeContentAd, parent: ViewGroup) {
+    public fun renderAd(nativeAd: NativeContentAd, parent: ViewGroup?) {
+        if (parent == null) {
+            return
+        }
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
         val adView = inflater.inflate(R.layout.inapp_sticky_ad_admob_content_ad_layout, null) as NativeContentAdView
