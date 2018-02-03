@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.flurry.android:ads:7.0.0'
+    api('com.facebook.android:audience-network-sdk:4.25.0') {
+        exclude group: 'com.google.android.gms'
+    }
+    api 'com.google.android.gms:play-services-ads-lite:' + rootProject.ext.gmsLibraryVersion
+    api 'com.github.bumptech.glide:glide:' + rootProject.ext.glideVersion
+    api 'jp.wasabeef:glide-transformations:' + rootProject.ext.glideTransformationVersion
+
+    api('com.mopub:mopub-sdk-banner:4.11.0@aar') {
+        transitive = true
+    }
+    api('com.mopub:mopub-sdk-native-static:4.11.0@aar') {
+        transitive = true
+    }
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    testImplementation 'junit:junit:4.12',
+            'org.powermock:powermock-core:1.6.5',
+            'org.powermock:powermock-api-mockito:1.6.5',
+            'org.powermock:powermock-module-junit4:1.6.5',
+            "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+}

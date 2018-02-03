@@ -3,6 +3,7 @@ package tw.bao.languagelearner
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import com.google.android.gms.ads.MobileAds
 import tw.bao.languagelearner.utils.UtilsTTS
 
 /**
@@ -24,6 +25,9 @@ class MyApplication : Application() {
         super.onCreate()
         sGlobalContext = this
         UtilsTTS.initTTSService(this)
+        MobileAds.initialize(this, "ca-app-pub-1786708346557555~6485478925")
+
+//        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713")
     }
 
     override fun onTerminate() {

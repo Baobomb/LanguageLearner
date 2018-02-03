@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val itemId = item?.itemId
-        if (itemId == android.R.id.home || itemId == R.id.menu_about) run {
-            Log.d(LOG_TAG, "Menu about click")
-        }
+//        if (itemId == android.R.id.home || itemId == R.id.menu_about) run {
+//            Log.d(LOG_TAG, "Menu about click")
+//        }
         return super.onOptionsItemSelected(item)
     }
 

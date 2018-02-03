@@ -15,8 +15,8 @@ interface WordsPreviewContract {
     }
 
     interface OnItemClickListener {
-        fun onChineseWordClick(chineseWords: String)
-        fun onEngWordClick(engWords: String)
+        fun onChineseWordSpeakerClick(chineseWords: String)
+        fun onEngWordSpeakerClick(engWords: String)
     }
 
     interface Presenter : BasePresenter

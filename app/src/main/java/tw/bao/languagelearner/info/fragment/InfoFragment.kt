@@ -10,14 +10,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.ads.formats.NativeAd
-import com.google.android.gms.ads.formats.NativeAppInstallAd
-import com.google.android.gms.ads.formats.NativeContentAd
 import kotlinx.android.synthetic.main.fragment_info_layout.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import tw.bao.adsdk.Definition
+import tw.bao.adsdk.adobject.BaseAdObject
+import tw.bao.adsdk.cache.AdCacheManager
+import tw.bao.adsdk.listener.AdRequestStatusListener
 import tw.bao.languagelearner.R
-import tw.bao.languagelearner.ad.AdManager
 import tw.bao.languagelearner.info.contract.InfoContract
 import tw.bao.languagelearner.info.contract.InfoPresenter
 import tw.bao.languagelearner.info.utils.UtilsInfo
@@ -32,7 +32,7 @@ import tw.bao.languagelearner.utils.db.UtilsDB
 class InfoFragment : Fragment(), InfoContract.View {
 
     private var mPresenter: InfoPresenter = InfoPresenter(this)
-    private var mAdObject: NativeAd? = null
+    private var mAdObject: BaseAdObject? = null
 
     companion object {
         private val LOG_TAG = InfoFragment::class.java.simpleName
@@ -165,21 +165,33 @@ class InfoFragment : Fragment(), InfoContract.View {
             tryToExpandAd(false)
             return
         }
-        AdManager.loadAd(context, object : AdManager.AdLoadedListener {
-            override fun onAdLoaded(ad: NativeAd) {
-                mAdObject = ad
-                tryToRenderAd()
-                tryToExpandAd(true)
-            }
-        })
+        tw.bao.adsdk.AdManager.getInstance(Definition.AdUnit.INFO)
+                .setIsUsingDebugAdUnit(true)
+                .setAdSourceNeedRequest(Definition.AdSource.NATIVE, true)
+                .setAdSourceNeedRequest(Definition.AdSource.BANNER, true)
+                .setRequestStatusListener(object : AdRequestStatusListener {
+                    override fun onRequestStart(adUnit: Definition.AdUnit) {
+                        Log.d(LOG_TAG, "Start request ad")
+                    }
+
+                    override fun onRequestEnd(adUnit: Definition.AdUnit) {
+                        Log.d(LOG_TAG, "Request end")
+                        mAdObject = AdCacheManager.getCacheAd(Definition.AdUnit.INFO)
+                        if (mAdObject == null) {
+                            return
+                        }
+                        if (mCvAdContainer == null) {
+                            return
+                        }
+                        mAdObject?.renderAd(context, mCvAdContainer)
+                        tryToExpandAd(true)
+                    }
+                })
+                .startRequest(context)
     }
 
     private fun tryToRenderAd() {
-        if (mAdObject is NativeContentAd) {
-            AdManager.renderAd((mAdObject as NativeContentAd), mCvAdContainer)
-        } else {
-            AdManager.renderAd((mAdObject as NativeAppInstallAd), mCvAdContainer)
-        }
+        mAdObject?.renderAd(context, mCvAdContainer)
     }
 
     private fun tryToExpandAd(isNeedSmoothExpand: Boolean) {

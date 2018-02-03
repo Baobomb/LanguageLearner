@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_whole"
+    android:layout_width="wrap_content"
+    android:layout_height="70dp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/iv_ad"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:scaleType="fitCenter" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/tv_cta_btn"
+        android:layout_toRightOf="@+id/iv_ad"
+        android:gravity="center|left"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_sponsored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:text="Sponsored"
+            android:textColor="#8a8f9b"
+            android:textSize="12sp" />
+
+        <FrameLayout
+            android:id="@+id/fl_fb_ad_choice_container"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_alignBottom="@+id/tv_sponsored"
+            android:layout_alignTop="@+id/tv_sponsored"
+            android:layout_toRightOf="@+id/tv_sponsored"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/tv_sponsored"
+            android:layout_alignTop="@+id/tv_sponsored"
+            android:layout_toRightOf="@+id/tv_sponsored" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_sponsored"
+            android:maxLines="1"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#777777"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_cta_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="9dp"
+        android:background="@drawable/ad_logs_btn"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:maxWidth="115dp"
+        android:minWidth="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="go"
+        android:textColor="#ffffff"
+        android:textSize="10sp" />
+
+    <View
+        android:id="@+id/v_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e6e6e6" />
+
+</RelativeLayout>

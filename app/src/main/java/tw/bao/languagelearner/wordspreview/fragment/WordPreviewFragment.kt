@@ -122,11 +122,11 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
         mWordDatasAdapter?.notifyDataSetChanged()
     }
 
-    override fun onChineseWordClick(chineseWords: String) {
+    override fun onChineseWordSpeakerClick(chineseWords: String) {
         UtilsTTS.speech(chineseWords, Locale.CHINESE)
     }
 
-    override fun onEngWordClick(engWords: String) {
+    override fun onEngWordSpeakerClick(engWords: String) {
         UtilsTTS.speech(engWords, Locale.ENGLISH)
     }
 }

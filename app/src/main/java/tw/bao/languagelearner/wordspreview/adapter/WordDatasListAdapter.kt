@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import kotlinx.android.synthetic.main.view_item_word_datas_list.view.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.contract.WordsPreviewContract
@@ -34,11 +33,15 @@ class WordDatasListAdapter(context: Context) : RecyclerView.Adapter<WordDatasLis
             holder?.itemView?.mTvWordEng?.text = this[position]?.engWord
             holder?.itemView?.mTvWordChinese?.text = this[position]?.chineseWord
             holder?.itemView?.mTvWordRoman?.text = this[position]?.romanText
-            holder?.itemView?.mTvWordEng?.setOnClickListener {
-                onItemClickListener?.onEngWordClick((it as TextView).text.toString())
+            holder?.itemView?.mIvEngSpeaker?.setOnClickListener {
+                holder.itemView?.mTvWordEng?.takeIf { it.text.toString().isNotEmpty() }?.apply {
+                    onItemClickListener?.onEngWordSpeakerClick(this.text.toString())
+                }
             }
-            holder?.itemView?.mTvWordChinese?.setOnClickListener {
-                onItemClickListener?.onChineseWordClick((it as TextView).text.toString())
+            holder?.itemView?.mIvChineseSpeaker?.setOnClickListener {
+                holder.itemView?.mTvWordChinese?.takeIf { it.text.toString().isNotEmpty() }?.apply {
+                    onItemClickListener?.onChineseWordSpeakerClick(this.text.toString())
+                }
             }
         }
     }
