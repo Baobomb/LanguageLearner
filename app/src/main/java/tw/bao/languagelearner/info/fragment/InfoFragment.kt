@@ -13,8 +13,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_info_layout.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import tw.bao.adsdk.AdManager
 import tw.bao.adsdk.Definition
 import tw.bao.adsdk.adobject.BaseAdObject
+import tw.bao.adsdk.adobject.NativeAdObject
 import tw.bao.adsdk.cache.AdCacheManager
 import tw.bao.adsdk.listener.AdRequestStatusListener
 import tw.bao.languagelearner.R
@@ -79,6 +81,10 @@ class InfoFragment : Fragment(), InfoContract.View {
     override fun onStop() {
         super.onStop()
         mPresenter.onStop()
+        AdManager.getInstance(Definition.AdUnit.INFO).stopRequest()
+        mAdObject?.destroy()
+        mCvAdContainer?.removeAllViews()
+        mAdObject = null
     }
 
     override fun initView() {
@@ -162,7 +168,11 @@ class InfoFragment : Fragment(), InfoContract.View {
         }
         if (mAdObject != null) {
             tryToRenderAd()
-            tryToExpandAd(false)
+            if (mAdObject is NativeAdObject) {
+                tryToExpandAd(false, 70f)
+            } else {
+                tryToExpandAd(false, 50f)
+            }
             return
         }
         tw.bao.adsdk.AdManager.getInstance(Definition.AdUnit.INFO)
@@ -184,7 +194,11 @@ class InfoFragment : Fragment(), InfoContract.View {
                             return
                         }
                         mAdObject?.renderAd(context, mCvAdContainer)
-                        tryToExpandAd(true)
+                        if (mAdObject is NativeAdObject) {
+                            tryToExpandAd(true, 70f)
+                        } else {
+                            tryToExpandAd(true, 50f)
+                        }
                     }
                 })
                 .startRequest(context)
@@ -194,7 +208,7 @@ class InfoFragment : Fragment(), InfoContract.View {
         mAdObject?.renderAd(context, mCvAdContainer)
     }
 
-    private fun tryToExpandAd(isNeedSmoothExpand: Boolean) {
+    private fun tryToExpandAd(isNeedSmoothExpand: Boolean, height: Float) {
         if (mCvAdContainer == null) {
             return
         }
@@ -202,7 +216,7 @@ class InfoFragment : Fragment(), InfoContract.View {
             mCvAdContainer.visibility = View.VISIBLE
             return
         }
-        val valueAnimator = ValueAnimator.ofInt(0, Utils.dp2px(context, 70f))
+        val valueAnimator = ValueAnimator.ofInt(0, Utils.dp2px(context, height))
         valueAnimator.addUpdateListener { valueAnimator ->
             if (mCvAdContainer != null) {
                 mCvAdContainer.layoutParams.height = valueAnimator.animatedValue as Int
