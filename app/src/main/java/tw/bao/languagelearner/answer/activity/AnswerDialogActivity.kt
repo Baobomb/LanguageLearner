@@ -1,5 +1,8 @@
 package tw.bao.languagelearner.answer.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -7,6 +10,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.Window
 import kotlinx.android.synthetic.main.activity_answer_dialog_layout.*
@@ -77,6 +81,11 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
         setContentView(R.layout.activity_answer_dialog_layout)
         setQuestionItem(answerPosition, wordDatas)
         setAnswerItem(answerPosition, wordDatas)
+        fadeAnimationOuestionView(0f, 1f, object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                mRlAnswerDialog.visibility = VISIBLE
+            }
+        })
     }
 
     private fun setQuestionItem(answerPosition: Int, wordDatas: WordDatas?) {
@@ -113,7 +122,24 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
     }
 
     override fun hideQuestionView() {
+        fadeAnimationOuestionView(1f, 0f, object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                stopSelf()
+            }
+        })
+    }
 
+    private fun fadeAnimationOuestionView(alphaFrom: Float, alphaTo: Float, animatorListenerAdapter: AnimatorListenerAdapter?) {
+        val valueAnimator = ValueAnimator.ofFloat(alphaFrom, alphaTo)
+        valueAnimator.addUpdateListener {
+            val animatedValue: Float = it.animatedValue as Float
+            mRlAnswerDialog.alpha = animatedValue
+        }
+        animatorListenerAdapter?.apply {
+            valueAnimator.addListener(this)
+        }
+        valueAnimator.duration = 1200
+        valueAnimator.start()
     }
 
     override fun showAnswer(chooseView: View) {

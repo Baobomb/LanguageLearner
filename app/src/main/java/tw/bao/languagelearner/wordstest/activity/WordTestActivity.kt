@@ -7,6 +7,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -77,6 +78,9 @@ class WordTestActivity : Activity(), WordTestContract.View {
     }
 
     override fun showNextQuestionView(answerPosition: Int, wordDatas: WordDatas?) {
+        val currentProgress = mTestProgress.progress
+        Log.d("TestProgress", "Current Progress :$currentProgress")
+        mTestProgress.progress = currentProgress + 1
         if (isStart) {
             fadeAnimationOuestionView(1f, 0f, object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
