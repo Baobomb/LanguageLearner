@@ -1,9 +1,7 @@
 package tw.bao.languagelearner.main.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
@@ -11,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.MainLayoutHelper
@@ -30,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.activity_main_toolbar, menu)
@@ -38,9 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val itemId = item?.itemId
-        if (itemId == android.R.id.home || itemId == R.id.menu_about) run {
-            Log.d(LOG_TAG,"Menu about click")
-        }
+//        if (itemId == android.R.id.home || itemId == R.id.menu_about) run {
+//            Log.d(LOG_TAG, "Menu about click")
+//        }
         return super.onOptionsItemSelected(item)
     }
 

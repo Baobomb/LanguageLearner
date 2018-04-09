@@ -20,9 +20,23 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = "27.0.0"
+    supportLibraryVersion = "26.1.0"
+    gmsLibraryVersion = "11.0.4"
+    minSdkVersion = 15
+    targetSdkVersion = 23
+    glideVersion = "3.8.0"
+    glideTransformationVersion = "2.0.1"
 }

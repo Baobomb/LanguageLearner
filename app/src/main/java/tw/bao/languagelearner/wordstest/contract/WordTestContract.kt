@@ -20,10 +20,13 @@ interface WordTestContract {
 
         fun getViewIntent(): Intent?
 
+        fun showSummary()
+
         fun stopSelf()
     }
 
     interface Presenter : BasePresenter {
         fun updateUserInfo(isScored: Boolean)
+        fun getAnswerSummary() : String
     }
 }

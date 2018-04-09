@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -12,14 +11,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_info_layout.*
-import kotlinx.android.synthetic.main.fragment_setting_layout.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import tw.bao.adsdk.AdManager
+import tw.bao.adsdk.Definition
+import tw.bao.adsdk.adobject.BaseAdObject
+import tw.bao.adsdk.adobject.NativeAdObject
+import tw.bao.adsdk.cache.AdCacheManager
+import tw.bao.adsdk.listener.AdRequestStatusListener
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.info.contract.InfoContract
 import tw.bao.languagelearner.info.contract.InfoPresenter
 import tw.bao.languagelearner.info.utils.UtilsInfo
 import tw.bao.languagelearner.model.WordData
+import tw.bao.languagelearner.utils.Utils
 import tw.bao.languagelearner.utils.db.UtilsDB
 
 /**
@@ -29,6 +34,7 @@ import tw.bao.languagelearner.utils.db.UtilsDB
 class InfoFragment : Fragment(), InfoContract.View {
 
     private var mPresenter: InfoPresenter = InfoPresenter(this)
+    private var mAdObject: BaseAdObject? = null
 
     companion object {
         private val LOG_TAG = InfoFragment::class.java.simpleName
@@ -64,6 +70,7 @@ class InfoFragment : Fragment(), InfoContract.View {
     override fun onResume() {
         super.onResume()
         mPresenter.onResume()
+        loadAd()
     }
 
     override fun onPause() {
@@ -74,6 +81,10 @@ class InfoFragment : Fragment(), InfoContract.View {
     override fun onStop() {
         super.onStop()
         mPresenter.onStop()
+        AdManager.getInstance(Definition.AdUnit.INFO).stopRequest()
+        mAdObject?.destroy()
+        mCvAdContainer?.removeAllViews()
+        mAdObject = null
     }
 
     override fun initView() {
@@ -96,15 +107,15 @@ class InfoFragment : Fragment(), InfoContract.View {
                 animatedValue > 1f -> 1f
                 else -> animatedValue
             }
-            mLlEngWordsPreview.alpha = alphaValue
-            mLlChineseWordsPreview.alpha = alphaValue
+            mLlEngWordsPreview?.alpha = alphaValue
+            mLlChineseWordsPreview?.alpha = alphaValue
         }
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?) {
                 nextWords?.apply {
-                    mTvChineseWordsPreview.text = chineseWord
-                    mTvEngWordsPreview.text = engWord
-                    mTvRomanWordsPreview.text = romanText
+                    mTvChineseWordsPreview?.text = chineseWord
+                    mTvEngWordsPreview?.text = engWord
+                    mTvRomanWordsPreview?.text = romanText
                 }
             }
 
@@ -150,5 +161,77 @@ class InfoFragment : Fragment(), InfoContract.View {
     }
 
     override fun getViewContext(): Context? = context
+
+    private fun loadAd() {
+        if (mCvAdContainer.childCount > 0) {
+            return
+        }
+        if (mAdObject != null) {
+            tryToRenderAd()
+            if (mAdObject is NativeAdObject) {
+                tryToExpandAd(false, 70f)
+            } else {
+                tryToExpandAd(false, 50f)
+            }
+            return
+        }
+        tw.bao.adsdk.AdManager.getInstance(Definition.AdUnit.INFO)
+                .setIsUsingDebugAdUnit(true)
+                .setAdSourceNeedRequest(Definition.AdSource.NATIVE, true)
+                .setAdSourceNeedRequest(Definition.AdSource.BANNER, true)
+                .setRequestStatusListener(object : AdRequestStatusListener {
+                    override fun onRequestStart(adUnit: Definition.AdUnit) {
+                        Log.d(LOG_TAG, "Start request ad")
+                    }
+
+                    override fun onRequestEnd(adUnit: Definition.AdUnit) {
+                        Log.d(LOG_TAG, "Request end")
+                        mAdObject = AdCacheManager.getCacheAd(Definition.AdUnit.INFO)
+                        if (mAdObject == null) {
+                            return
+                        }
+                        if (mCvAdContainer == null) {
+                            return
+                        }
+                        mAdObject?.renderAd(context, mCvAdContainer)
+                        if (mAdObject is NativeAdObject) {
+                            tryToExpandAd(true, 70f)
+                        } else {
+                            tryToExpandAd(true, 50f)
+                        }
+                    }
+                })
+                .startRequest(context)
+    }
+
+    private fun tryToRenderAd() {
+        mAdObject?.renderAd(context, mCvAdContainer)
+    }
+
+    private fun tryToExpandAd(isNeedSmoothExpand: Boolean, height: Float) {
+        if (mCvAdContainer == null) {
+            return
+        }
+        if (!isNeedSmoothExpand) {
+            mCvAdContainer.visibility = View.VISIBLE
+            return
+        }
+        val valueAnimator = ValueAnimator.ofInt(0, Utils.dp2px(context, height))
+        valueAnimator.addUpdateListener { valueAnimator ->
+            if (mCvAdContainer != null) {
+                mCvAdContainer.layoutParams.height = valueAnimator.animatedValue as Int
+                mCvAdContainer.requestLayout()
+            }
+        }
+        valueAnimator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator) {
+                if (mCvAdContainer != null) {
+                    mCvAdContainer.visibility = View.VISIBLE
+                }
+            }
+        })
+        valueAnimator.duration = 500
+        valueAnimator.start()
+    }
 
 }

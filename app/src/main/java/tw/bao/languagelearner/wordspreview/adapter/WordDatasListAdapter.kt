@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.view_item_word_datas_list.view.*
 import tw.bao.languagelearner.R
+import tw.bao.languagelearner.main.contract.WordsPreviewContract
 import tw.bao.languagelearner.model.WordDatas
 
 /**
@@ -20,6 +21,7 @@ class WordDatasListAdapter(context: Context) : RecyclerView.Adapter<WordDatasLis
             field = wordDatas
             notifyDataSetChanged()
         }
+    public var onItemClickListener: WordsPreviewContract.OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WordDatasListItemViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.view_item_word_datas_list, parent, false)
@@ -31,6 +33,16 @@ class WordDatasListAdapter(context: Context) : RecyclerView.Adapter<WordDatasLis
             holder?.itemView?.mTvWordEng?.text = this[position]?.engWord
             holder?.itemView?.mTvWordChinese?.text = this[position]?.chineseWord
             holder?.itemView?.mTvWordRoman?.text = this[position]?.romanText
+            holder?.itemView?.mIvEngSpeaker?.setOnClickListener {
+                holder.itemView?.mTvWordEng?.takeIf { it.text.toString().isNotEmpty() }?.apply {
+                    onItemClickListener?.onEngWordSpeakerClick(this.text.toString())
+                }
+            }
+            holder?.itemView?.mIvChineseSpeaker?.setOnClickListener {
+                holder.itemView?.mTvWordChinese?.takeIf { it.text.toString().isNotEmpty() }?.apply {
+                    onItemClickListener?.onChineseWordSpeakerClick(this.text.toString())
+                }
+            }
         }
     }
 

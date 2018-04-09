@@ -1,5 +1,6 @@
 package tw.bao.languagelearner.utils
 
+import android.content.Context
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
@@ -50,4 +51,6 @@ object Utils {
         Prefs.putLong(Prefs.KEY_LAST_ANSWER_DIALOG_OPEN_TIME, currentTime)
         return true
     }
+
+    fun dp2px(context: Context, dpValue: Float): Int = (dpValue * context.applicationContext.resources.displayMetrics.density + 0.5f).toInt()
 }

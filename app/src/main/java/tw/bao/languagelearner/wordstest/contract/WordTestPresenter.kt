@@ -25,6 +25,7 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
     var mDbHelper: DBHelper? = null
     var mWordDatas: WordDatas? = null
     var mNowAnswerStartPosition = 0
+    val mAnsweredResult: ArrayList<Boolean> = ArrayList()
 
     override fun onCreate() {
         mView.initView()
@@ -48,6 +49,7 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
                 val type = mWordDatas?.type
                 Log.d("TAG", "Type : $type Counts : $counts")
                 uiThread {
+                    mAnsweredResult.clear()
                     tryToShowNextQuestion()
                 }
             }
@@ -61,6 +63,7 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
     }
 
     override fun updateUserInfo(isScored: Boolean) {
+        mAnsweredResult.add(isScored)
         if (isScored) {
             UtilsInfo.upUserScore()
         }
@@ -74,9 +77,14 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
         timer.start()
     }
 
+    override fun getAnswerSummary(): String {
+        return "共答對 ${mAnsweredResult.count { it }} 題"
+    }
+
     private fun tryToShowNextQuestion() {
-        if (mWordDatas == null || mWordDatas?.words == null || mNowAnswerStartPosition >= mWordDatas!!.words.size) {
-            mView.stopSelf()
+        if (mWordDatas == null || mWordDatas?.words == null || mNowAnswerStartPosition >= mWordDatas!!.words.size || mAnsweredResult.size >= 10) {
+            mNowAnswerStartPosition = 0
+            mView.showSummary()
             return
         }
         val words = ArrayList<WordData?>()

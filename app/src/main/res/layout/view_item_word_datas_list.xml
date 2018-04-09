@@ -11,19 +11,26 @@
         android:id="@+id/mLlEngWordsPreview"
         android:layout_width="0dp"
         android:layout_height="78dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.5">
 
         <TextView
             android:id="@+id/mTvWordEng"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="78dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="EngWord"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/mIvEngSpeaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_volume_up_black_24dp" />
 
     </LinearLayout>
 
@@ -54,6 +61,14 @@
             android:gravity="center"
             android:text="RomanWord"
             android:textSize="20sp" />
+
+
+        <ImageView
+            android:id="@+id/mIvChineseSpeaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_volume_up_black_24dp" />
 
     </LinearLayout>
 
