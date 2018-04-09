@@ -13,7 +13,7 @@ import java.util.*
  */
 object UtilsPermission {
 
-    public val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.READ_PHONE_STATE)
+    public val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE)
     private val sPermissions = Hashtable<String, Int>()
     public val REQUEST_PERMISSION_CODE = 1985
 
@@ -47,7 +47,7 @@ object UtilsPermission {
     }
 
     fun hasRequiredPermissions(): Boolean {
-        return hasPermission(Manifest.permission.READ_PHONE_STATE)
+        return hasPermissions(REQUIRED_PERMISSIONS)
     }
 
 
