@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
 
+    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#AAAFAB</color>
     <color name="green">#34bf49</color>
@@ -15,4 +16,6 @@
     <color name="tab_text_color">#3f263147</color>
     <color name="tab_ripple_color">#8A8F9B</color>
     <color name="tab_selected_text_color">#263147</color>
+    <color name="app_bar_color">#3FE9B7</color>
+    <color name="main_app_color">#2a303e</color>
 </resources>

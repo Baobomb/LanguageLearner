@@ -1,5 +1,6 @@
 package tw.bao.languagelearner.wordspreview.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_words_preview_layout.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.info.utils.UtilsInfo
@@ -96,8 +98,9 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
         })
         val userLevel = UtilsInfo.getUserLevel()
         for (tablePos in 0..userLevel) {
-            val tab = mTlWordsTables.newTab()
-            tab.text = "Level " + (tablePos + 1)
+            val level = "${tablePos + 1}"
+            val customView = inflateLevelCustomTab(context!!, "Level $level", level)
+            val tab = mTlWordsTables.newTab().setCustomView(customView)
             val tag = DBDefinetion.TABLE_LIST[tablePos]
             tab.tag = tag
             mTlWordsTables.addTab(tab)
@@ -128,5 +131,15 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
 
     override fun onEngWordSpeakerClick(engWords: String) {
         UtilsTTS.speech(engWords, Locale.ENGLISH)
+    }
+
+
+    private fun inflateLevelCustomTab(context: Context, title: String, level: String): View {
+        val view = LayoutInflater.from(context).inflate(R.layout.words_preview_custom_tab, null)
+        val tabText: TextView = view.findViewById(R.id.mTvTabText)
+        val cvText: TextView = view.findViewById(R.id.mTvCvText)
+        tabText.text = title
+        cvText.text = level
+        return view
     }
 }

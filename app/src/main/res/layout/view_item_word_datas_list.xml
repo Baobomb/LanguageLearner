@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@drawable/info_card_bg">
+    android:background="@drawable/white_card_bg_with_shadow">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/mLlEngWordsPreview"
         android:layout_width="0dp"
         android:layout_height="78dp"
@@ -19,7 +19,6 @@
             android:id="@+id/mTvWordEng"
             android:layout_width="match_parent"
             android:layout_height="78dp"
-            android:layout_weight="1"
             android:gravity="center"
             android:text="EngWord"
             android:textSize="20sp"
@@ -29,12 +28,13 @@
             android:id="@+id/mIvEngSpeaker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:src="@drawable/ic_volume_up_black_24dp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/mLlChineseWordsPreview"
         android:layout_width="0dp"
         android:layout_height="78dp"
@@ -46,18 +46,27 @@
         <TextView
             android:id="@+id/mTvWordChinese"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/mVCenterDummy"
+            android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:gravity="center"
             android:text="ChineseWord"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <View
+            android:id="@+id/mVCenterDummy"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true" />
+
         <TextView
             android:id="@+id/mTvWordRoman"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mVCenterDummy"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="RomanWord"
             android:textSize="20sp" />
@@ -67,9 +76,10 @@
             android:id="@+id/mIvChineseSpeaker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:src="@drawable/ic_volume_up_black_24dp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

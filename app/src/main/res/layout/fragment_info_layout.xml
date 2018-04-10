@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/mCvAdContainer"
-        android:background="#2a303e">
+        android:background="@color/main_app_color">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/mClInfoMain"
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="15dp"
-                android:background="@drawable/info_card_bg"
+                android:background="@drawable/white_card_bg_with_shadow"
                 app:layout_constraintHeight_percent="0.3">
 
                 <LinearLayout
@@ -117,7 +117,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_toLeftOf="@+id/mTvTitle"
-                    android:background="@android:color/white" />
+                    android:background="@color/black" />
 
                 <TextView
                     android:id="@+id/mTvTitle"
@@ -135,7 +135,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_toRightOf="@+id/mTvTitle"
-                    android:background="@android:color/white" />
+                    android:background="@color/black" />
             </RelativeLayout>
 
             <LinearLayout
@@ -145,7 +145,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/info_card_bg"
+                android:background="@drawable/white_card_bg_with_shadow"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -248,7 +248,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/info_card_bg"
+                android:background="@drawable/white_card_bg_with_shadow"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"

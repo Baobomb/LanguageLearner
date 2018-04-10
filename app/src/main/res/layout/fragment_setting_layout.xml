@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2a303e">
+    android:background="@color/main_app_color">
 
 
     <LinearLayout
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="10dp"
-        android:background="@drawable/info_card_bg"
+        android:background="@drawable/white_card_bg_with_shadow"
         android:orientation="vertical">
 
         <TextView
@@ -159,17 +159,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/mVDivider4" />
 
         </LinearLayout>
-
-        <View
-            android:id="@+id/mVDivider5"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mEtAnswerRestrictShowTimes" />
     </LinearLayout>
 </RelativeLayout>
