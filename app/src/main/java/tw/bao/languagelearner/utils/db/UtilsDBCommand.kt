@@ -17,7 +17,7 @@ object UtilsDBCommand {
         val wordDataArray = condition.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         val wordDataList: List<WordData> = wordDataArray
                 .map { getSingleCommands(it) }
-                .map { WordData(it[1], it[2], it[0]) }
+                .map { WordData(it[1], it[2], it[0], it[3], it[4]) }
         return WordDatas(type, wordDataList.toMutableList())
     }
 
