@@ -98,6 +98,9 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
         })
         val userLevel = UtilsInfo.getUserLevel()
         for (tablePos in 0..userLevel) {
+            if (tablePos >= DBDefinetion.TABLE_LIST.size) {
+                break
+            }
             val level = "${tablePos + 1}"
             val customView = inflateLevelCustomTab(context!!, "Level $level", level)
             val tab = mTlWordsTables.newTab().setCustomView(customView)

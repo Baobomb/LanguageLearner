@@ -47,7 +47,7 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
                 mWordDatas = prepareWords(tableName)
                 val counts = mWordDatas?.words?.size
                 val type = mWordDatas?.type
-                Log.d("TAG", "Type : $type Counts : $counts")
+                Log.d("WORDS_TEST", "Type : $type Counts : $counts")
                 uiThread {
                     mAnsweredResult.clear()
                     tryToShowNextQuestion()
@@ -92,11 +92,12 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
         positions.mapTo(words) {
             mWordDatas!!.words[it]
         }
+        val wordDatas = WordDatas(mWordDatas!!.type, words)
         val answerPosition = Utils.getRandomFourInts(1, 4)[0]
         Log.d("WORDS_TEST", "Now answer position : " + mNowAnswerStartPosition)
         mNowAnswerStartPosition += 4
         Log.d("WORDS_TEST", "Next answer position : " + mNowAnswerStartPosition)
-        mView.showNextQuestionView(answerPosition = answerPosition, wordDatas = mWordDatas)
+        mView.showNextQuestionView(answerPosition = answerPosition, wordDatas = wordDatas)
     }
 
     private fun prepareWords(tableName: String): WordDatas? {

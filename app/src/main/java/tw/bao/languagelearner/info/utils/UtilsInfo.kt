@@ -7,12 +7,13 @@ import tw.bao.languagelearner.utils.Prefs
  */
 object UtilsInfo {
 
+    private val DEBUG_LEVEL = true
 
     public fun getUserTotalAnswerScore(): Int = Prefs.getInt(Prefs.KEY_SCORE, 0)
 
     public fun getUserCurrentScore(): Int = getUserTotalAnswerScore() % 100
 
-    public fun getUserLevel(): Int = getUserTotalAnswerScore() / 100
+    public fun getUserLevel(): Int = if (DEBUG_LEVEL) 1000 else getUserTotalAnswerScore() / 100
 
     public fun getUserAnswerCorrectNums(): Int = Prefs.getInt(Prefs.KEY_ANSWER_CORRECT_NUMS, 0)
 

@@ -17,12 +17,10 @@ object DBDefinetion {
         val WORD_TABLE_LIFE = "word_life"
         val WORD_TABLE_BUSINESS = "word_business"
         val WORD_TABLE_SCHOOL = "word_school"
-        val WORD_TABLE_DIRTY = "word_dirty"
     }
 
     public val TABLE_LIST = arrayOf(TableName.WORD_TABLE_BASIC
             , TableName.WORD_TABLE_LIFE
             , TableName.WORD_TABLE_BUSINESS
-            , TableName.WORD_TABLE_SCHOOL
-            , TableName.WORD_TABLE_DIRTY)
+            , TableName.WORD_TABLE_SCHOOL)
 }
