@@ -115,7 +115,7 @@ class WordTestActivity : Activity(), WordTestContract.View {
 
     private fun setQuestionItem(answerPosition: Int, wordDatas: WordDatas?) {
         wordDatas?.apply {
-            mTvQuestion.text = words[answerPosition - 1]?.engWord
+            mTvQuestion.text = words[answerPosition - 1]?.getWord()
         }
     }
 

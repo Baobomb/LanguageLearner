@@ -54,6 +54,24 @@ class CircleView : View {
         mCircleBounds?.set(0f + mStrokeWidth, 0f + mStrokeWidth, w.toFloat() - mStrokeWidth, h.toFloat() - mStrokeWidth)
     }
 
+    public fun setCircleColor(foregroundColor: Int, backgroundColor: Int) {
+        mForegroundStrokeColor = foregroundColor
+        mBackgroundStrokeColor = backgroundColor
+        mBackgroundCirclePaint?.color = mBackgroundStrokeColor
+        mForegroundStrokePaint?.color = mForegroundStrokeColor
+        invalidate()
+    }
+
+    public fun setForegroundStrokeColor(color: Int) {
+        mForegroundStrokeColor = color
+        invalidate()
+
+    }
+
+    public fun setBackgroundStrokeColor(color: Int) {
+        mBackgroundStrokeColor = color
+        invalidate()
+    }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)

@@ -114,7 +114,7 @@ class InfoFragment : Fragment(), InfoContract.View {
             override fun onAnimationStart(animation: Animator?) {
                 nextWords?.apply {
                     mTvChineseWordsPreview?.text = chineseWord
-                    mTvEngWordsPreview?.text = engWord
+                    mTvWordsPreview?.text = getWord()
                     mTvRomanWordsPreview?.text = romanText
                 }
             }

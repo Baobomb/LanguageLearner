@@ -1,6 +1,7 @@
 package tw.bao.languagelearner.info.utils
 
 import tw.bao.languagelearner.utils.Prefs
+import java.util.*
 
 /**
  * Created by bao on 2017/12/14.
@@ -38,6 +39,18 @@ object UtilsInfo {
         if (isCorrect) {
             val totalCorrect = Prefs.getInt(Prefs.KEY_ANSWER_CORRECT_NUMS, 0)
             Prefs.putInt(Prefs.KEY_ANSWER_CORRECT_NUMS, (totalCorrect + 1))
+        }
+    }
+
+    public fun getDefaultLanguageLocale(): Locale {
+        val language = Locale.getDefault().language
+        return when (language) {
+            Locale.ENGLISH.language -> Locale.ENGLISH
+            Locale.JAPAN.language -> Locale.JAPANESE
+            Locale.JAPANESE.language -> Locale.JAPANESE
+            Locale.KOREA.language -> Locale.KOREAN
+            Locale.KOREAN.language -> Locale.KOREAN
+            else -> Locale.ENGLISH
         }
     }
 

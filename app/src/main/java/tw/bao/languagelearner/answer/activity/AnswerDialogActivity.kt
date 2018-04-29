@@ -90,8 +90,8 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
 
     private fun setQuestionItem(answerPosition: Int, wordDatas: WordDatas?) {
         wordDatas?.apply {
-            Log.d("TAG", "setQuestionItem : " + words[answerPosition - 1]?.engWord)
-            mTvQuestion.text = words[answerPosition - 1]?.engWord
+            Log.d("TAG", "setQuestionItem : " + words[answerPosition - 1]?.getWord())
+            mTvQuestion.text = words[answerPosition - 1]?.getWord()
         }
     }
 

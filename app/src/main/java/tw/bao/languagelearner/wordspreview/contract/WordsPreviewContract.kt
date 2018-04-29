@@ -12,11 +12,12 @@ interface WordsPreviewContract {
     interface View : BaseView<Presenter> {
         fun getContext(): Context?
         fun setWordDatas(wordDatas: WordDatas?)
+        fun setSelectedLevel(position: Int)
     }
 
     interface OnItemClickListener {
         fun onChineseWordSpeakerClick(chineseWords: String)
-        fun onEngWordSpeakerClick(engWords: String)
+        fun onWordSpeakerClick(engWords: String)
     }
 
     interface Presenter : BasePresenter

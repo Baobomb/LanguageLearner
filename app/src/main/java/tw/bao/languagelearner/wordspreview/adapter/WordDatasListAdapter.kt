@@ -30,12 +30,12 @@ class WordDatasListAdapter(context: Context) : RecyclerView.Adapter<WordDatasLis
 
     override fun onBindViewHolder(holder: WordDatasListItemViewHolder?, position: Int) {
         mWordDatas?.words?.takeIf { it[position] != null }?.apply {
-            holder?.itemView?.mTvWordEng?.text = this[position]?.engWord
+            holder?.itemView?.mTvWord?.text = this[position]?.getWord()
             holder?.itemView?.mTvWordChinese?.text = this[position]?.chineseWord
             holder?.itemView?.mTvWordRoman?.text = this[position]?.romanText
             holder?.itemView?.mIvEngSpeaker?.setOnClickListener {
-                holder.itemView?.mTvWordEng?.takeIf { it.text.toString().isNotEmpty() }?.apply {
-                    onItemClickListener?.onEngWordSpeakerClick(this.text.toString())
+                holder.itemView?.mTvWord?.takeIf { it.text.toString().isNotEmpty() }?.apply {
+                    onItemClickListener?.onWordSpeakerClick(this.text.toString())
                 }
             }
             holder?.itemView?.mIvChineseSpeaker?.setOnClickListener {

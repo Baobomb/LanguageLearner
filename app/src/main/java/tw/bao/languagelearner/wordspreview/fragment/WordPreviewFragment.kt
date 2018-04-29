@@ -1,9 +1,11 @@
 package tw.bao.languagelearner.wordspreview.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_words_preview_layout.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.info.utils.UtilsInfo
+import tw.bao.languagelearner.info.view.CircleView
 import tw.bao.languagelearner.main.contract.WordsPreviewContract
 import tw.bao.languagelearner.main.contract.WordsPreviewPresenter
 import tw.bao.languagelearner.model.WordDatas
@@ -30,6 +33,7 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
 
     var mPresenter: WordsPreviewPresenter = WordsPreviewPresenter(this)
     var mWordDatasAdapter: WordDatasListAdapter? = null
+    var mLastSelectedWords = 0
 
     companion object {
         private val LOG_TAG = WordPreviewFragment::class.java.simpleName
@@ -85,6 +89,7 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tab?.apply {
                     mPresenter.selectWords(tag.toString())
+                    setSelectedLevel(tab.position)
                 }
             }
 
@@ -109,6 +114,7 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
             mTlWordsTables.addTab(tab)
         }
         mPresenter.selectWords(DBDefinetion.TABLE_LIST[0])
+        setSelectedLevel(mLastSelectedWords)
         mIvStartTest.setOnClickListener {
             startActivity(WordTestActivity.getWordTestActivityIntent(context!!, mPresenter.mSelectedWords!!))
         }
@@ -132,10 +138,9 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
         UtilsTTS.speech(chineseWords, Locale.CHINESE)
     }
 
-    override fun onEngWordSpeakerClick(engWords: String) {
-        UtilsTTS.speech(engWords, Locale.ENGLISH)
+    override fun onWordSpeakerClick(engWords: String) {
+        UtilsTTS.speech(engWords, UtilsInfo.getDefaultLanguageLocale())
     }
-
 
     private fun inflateLevelCustomTab(context: Context, title: String, level: String): View {
         val view = LayoutInflater.from(context).inflate(R.layout.words_preview_custom_tab, null)
@@ -144,5 +149,28 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
         tabText.text = title
         cvText.text = level
         return view
+    }
+
+    override fun setSelectedLevel(position: Int) {
+        val lastTab = mTlWordsTables.getTabAt(mLastSelectedWords)
+        lastTab?.customView?.apply {
+            val grayColor = ContextCompat.getColor(context, R.color.gray)
+            val text = findViewById<TextView>(R.id.mTvTabText)
+            val icon = findViewById<CircleView>(R.id.mCvTabIcon)
+            val iconText = findViewById<TextView>(R.id.mTvCvText)
+            text.setTextColor(grayColor)
+            icon.setCircleColor(grayColor, grayColor)
+            iconText.setTextColor(grayColor)
+        }
+        val tab = mTlWordsTables.getTabAt(position)
+        tab?.customView?.apply {
+            val text = findViewById<TextView>(R.id.mTvTabText)
+            val icon = findViewById<CircleView>(R.id.mCvTabIcon)
+            val iconText = findViewById<TextView>(R.id.mTvCvText)
+            text.setTextColor(Color.BLACK)
+            icon.setCircleColor(Color.BLACK, Color.BLACK)
+            iconText.setTextColor(Color.BLACK)
+        }
+        mLastSelectedWords = position
     }
 }

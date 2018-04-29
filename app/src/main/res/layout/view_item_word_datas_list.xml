@@ -16,7 +16,7 @@
         app:layout_constraintWidth_percent="0.5">
 
         <TextView
-            android:id="@+id/mTvWordEng"
+            android:id="@+id/mTvWord"
             android:layout_width="match_parent"
             android:layout_height="78dp"
             android:gravity="center"
