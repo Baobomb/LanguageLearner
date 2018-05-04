@@ -33,7 +33,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/start_test_button_bg"
         android:gravity="center"
-        android:text="Start Test"
+        android:text="@string/words_preview_start_test"
         android:textSize="20sp" />
 
 </RelativeLayout>

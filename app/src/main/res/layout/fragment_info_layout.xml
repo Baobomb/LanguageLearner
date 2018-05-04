@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:text="學習資訊"
+                    android:text="@string/info_page_title"
                     android:textColor="@color/green" />
 
                 <View
@@ -190,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:gravity="center"
-                        android:text="Exp"
+                        android:text="@string/info_page_exp_title"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/mCircleLevelExp"
@@ -222,7 +222,7 @@
                         android:layout_marginEnd="24dp"
                         android:layout_marginStart="24dp"
                         android:gravity="center"
-                        android:text="等級 1"
+                        android:text="@string/info_page_level"
                         android:textStyle="bold" />
 
                     <TextView
@@ -233,7 +233,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
-                        android:text="解鎖字彙等級"
+                        android:text="@string/info_page_level_title"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -294,7 +294,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:gravity="center"
-                        android:text="Correct"
+                        android:text="@string/info_page_correct_rate_title"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/mCircleAnswerCorrectRate"
@@ -327,7 +327,7 @@
                         android:layout_marginEnd="24dp"
                         android:layout_marginStart="24dp"
                         android:gravity="center"
-                        android:text="共答對 10題"
+                        android:text="@string/info_page_correct_nums"
                         android:textStyle="bold" />
 
                     <TextView
@@ -338,7 +338,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
-                        android:text="共作答 20題"
+                        android:text="@string/info_page_answer_nums"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>

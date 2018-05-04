@@ -1,7 +1,24 @@
 <resources>
-    <string name="app_name">LanguageLearner</string>
+    <string name="app_name">Chinese-Learner</string>
 
     <string name="info_tab_name">Info</string>
     <string name="word_preview_tab_name">Words</string>
     <string name="setting_tab_name">Settings</string>
+    <string name="word_test_summary_title">Finish</string>
+    <string name="word_test_summary">共答對 %1$s 題</string>
+    <string name="info_page_title">學習資訊</string>
+    <string name="info_page_exp_title">Exp</string>
+    <string name="info_page_level">等級 %1$s</string>
+    <string name="info_page_level_title">解鎖字彙等級</string>
+    <string name="info_page_correct_rate_title">Correct</string>
+    <string name="info_page_correct_nums">共答對 %1$s題</string>
+    <string name="info_page_answer_nums">共作答 %1$s題</string>
+    <string name="setting_page_title">Setting</string>
+    <string name="setting_page_answer_dialog">ANSWER_DIALOG</string>
+    <string name="setting_page_answer_show_after_call">ANSWER_DIALOG Show after call</string>
+    <string name="setting_page_answer_show_after_unlock">ANSWER_DIALOG Show after unlock</string>
+    <string name="setting_page_answer_restrict_show_times">ANSWER_DIALOG restrict show times</string>
+    <string name="setting_page_restrict_times">times</string>
+    <string name="words_preview_start_test">Start Test</string>
+    <string name="words_preview_page_tab_level">Level%1$s</string>
 </resources>
