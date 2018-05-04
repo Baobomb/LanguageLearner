@@ -29,6 +29,9 @@ object UtilsInfo {
 
     public fun upUserScore() {
         var currentTotalScore = getUserTotalAnswerScore()
+        if (currentTotalScore >= 500) {
+            return
+        }
         currentTotalScore += 10
         Prefs.putInt(Prefs.KEY_SCORE, currentTotalScore)
     }

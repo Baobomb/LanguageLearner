@@ -158,6 +158,18 @@ class AnswerDialogActivity : Activity(), AnswerDialogContract.View {
         mTvAnswerTwo.isClickable = false
         mTvAnswerThird.isClickable = false
         mTvAnswerFour.isClickable = false
+        tryToCloseSelf(2000)
+    }
+
+    private fun tryToCloseSelf(delay: Long) {
+        val valueAnimator = ValueAnimator.ofInt(0, 1)
+        valueAnimator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                hideQuestionView()
+            }
+        })
+        valueAnimator.duration = delay
+        valueAnimator.start()
     }
 
     override fun getContext(): Context = this

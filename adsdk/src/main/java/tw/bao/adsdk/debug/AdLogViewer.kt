@@ -46,7 +46,7 @@ object AdLogViewer {
                 mWindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             }
 
-            mWindowLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR
+            mWindowLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             mWindowLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
             mWindowLayoutParams.format = PixelFormat.TRANSPARENT
             mWindowLayoutParams.gravity = Gravity.BOTTOM

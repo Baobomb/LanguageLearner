@@ -23,7 +23,6 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.flurry.android:ads:7.0.0'
     api('com.facebook.android:audience-network-sdk:4.25.0') {
         exclude group: 'com.google.android.gms'
     }
@@ -38,6 +37,8 @@ dependencies {
         transitive = true
     }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    api 'com.flurry.android:analytics:10.1.0@aar'
+    api 'com.flurry.android:ads:10.1.0@aar'
 
     testImplementation 'junit:junit:4.12',
             'org.powermock:powermock-core:1.6.5',

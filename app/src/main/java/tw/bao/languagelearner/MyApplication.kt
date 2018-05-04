@@ -5,6 +5,9 @@ import android.content.Context
 import android.util.Log
 import com.google.android.gms.ads.MobileAds
 import tw.bao.languagelearner.utils.UtilsTTS
+import com.flurry.android.FlurryAgent
+
+
 
 /**
  * Created by bao on 2017/11/11.
@@ -27,6 +30,9 @@ class MyApplication : Application() {
         UtilsTTS.initTTSService(this)
         MobileAds.initialize(this, "ca-app-pub-1786708346557555~6485478925")
 
+        FlurryAgent.Builder()
+                .withLogEnabled(true)
+                .build(this, "Q7JQNTZFTCMG4B2SP32N")
 //        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713")
     }
 
