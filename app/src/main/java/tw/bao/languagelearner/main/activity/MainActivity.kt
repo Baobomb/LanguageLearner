@@ -12,6 +12,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.app_bar_main.*
 import tw.bao.languagelearner.R
 import tw.bao.languagelearner.main.MainLayoutHelper
+import tw.bao.languagelearner.utils.UtilsWording
 
 /**
  * Created by bao on 2017/10/25.
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initView() {
         setContentView(R.layout.activity_main_layout)
-        mMainToolbar.title = "LearnChinese"
+        mMainToolbar.title = UtilsWording.getSyncString(this, R.string.app_name)
         setSupportActionBar(mMainToolbar)
 
 //        val toggle = ActionBarDrawerToggle(

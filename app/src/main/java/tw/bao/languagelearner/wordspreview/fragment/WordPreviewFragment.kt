@@ -20,6 +20,7 @@ import tw.bao.languagelearner.main.contract.WordsPreviewContract
 import tw.bao.languagelearner.main.contract.WordsPreviewPresenter
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.UtilsTTS
+import tw.bao.languagelearner.utils.UtilsWording
 import tw.bao.languagelearner.utils.db.DBDefinetion
 import tw.bao.languagelearner.wordspreview.adapter.WordDatasListAdapter
 import tw.bao.languagelearner.wordstest.activity.WordTestActivity
@@ -107,7 +108,7 @@ class WordPreviewFragment : Fragment, WordsPreviewContract.View, WordsPreviewCon
                 break
             }
             val level = "${tablePos + 1}"
-            val customView = inflateLevelCustomTab(context!!, "Level $level", level)
+            val customView = inflateLevelCustomTab(context!!, UtilsWording.getSyncString(activity, R.string.words_preview_page_tab_level, level), level)
             val tab = mTlWordsTables.newTab().setCustomView(customView)
             val tag = DBDefinetion.TABLE_LIST[tablePos]
             tab.tag = tag

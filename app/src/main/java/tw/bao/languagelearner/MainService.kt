@@ -8,10 +8,7 @@ import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import tw.bao.languagelearner.answer.receiver.CallStatusReceiver
 import tw.bao.languagelearner.answer.receiver.ScreenStatusReceiver
-import tw.bao.languagelearner.utils.NotifyID
-import tw.bao.languagelearner.utils.Prefs
-import tw.bao.languagelearner.utils.UtilsNotification
-import tw.bao.languagelearner.utils.UtilsService
+import tw.bao.languagelearner.utils.*
 
 /**
  * Created by bao on 2018/1/13.
@@ -69,8 +66,8 @@ class MainService : Service() {
 
     private fun starFunctionService() {
         val builder = UtilsNotification.getBasicBuilder(this)
-                .setContentTitle("Service is running")
-                .setContentText("Service is running")
+                .setContentTitle(UtilsWording.getString(this, R.string.app_name))
+                .setContentText(UtilsWording.getString(this, R.string.service_content))
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setDefaults(0)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

@@ -25,6 +25,7 @@ import tw.bao.languagelearner.info.contract.InfoPresenter
 import tw.bao.languagelearner.info.utils.UtilsInfo
 import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.utils.Utils
+import tw.bao.languagelearner.utils.UtilsWording
 import tw.bao.languagelearner.utils.db.UtilsDB
 
 /**
@@ -92,9 +93,9 @@ class InfoFragment : Fragment(), InfoContract.View {
         mTvExp.text = UtilsInfo.getUserCurrentScore().toString()
         mCircleAnswerCorrectRate.mCircleOuterStrokePercent = UtilsInfo.getUserAnswerCorrectRate().toInt()
         mTvAnswerCorrectRate.text = "${UtilsInfo.getUserAnswerCorrectRate()}%"
-        mTvAnswerTotalNums.text = "共作答 : ${UtilsInfo.getUserAnswerTotalNums()}題"
-        mTvAnswerCorrectNums.text = "共答對 : ${UtilsInfo.getUserAnswerCorrectNums()}題"
-        mTvLevel.text = "等級 : ${(UtilsInfo.getUserLevel() + 1)}"
+        mTvAnswerTotalNums.text = UtilsWording.getSyncString(context, R.string.info_page_answer_nums, UtilsInfo.getUserAnswerTotalNums())
+        mTvAnswerCorrectNums.text = UtilsWording.getSyncString(context, R.string.info_page_correct_nums, UtilsInfo.getUserAnswerCorrectNums())
+        mTvLevel.text = UtilsWording.getSyncString(context, R.string.info_page_level, UtilsInfo.getUserLevel() + 1)
     }
 
     var nextWords: WordData? = null

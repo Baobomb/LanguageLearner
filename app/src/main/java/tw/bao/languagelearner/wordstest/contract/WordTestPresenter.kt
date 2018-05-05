@@ -6,10 +6,12 @@ import android.animation.ValueAnimator
 import android.util.Log
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import tw.bao.languagelearner.R
 import tw.bao.languagelearner.info.utils.UtilsInfo
 import tw.bao.languagelearner.model.WordData
 import tw.bao.languagelearner.model.WordDatas
 import tw.bao.languagelearner.utils.Utils
+import tw.bao.languagelearner.utils.UtilsWording
 import tw.bao.languagelearner.utils.db.DBDefinetion
 import tw.bao.languagelearner.utils.db.DBHelper
 
@@ -78,7 +80,7 @@ class WordTestPresenter(view: WordTestContract.View) : WordTestContract.Presente
     }
 
     override fun getAnswerSummary(): String {
-        return "共答對 ${mAnsweredResult.count { it }} 題"
+        return UtilsWording.getSyncString(mView.getContext(), R.string.word_test_summary, mAnsweredResult.count { it })
     }
 
     private fun tryToShowNextQuestion() {

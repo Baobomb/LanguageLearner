@@ -1,24 +1,25 @@
 <resources>
-    <string name="app_name">Chinese-Learner</string>
+    <string name="app_name">중국어를 배우다</string>
 
-    <string name="info_tab_name">Info</string>
-    <string name="word_preview_tab_name">Words</string>
-    <string name="setting_tab_name">Settings</string>
-    <string name="word_test_summary_title">Finish</string>
-    <string name="word_test_summary">共答對 %1$s 題</string>
-    <string name="info_page_title">學習資訊</string>
-    <string name="info_page_exp_title">Exp</string>
-    <string name="info_page_level">等級 %1$s</string>
-    <string name="info_page_level_title">解鎖字彙等級</string>
-    <string name="info_page_correct_rate_title">Correct</string>
-    <string name="info_page_correct_nums">共答對 %1$s題</string>
-    <string name="info_page_answer_nums">共作答 %1$s題</string>
-    <string name="setting_page_title">Setting</string>
-    <string name="setting_page_answer_dialog">ANSWER_DIALOG</string>
-    <string name="setting_page_answer_show_after_call">ANSWER_DIALOG Show after call</string>
-    <string name="setting_page_answer_show_after_unlock">ANSWER_DIALOG Show after unlock</string>
-    <string name="setting_page_answer_restrict_show_times">ANSWER_DIALOG restrict show times</string>
-    <string name="setting_page_restrict_times">times</string>
-    <string name="words_preview_start_test">Start Test</string>
-    <string name="words_preview_page_tab_level">Level%1$s</string>
+    <string name="info_tab_name">정보</string>
+    <string name="word_preview_tab_name">워드</string>
+    <string name="setting_tab_name">구성</string>
+    <string name="word_test_summary_title">종료</string>
+    <string name="word_test_summary">%1$s정답</string>
+    <string name="info_page_title">학습 정보</string>
+    <string name="info_page_exp_title">체험 포인트</string>
+    <string name="info_page_level">%1$s 수준</string>
+    <string name="info_page_level_title">어휘 수준</string>
+    <string name="info_page_correct_rate_title">옳은</string>
+    <string name="info_page_correct_nums">총 %1$s정답</string>
+    <string name="info_page_answer_nums">답변 됨 %1$s개 질문</string>
+    <string name="setting_page_title">구성</string>
+    <string name="setting_page_answer_dialog">응답 창</string>
+    <string name="setting_page_answer_show_after_call">응답 창 호출 후 표시</string>
+    <string name="setting_page_answer_show_after_unlock">응답 창 잠금 후 표시</string>
+    <string name="setting_page_answer_restrict_show_times">응답 윈도우 제한 시간 표시</string>
+    <string name="setting_page_restrict_times">타임스</string>
+    <string name="words_preview_start_test">테스트 시작</string>
+    <string name="words_preview_page_tab_level">%1$s수준</string>
+    <string name="service_content">서비스가 실행 중입니다.</string>
 </resources>

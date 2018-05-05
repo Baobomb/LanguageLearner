@@ -8,7 +8,7 @@ import java.util.*
  */
 object UtilsInfo {
 
-    private val DEBUG_LEVEL = true
+    private val DEBUG_LEVEL = false
 
     public fun getUserTotalAnswerScore(): Int = Prefs.getInt(Prefs.KEY_SCORE, 0)
 
