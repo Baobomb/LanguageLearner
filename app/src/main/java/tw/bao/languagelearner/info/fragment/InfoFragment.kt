@@ -177,7 +177,7 @@ class InfoFragment : Fragment(), InfoContract.View {
             return
         }
         tw.bao.adsdk.AdManager.getInstance(Definition.AdUnit.INFO)
-                .setIsUsingDebugAdUnit(true)
+                .setIsUsingDebugAdUnit(false)
                 .setAdSourceNeedRequest(Definition.AdSource.NATIVE, true)
                 .setAdSourceNeedRequest(Definition.AdSource.BANNER, true)
                 .setRequestStatusListener(object : AdRequestStatusListener {
